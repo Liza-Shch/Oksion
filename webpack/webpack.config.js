@@ -8,6 +8,7 @@ module.exports = {
     entry: path.resolve(src, 'index.js'),
     output: {
         path: build,
+        publicPath: '/',
         filename: 'bundle.js'
     },
     module: {
@@ -31,6 +32,11 @@ module.exports = {
             //     }
             // },
 
+            {
+                test: /\.html$/,
+                use: [{loader: "html-loader"}]
+            },
+            
             {
                 test: /\.scss$/,
                 use: [
