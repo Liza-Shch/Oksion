@@ -1,7 +1,7 @@
 import Router from "./router";
-import IndexView from "./views/IndexView";
-import LoginView from "./views/LoginView";
-import ObjectView from "./views/ObjectView";
+import IndexView from "../views/IndexView";
+import LoginView from "../views/LoginView";
+import ObjectView from "../views/ObjectView";
 
 export default class App {
     constructor() {
@@ -16,6 +16,10 @@ export default class App {
                     .addRoute("/object/:id", ObjectView);
     };
 
+    /**
+     * run view methods
+     * @param {View object} view 
+     */
     controller(view) {
         view.render();
     };
