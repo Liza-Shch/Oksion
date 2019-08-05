@@ -1,9 +1,26 @@
-export default class IndexView {
+import BaseView from "./BaseView";
+import IndexPage from "../pages/IndexPage/IndexPage";
+
+export default class IndexView extends BaseView {
     constructor() {
-        console.log("Index");
+        console.log("Index"); 
+        super(IndexPage);
     };
 
-    render() {
-        console.log("Index render");
-    }
+    beforeRender() {
+        this.args.objects = [
+            {
+                type: "ПИОН",
+                district: "Северо-западный",
+                work: true,
+            },
+            {
+                type: "ПУОН",
+                district: "Западный",
+                work: false,
+            }
+        ];
+    };
+
+    afterRender() {};
 }
