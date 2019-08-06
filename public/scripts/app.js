@@ -12,9 +12,9 @@ export default class App {
 
     init() {
         this.router
-                    .addRoute("/", IndexView)
-                    .addRoute("/login", LoginView)
-                    .addRoute("/object/:id", ObjectView);
+                    .addRoute("/", LoginView)
+                    .addRoute("/objects", IndexView)
+                    .addRoute("/objects/:id", ObjectView);
     };
 
     /**
@@ -22,6 +22,8 @@ export default class App {
      * @param {View object} view 
      */
     controller(view) {
+        const targetRender = document.querySelector('.main') || document.createElement('div').classList.add('main');
+        view.setTargetRender(targetRender);
         view.beforeRender();
         view.render();
         view.afterRender();
@@ -29,8 +31,8 @@ export default class App {
 
     run() {
         this.commonView.beforeRender();
-        document.body.innerHTML = this.commonView.render();
+        this.commonView.getTargetRender().innerHTML = this.commonView.render();
         this.commonView.afterRender();
         this.router.start();
     };
-}
+};
