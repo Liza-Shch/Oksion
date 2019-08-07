@@ -1,9 +1,10 @@
+import IndexContainer from '../../components/IndexContainer/IndexContainer';
+
 export default class IndexPage {
-    constructor(args) {
-        this._args = args;
-    };
+    constructor() {};
 
     render() {
-        console.log(this._args);
+        const indexContainer = new IndexContainer();
+        return indexContainer.render()
     };
 }

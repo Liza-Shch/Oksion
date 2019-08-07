@@ -5,7 +5,4 @@ export default class CommonView extends BaseView {
     constructor() {
         super(CommonPage);
     };
-
-    beforeRender() {};
-    afterRender() {};
 }

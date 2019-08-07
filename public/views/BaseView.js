@@ -11,11 +11,15 @@ export default class BaseView {
 
     setTargetRender(targetRender) {
         this._targetRender = targetRender;
-    }
+    };
+
+    beforeRender() {};
 
     render() {
         const page = new this._page(this.args);
         console.log("Base render");
         return page.render();
     };
+
+    afterRender() {};
 };

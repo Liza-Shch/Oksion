@@ -7,8 +7,4 @@ export default class LoginView extends BaseView {
         super(LoginPage);
         this.setTargetRender(document.querySelector('.main'));
     };
-
-    beforeRender() {};
-
-    afterRender() {};
 }

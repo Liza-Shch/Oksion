@@ -9,9 +9,21 @@ body {
     margin: 0;
     color: white;
     font-family: Text;
+    font-size: x-large;
 };
 
 a {
     text-decoration: none;
     color: white;
 };
+
+p {
+    margin: 0;
+}
+
+button, input {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: unset;
+}

@@ -1,0 +1,25 @@
+.index-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "header header"
+        "login text";
+    
+    justify-items: center;
+
+    &__header {
+        margin-bottom: 50px;
+        grid-area: header;
+    };
+
+    &__text {
+        margin-bottom: 50px;
+        width: 70%;
+        grid-area: text;
+        text-align: end;
+    };
+
+    &__button {
+        grid-area: login;
+    };
+}

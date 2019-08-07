@@ -3,6 +3,8 @@ import CommonView from "../views/CommonView";
 import IndexView from "../views/IndexView";
 import LoginView from "../views/LoginView";
 import ObjectView from "../views/ObjectView";
+import EventBus from "./eventbus";
+import { PageEvents } from "../events/PageEvents";
 
 export default class App {
     constructor() {
@@ -12,9 +14,11 @@ export default class App {
 
     init() {
         this.router
-                    .addRoute("/", LoginView)
-                    .addRoute("/objects", IndexView)
+                    .addRoute("/", IndexView)
+                    .addRoute("/objects", LoginView)
                     .addRoute("/objects/:id", ObjectView);
+
+        EventBus.on(PageEvents.RENDER_LOGIN_FORM, IndexView.onLoginFormRender.bind(IndexView));
     };
 
     /**

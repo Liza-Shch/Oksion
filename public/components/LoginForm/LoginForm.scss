@@ -1,18 +1,13 @@
 .login {
     display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    &__icon {
-        background-image: url('./cop.jpg');
-        background-size: cover;
-        width: 200px;
-        height: 200px;
+    &__input {
+        margin-bottom: 20px;
     }
 
-    &__form {
-        display: flex;
-        flex-direction: column;
-        width: 100px;
-        height: 200px;
-        background-color: blue;
+    &__button {
+        margin: 20px 0px;
     }
 }
