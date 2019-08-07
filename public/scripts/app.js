@@ -22,10 +22,8 @@ export default class App {
      * @param {View object} view 
      */
     controller(view) {
-        const targetRender = document.querySelector('.main') || document.createElement('div').classList.add('main');
-        view.setTargetRender(targetRender);
         view.beforeRender();
-        view.render();
+        view.getTargetRender().innerHTML = view.render();
         view.afterRender();
     };
 

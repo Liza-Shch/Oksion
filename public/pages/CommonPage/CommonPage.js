@@ -17,6 +17,10 @@ export default class CommonPage {
         commonPage.classList.add('container');
         commonPage.insertAdjacentHTML("afterbegin", html);
 
+        const main = document.createElement('div');
+        main.classList.add('main');
+        commonPage.appendChild(main);
+
         return commonPage.outerHTML;
     };
 };

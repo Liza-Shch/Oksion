@@ -1,0 +1,18 @@
+.login {
+    display: flex;
+
+    &__icon {
+        background-image: url('./cop.jpg');
+        background-size: cover;
+        width: 200px;
+        height: 200px;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        width: 100px;
+        height: 200px;
+        background-color: blue;
+    }
+}
