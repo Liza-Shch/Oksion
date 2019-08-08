@@ -1,0 +1,8 @@
+mixin button(type, text)
+    case type
+        when 'primary'
+            button.button.button_primary&attributes(attributes) #{text}
+        when 'secondary'
+            button.button.button_secondary&attributes(attributes) #{text}
+        default
+            button.button.button_primary&attributes(attributes) #{text}

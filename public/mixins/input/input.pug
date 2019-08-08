@@ -1,0 +1,10 @@
+mixin input(type, placeholder)
+    .input&attributes(attributes)
+        case type
+            when 'login'
+                .input__icon.input__icon_login
+                input.input__input(type='email', placeholder=placeholder, autocomplete="email")
+            when 'password'
+                .input__icon.input__icon_password
+                input.input__input(type='password', minlength='8', placeholder=placeholder, autocomplete='current-password').input__input_password
+                button(type='button').input__password.input__password_show

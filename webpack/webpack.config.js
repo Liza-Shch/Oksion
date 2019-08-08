@@ -45,11 +45,26 @@ module.exports = {
                     {loader: 'sass-loader'}
                   ],
             },
+
+            {
+                test: /\.(png|svg|jpg|gif|woff)$/,
+                use: [
+                    'file-loader'
+                ]
+            },
+            
+            {
+                test: /\.pug$/,
+                loader: 'pug-loader',
+                options: {
+                    pretty: true
+                }
+            }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(src, 'index.html')
+            template: path.resolve(src, 'index.pug')
         }),
         new MiniCssExtractPlugin('bundle.css'),
     ]

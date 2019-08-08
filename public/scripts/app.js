@@ -1,19 +1,25 @@
 import Router from "./router";
+import CommonView from "../views/CommonView";
 import IndexView from "../views/IndexView";
 import LoginView from "../views/LoginView";
 import ObjectView from "../views/ObjectView";
+import EventBus from "./eventbus";
+import { PageEvents } from "../events/PageEvents";
 
 export default class App {
     constructor() {
         this.router = new Router(this.controller);
-        this.IndexView = IndexView;
+        this.commonView = new CommonView();
     };
 
     init() {
         this.router
                     .addRoute("/", IndexView)
-                    .addRoute("/login", LoginView)
-                    .addRoute("/object/:id", ObjectView);
+                    .addRoute("/objects", LoginView)
+                    .addRoute("/objects/:id", ObjectView);
+
+        EventBus.on(PageEvents.RENDER_LOGIN_FORM, IndexView.onLoginFormRender);
+        EventBus.on(PageEvents.AFTER_RENDER_LOGIN_FORM, IndexView.onLoginFormAfterRender);
     };
 
     /**
@@ -21,10 +27,15 @@ export default class App {
      * @param {View object} view 
      */
     controller(view) {
-        view.render();
+        view.beforeRender();
+        view.getTargetRender().innerHTML = view.render();
+        view.afterRender();
     };
 
     run() {
+        this.commonView.beforeRender();
+        this.commonView.getTargetRender().innerHTML = this.commonView.render();
+        this.commonView.afterRender();
         this.router.start();
     };
-}
+};

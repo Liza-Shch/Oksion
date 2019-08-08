@@ -1,0 +1,17 @@
+.title {
+    display: flex;
+    align-items: center;
+
+    &__icon {
+        background-image: url('../../components/Logo/img/icon.png');
+        background-size: cover;
+        background-position: center;
+        width: 160px;
+        height: 190px;
+        margin-right: 20px;
+    }
+
+    &__text {
+        font-size: 600%;
+    }
+}

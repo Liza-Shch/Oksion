@@ -1,4 +1,4 @@
-export default class EventBus {
+class EventBus {
     constructor() {
         this._listeners = {};
     };
@@ -10,14 +10,14 @@ export default class EventBus {
      */
     on(event, callback) {
         this._listeners[event] = this._listeners[event] || [];
-        this._listeners.push(callback);
+        this._listeners[event].push(callback);
     };
 
 
     /**
      * event callback unsubscription
      * @param {const string} event 
-     * @param {function} callback 
+     * @param {} callback 
      */
     off(event, callback) {
         if (!this._listeners[event]) {
@@ -40,3 +40,5 @@ export default class EventBus {
         });
     };
 };
+
+export default new EventBus();

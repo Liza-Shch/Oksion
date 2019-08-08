@@ -1,0 +1,58 @@
+.input {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    &__input {
+        width: 250px;
+        height: 50px;
+        border-radius: 50px;
+        border: 1px solid white;
+        background-color: #111823;
+        padding-left: 60px;
+        padding-right: 20px;
+        box-sizing: border-box;
+
+        &::placeholder {
+            color: white;
+        }
+
+        &_password {
+            padding-right: 60px;
+        }
+    }
+
+    &__icon {
+        width: 30px;
+        height: 30px;
+        margin-left: 20px;
+        background-size: cover;
+        background-position: center;
+        position: absolute;
+
+        &_login {
+            background-image: url('./img/user.svg');
+        }
+
+        &_password {
+            background-image: url('./img/lock.svg');
+        }
+    }
+
+    &__password {
+        width: 30px;
+        height: 30px;
+        background-size: cover;
+        position: absolute;
+        right: 20px;
+        border: none;
+
+        &_show {
+            background-image: url('./img/password-show.svg');
+        }
+
+        &_hide {
+            background-image: url('./img/password-hide.svg');
+        }
+    }
+}
