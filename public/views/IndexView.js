@@ -16,6 +16,7 @@ export default class IndexView extends BaseView {
         loginButton.addEventListener('click', (e) => {
             e.preventDefault();
             EventBus.emit(PageEvents.RENDER_LOGIN_FORM);
+            EventBus.emit(PageEvents.AFTER_RENDER_LOGIN_FORM);
         });
     };
 
@@ -23,5 +24,19 @@ export default class IndexView extends BaseView {
         const targetRender = document.querySelector('.index-container__login');
         const loginForm = new LoginForm();
         targetRender.innerHTML = loginForm.render();
+    }
+
+    static onLoginFormAfterRender() {
+        const showPasswordButton = document.querySelector('.input__password');
+        showPasswordButton.addEventListener('click', (e) => {
+            const input = document.querySelector('.input__input_password');
+            if (input.getAttribute('type') == 'password') {
+                showPasswordButton.classList.replace('input__password_show', 'input__password_hide');
+                input.setAttribute('type', 'text');
+            } else {
+                showPasswordButton.classList.replace('input__password_hide', 'input__password_show');
+                input.setAttribute('type', 'password');
+            }
+        })
     }
 }

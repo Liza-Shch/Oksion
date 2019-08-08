@@ -18,7 +18,8 @@ export default class App {
                     .addRoute("/objects", LoginView)
                     .addRoute("/objects/:id", ObjectView);
 
-        EventBus.on(PageEvents.RENDER_LOGIN_FORM, IndexView.onLoginFormRender.bind(IndexView));
+        EventBus.on(PageEvents.RENDER_LOGIN_FORM, IndexView.onLoginFormRender);
+        EventBus.on(PageEvents.AFTER_RENDER_LOGIN_FORM, IndexView.onLoginFormAfterRender);
     };
 
     /**
