@@ -2,17 +2,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
+    width: 250px;
     height: 50px;
     border-radius: 50px;
+    box-sizing: border-box;
 
     &_primary {
         background-color: #A10909;
         border: none;
+
+        &:hover {
+            background-color: red;
+        }
     }
 
     &_secondary {
         background-color: unset;
         border: 1px solid white;
+
+        &:hover {
+            background-color: white;
+            color: #111823;
+        }
     }
 }
