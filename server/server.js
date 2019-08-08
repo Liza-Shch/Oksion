@@ -1,8 +1,18 @@
 const express = require('express');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
 const path = require('path');
+
 const app = express();
+
 const fallback = require('express-history-api-fallback');
+
 const root = path.resolve(__dirname, '..', 'dist');
+
+app.use(logger('dev'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(express.static(root));
 
@@ -12,8 +22,13 @@ app.get('*', (req, res) => {
     res.sendFile(path.resolve(root, 'index.html'));
 });
 
+const http = require('http');
 const port = process.env.PORT || 3000;
+app.set('port', port);
 
-app.listen(port, () => {
-    console.log(`Server listening port ${port}`);
-});
+const server = http.createServer(app);
+server.listen(port);
+
+// app.listen(port, () => {
+//     console.log(`Server listening port ${port}`);
+// });
