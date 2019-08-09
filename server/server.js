@@ -18,9 +18,39 @@ app.use(express.static(root));
 
 app.use(fallback(path.resolve(root, 'index.html'), {root: root}));
 
-app.get('*', (req, res) => {
+const db = require('../models/index');
+const PERMISSIONS = require('../config/db.config');
+
+db.Permission.create({
+    name: PERMISSIONS.READ
+}).catch((err) => {
+    return;
+});
+
+db.Permission.create({
+    name: PERMISSIONS.WRITE
+}).catch((err) => {
+    return;
+});
+
+db.Permission.create({
+    name: PERMISSIONS.USERS_MODIFY
+}).catch((err) => {
+    return;
+});
+
+app.get('/', (req, res) => {
     res.sendFile(path.resolve(root, 'index.html'));
 });
+
+const Middlewares = require('../middlewares/index');
+const Controllers = require('../controllers/index');
+
+app.get('/api', (req, res) => res.status(200).send({
+    message: 'Welcome to API!',
+  }));
+
+app.post('/api/signup', [Middlewares.SignUp.checkBodyExist, Middlewares.SignUp.checkRoleExist], Controllers.User.createUser);
 
 const http = require('http');
 const port = process.env.PORT || 3000;

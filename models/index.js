@@ -34,4 +34,7 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.Permission.belongsToMany(db.User, { through: 'UserPermissions', foreignKey: 'permission_id', otherKey: 'user_id'});
+db.User.belongsToMany(db.Permission, { through: 'UserPermissions', foreignKey: 'user_id', otherKey: 'permission_id'});
+
 module.exports = db;
