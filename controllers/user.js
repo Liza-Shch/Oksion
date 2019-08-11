@@ -1,5 +1,6 @@
 const db = require('../models/index');
 const bscrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const Queries = require('../queries/index');
 
 module.exports = class User {
@@ -14,12 +15,33 @@ module.exports = class User {
                     return user.setPermissions(permissions)
                 })
             })
-            .then(() => { return res.status(201).send({'message': `User successfully created!`})})
-            .catch((err) => { return res.status(500).send({'message': `${err}`})});
+            .then(() => { return res.status(201).send({status: 'ok', message: `User successfully created!`})})
+            .catch((err) => { return res.status(200).send({status:' errer', errors: ['server.error'], message: `${err}`})});
         })
         .catch((err) => { 
-            return res.status(500).send({'message': `${err}`});
+            return res.status(200).send({status: 'error', errors: ['server.error'], message: `${err}`});
         });
+    };
+
+    static login(req, res) {
+        db.sequelize.transaction((t) => {
+            return Queries.User.getUserByEmail(req.body.email, t)
+            .then(user => {
+                if (!user) {
+                    return res.status(200).send({status:'error', errors:['user.not_found'], message: `User with email ${req.body.email} does not exist`});
+                }
+                const passwordIsValid = bscrypt.compareSync(req.body.password, user.password);
+                if (!passwordIsValid) {
+                    return res.status(200).send({status:'error', errors:['password.not_matched'], message: 'Invalid Password'});
+                };
+
+                const token = jwt.sign({userId: user.id}, process.env.SECRET, {expiresIn: '24h'});
+                res.status(200).send({status:'ok', accessToken: token});
+            })
+            .catch((err) => {
+                res.status(200).send({status:'error', errors: ['server.error'], message: `${err}`});
+            })
+        })
     };
 
     // static deleteUser(req, res) {

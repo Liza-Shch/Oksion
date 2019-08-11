@@ -6,7 +6,7 @@ module.exports = class User {
             email: user.email,
             password: user.password
         }, {transaction: t})
-    };
+    }
 
     static deleteUserByEmail(email) {
         return db.User.destroy({
@@ -16,11 +16,11 @@ module.exports = class User {
         })
     }
 
-    static getUserByEmail(email) {
+    static getUserByEmail(email, t) {
         return db.User.findOne({
             where: {
                 email: email
             }
-        })
+        }, {transaction: t})
     }
 }

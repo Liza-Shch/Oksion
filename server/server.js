@@ -51,6 +51,7 @@ app.get('/api', (req, res) => res.status(200).send({
   }));
 
 app.post('/api/signup', [Middlewares.SignUp.checkBodyExist, Middlewares.SignUp.checkRoleExist], Controllers.User.createUser);
+app.post('/api/login', Controllers.User.login);
 
 const http = require('http');
 const port = process.env.PORT || 3000;
