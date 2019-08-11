@@ -35,8 +35,8 @@ module.exports = class User {
                     return res.status(200).send({status:'error', errors:['password.not_matched'], message: 'Invalid Password'});
                 };
 
-                const token = jwt.sign({userId: user.id}, process.env.SECRET, {expiresIn: '24h'});
-                res.status(200).send({status:'ok', accessToken: token});
+                const token = jwt.sign({userId: user.id}, process.env.SECRET, {expiresIn: '10h'});
+                res.status(200).cookie('x-access-token', token, { expires: new Date(Date.now() + 36000000), httpOnly: true }).send({status:'ok', email: user.email});
             })
             .catch((err) => {
                 res.status(200).send({status:'error', errors: ['server.error'], message: `${err}`});

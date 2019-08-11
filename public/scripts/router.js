@@ -24,7 +24,9 @@ export default class Router {
      * @param {string} url example: "/object/param1/param2"
      */
     go(url) {
+        console.log(this);
         for (let key in this._routes) {
+            console.log(key);
             let parsedUrl = this._routes[key].pattern.exec(url);
             if (!parsedUrl) {
                 continue;

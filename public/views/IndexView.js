@@ -4,6 +4,7 @@ import EventBus from '../scripts/eventbus';
 import LoginForm from '../components/LoginForm/LoginForm';
 import PageEvents from "../events/PageEvents";
 import APIEvents from "../events/APIEvents";
+import StoreEvents from "../events/StoreEvents";
 
 export default class IndexView extends BaseView {
     constructor() {
@@ -53,6 +54,11 @@ export default class IndexView extends BaseView {
 
     static onLoginSuccess(data) {
         console.log('Login success', data);
+        EventBus.emit(PageEvents.RENDER_OBJECTS_PAGE, '/objects');
+
+        const user = {};
+        user.email = data.email;
+        EventBus.emit(StoreEvents.UPDATE_USER, user);
     }
 
     static onLoginError(err) {

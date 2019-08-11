@@ -18,40 +18,39 @@ app.use(express.static(root));
 
 app.use(fallback(path.resolve(root, 'index.html'), {root: root}));
 
-const db = require('../models/index');
-const PERMISSIONS = require('../config/db.config');
+// const db = require('../models/index');
+// const PERMISSIONS = require('../config/db.config');
 
-db.Permission.create({
-    name: PERMISSIONS.READ
-}).catch((err) => {
-    return;
-});
+// db.Permission.create({
+//     name: PERMISSIONS.READ
+// }).catch((err) => {
+//     return;
+// });
 
-db.Permission.create({
-    name: PERMISSIONS.WRITE
-}).catch((err) => {
-    return;
-});
+// db.Permission.create({
+//     name: PERMISSIONS.WRITE
+// }).catch((err) => {
+//     return;
+// });
 
-db.Permission.create({
-    name: PERMISSIONS.USERS_MODIFY
-}).catch((err) => {
-    return;
-});
-
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(root, 'index.html'));
-});
+// db.Permission.create({
+//     name: PERMISSIONS.USERS_MODIFY
+// }).catch((err) => {
+//     return;
+// });
 
 const Middlewares = require('../middlewares/index');
 const Controllers = require('../controllers/index');
 
-app.get('/api', (req, res) => res.status(200).send({
-    message: 'Welcome to API!',
-  }));
-
+app.get('/api', (req, res) => {
+    res.status(200).send({ message: 'Welcome to API!', })
+});
 app.post('/api/signup', [Middlewares.SignUp.checkBodyExist, Middlewares.SignUp.checkRoleExist], Controllers.User.createUser);
 app.post('/api/login', Controllers.User.login);
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(root, 'index.html'));
+});
 
 const http = require('http');
 const port = process.env.PORT || 3000;
