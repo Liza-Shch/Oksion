@@ -2,7 +2,8 @@ import BaseView from "./BaseView";
 import IndexPage from "../pages/IndexPage/IndexPage";
 import EventBus from '../scripts/eventbus';
 import LoginForm from '../components/LoginForm/LoginForm';
-import { PageEvents } from "../events/PageEvents";
+import PageEvents from "../events/PageEvents";
+import APIEvents from "../events/APIEvents";
 
 export default class IndexView extends BaseView {
     constructor() {
@@ -37,6 +38,24 @@ export default class IndexView extends BaseView {
                 showPasswordButton.classList.replace('input__password_hide', 'input__password_show');
                 input.setAttribute('type', 'password');
             }
-        })
+        });
+
+        const loginForm = document.querySelector('.login');
+        loginForm.onsubmit = (e) => {
+            e.preventDefault();
+            const user = {};
+            user.email = loginForm.email.value;
+            user.password = loginForm.password.value;
+
+            EventBus.emit(APIEvents.LOGIN, user);
+        }
+    }
+
+    static onLoginSuccess(data) {
+        console.log('Login success', data);
+    }
+
+    static onLoginError(err) {
+        console.log('Login error', err)
     }
 }
