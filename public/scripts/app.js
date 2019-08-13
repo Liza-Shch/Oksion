@@ -22,11 +22,11 @@ export default class App {
                     .addRoute("/objects", ObjectsView)
                     .addRoute("/objects/:id", ObjectView);
 
-        EventBus.on(PageEvents.RENDER_LOGIN_FORM, IndexView.onLoginFormRender);
-        EventBus.on(PageEvents.AFTER_RENDER_LOGIN_FORM, IndexView.onLoginFormAfterRender);
+        // EventBus.on(PageEvents.RENDER_LOGIN_FORM, IndexView.onLoginFormRender);
+        // EventBus.on(PageEvents.AFTER_RENDER_LOGIN_FORM, IndexView.onLoginFormAfterRender);
         EventBus.on(APIEvents.LOGIN, API.onLogin);
-        EventBus.on(PageEvents.LOGIN_SUCCESS, IndexView.onLoginSuccess);
-        EventBus.on(PageEvents.LOGIN_ERROR, IndexView.onLoginError);
+        // EventBus.on(PageEvents.LOGIN_SUCCESS, IndexView.onLoginSuccess);
+        // EventBus.on(PageEvents.LOGIN_ERROR, IndexView.onLoginError);
         EventBus.on(StoreEvents.UPDATE_USER, Store.onUpdateUser.bind(Store));
         EventBus.on(PageEvents.RENDER_OBJECTS_PAGE, this.router.go.bind(this.router));
     };

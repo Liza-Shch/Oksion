@@ -11,7 +11,7 @@ export default class API {
             })
             .then((data) => {
                 if (data.status != 'ok') {
-                    return EventBus.emit(PageEvents.LOGIN_ERROR, data);
+                    return EventBus.emit(PageEvents.LOGIN_ERROR, data.errors);
                 }
 
                 EventBus.emit(PageEvents.LOGIN_SUCCESS, data);

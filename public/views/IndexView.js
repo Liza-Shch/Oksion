@@ -5,15 +5,22 @@ import LoginForm from '../components/LoginForm/LoginForm';
 import PageEvents from "../events/PageEvents";
 import APIEvents from "../events/APIEvents";
 import StoreEvents from "../events/StoreEvents";
+import ERROR from "../network/Errors";
+import ERROR_MSG from "../pages/ErrorMsg";
+import FormMixin from "./mixins/FormMixin";
 
 export default class IndexView extends BaseView {
     constructor() {
         console.log("Index"); 
         super(IndexPage);
         this.setTargetRender(document.querySelector('.main'));
+        this.formController = FormMixin;
     };
 
     afterRender() {
+        EventBus.on(PageEvents.RENDER_LOGIN_FORM, this.onLoginFormRender.bind(this));
+        EventBus.on(PageEvents.AFTER_RENDER_LOGIN_FORM, this.onLoginFormAfterRender.bind(this));
+
         const loginButton = document.querySelector('.button_secondary');
         loginButton.addEventListener('click', (e) => {
             e.preventDefault();
@@ -22,21 +29,24 @@ export default class IndexView extends BaseView {
         });
     };
 
-    static onLoginFormRender() {
+    onLoginFormRender() {
         const targetRender = document.querySelector('.index-container__login');
         const loginForm = new LoginForm();
         targetRender.innerHTML = loginForm.render();
     }
 
-    static onLoginFormAfterRender() {
-        const showPasswordButton = document.querySelector('.input__password');
+    onLoginFormAfterRender() {
+        EventBus.on(PageEvents.LOGIN_SUCCESS, this.onLoginSuccess.bind(this));
+        EventBus.on(PageEvents.LOGIN_ERROR, this.onLoginError.bind(this));
+
+        const showPasswordButton = document.querySelector('.form-input__password');
         showPasswordButton.addEventListener('click', (e) => {
-            const input = document.querySelector('.input__input_password');
+            const input = document.querySelector('.form-input__input_password');
             if (input.getAttribute('type') == 'password') {
-                showPasswordButton.classList.replace('input__password_show', 'input__password_hide');
+                showPasswordButton.classList.replace('form-input__password_show', 'form-input__password_hide');
                 input.setAttribute('type', 'text');
             } else {
-                showPasswordButton.classList.replace('input__password_hide', 'input__password_show');
+                showPasswordButton.classList.replace('form-input__password_hide', 'form-input__password_show');
                 input.setAttribute('type', 'password');
             }
         });
@@ -44,15 +54,21 @@ export default class IndexView extends BaseView {
         const loginForm = document.querySelector('.login');
         loginForm.onsubmit = (e) => {
             e.preventDefault();
+            this.formController.clearErrors();
+            const result = this.formController.validation(loginForm);
+            if (!result.success) {
+                return this.formController.renderInputErrors(result.emptyInputs);
+            }
+
             const user = {};
             user.email = loginForm.email.value;
             user.password = loginForm.password.value;
 
             EventBus.emit(APIEvents.LOGIN, user);
-        }
+        };
     }
 
-    static onLoginSuccess(data) {
+    onLoginSuccess(data) {
         console.log('Login success', data);
         EventBus.emit(PageEvents.RENDER_OBJECTS_PAGE, '/objects');
 
@@ -61,7 +77,40 @@ export default class IndexView extends BaseView {
         EventBus.emit(StoreEvents.UPDATE_USER, user);
     }
 
-    static onLoginError(err) {
-        console.log('Login error', err)
+    onLoginError(errors) {
+        console.log('Login error', errors);
+        errors.forEach((err) => {
+            switch(err) {
+                case ERROR.USER_NOT_FOUND: {
+                    console.log('user not found');
+                    const email = document.querySelector('input[type=email]');
+                    const error = email.parentElement.nextElementSibling;
+                    const data = [
+                        {
+                            input: email,
+                            error: error,
+                            msg: ERROR_MSG.USER_NOT_FOUND
+                        }
+                    ];
+
+                    this.formController.renderInputErrors(data);
+                    break;
+                }
+                case ERROR.PASSWORD_NOT_MATCHED: {
+                    const password = document.querySelector('input[type=password]');
+                    const error = password.parentElement.nextElementSibling;
+                    const data = [{
+                        input: password,
+                        error: error,
+                        msg: ERROR_MSG.PASSWORD_NOT_MATCHED
+                    }];
+
+                    this.formController.renderInputErrors(data);
+                    break;
+                }
+                default:
+                    EventBus.emit(PageEvents.RENDER_SERVER_ERROR);
+            }
+        })
     }
 }

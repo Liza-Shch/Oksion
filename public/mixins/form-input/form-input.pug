@@ -1,0 +1,12 @@
+mixin form-input(type, placeholder)
+    .form-input&attributes(attributes)
+        .form-input__input-block
+            case type
+                when 'email'
+                    .form-input__icon.form-input__icon_login
+                    input.form-input__input(type='email', placeholder=placeholder, autocomplete="email", name='email')
+                when 'password'
+                    .form-input__icon.form-input__icon_password
+                    input.form-input__input(type='password', minlength='8', placeholder=placeholder, autocomplete='current-password', name='password').form-input__input_password
+                    button(type='button').form-input__password.form-input__password_show
+        span.form-input__msg
