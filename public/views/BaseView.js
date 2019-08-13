@@ -1,6 +1,7 @@
 export default class BaseView {
     constructor(page) {
-        this._page = page;
+        this.Page = page;
+        this.page = null;
         this.args = {};
         this._targetRender = document.body;
     };
@@ -16,9 +17,9 @@ export default class BaseView {
     beforeRender() {};
 
     render() {
-        const page = new this._page(this.args);
+        this.page = new this.Page(this.args);
         console.log("Base render");
-        return page.render();
+        return this.page.render();
     };
 
     afterRender() {};

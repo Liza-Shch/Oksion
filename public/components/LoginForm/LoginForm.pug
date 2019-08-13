@@ -1,6 +1,6 @@
 form.login
-    include ../../mixins/input/input.pug
-    +input('login', 'Email')(class='login__input')
-    +input('password', 'Пароль')(class='login__input')
+    include ../../mixins/form-input/form-input.pug
+    +form-input('email', 'Email')(class='login__input')
+    +form-input('password', 'Пароль')(class='login__input')
     include ../../mixins/button/button.pug
     +button('primary', 'Войти')(class='login__button')
