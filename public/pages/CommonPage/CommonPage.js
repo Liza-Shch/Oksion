@@ -1,5 +1,5 @@
 import './CommonPage.scss';
-import Logo from "../../components/Logo/Logo";
+import Menu from '../../components/Menu/Menu';
 
 export default class CommonPage {
     constructor(authAs) {
@@ -8,18 +8,14 @@ export default class CommonPage {
 
     render() {
         console.log("CommonPage render");
-        let html = '';
-
-        const logo = new Logo();
-        html += logo.render();
-
+        console.log(this._authAs);
         const commonPage = document.createElement('div');
         commonPage.classList.add('container');
-        commonPage.insertAdjacentHTML("afterbegin", html);
 
-        const main = document.createElement('div');
-        main.classList.add('main');
-        commonPage.appendChild(main);
+        if (this._authAs) {
+            const menu = new Menu();
+            commonPage.insertAdjacentHTML('afterbegin', menu.render());
+        }
 
         return commonPage.outerHTML;
     };

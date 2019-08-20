@@ -13,7 +13,7 @@ import API from "../network/API";
 export default class App {
     constructor() {
         this.router = new Router(this.controller);
-        this.commonView = new CommonView();
+        this.commonView = new CommonView(Store.user.isAuth());
     };
 
     init() {
@@ -24,6 +24,7 @@ export default class App {
 
         // EventBus.on(PageEvents.RENDER_LOGIN_FORM, IndexView.onLoginFormRender);
         // EventBus.on(PageEvents.AFTER_RENDER_LOGIN_FORM, IndexView.onLoginFormAfterRender);
+        EventBus.on(APIEvents.AUTH, API.onAuth);
         EventBus.on(APIEvents.LOGIN, API.onLogin);
         // EventBus.on(PageEvents.LOGIN_SUCCESS, IndexView.onLoginSuccess);
         // EventBus.on(PageEvents.LOGIN_ERROR, IndexView.onLoginError);
@@ -37,11 +38,12 @@ export default class App {
      */
     controller(view) {
         view.beforeRender();
-        view.getTargetRender().innerHTML = view.render();
+        view.getTargetRender().insertAdjacentHTML('beforeend', view.render());
         view.afterRender();
     };
 
     run() {
+        EventBus.emit(APIEvents.AUTH);
         this.commonView.beforeRender();
         this.commonView.getTargetRender().innerHTML = this.commonView.render();
         this.commonView.afterRender();

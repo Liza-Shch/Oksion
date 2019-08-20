@@ -2,7 +2,7 @@ export default class BaseView {
     constructor(page) {
         this.Page = page;
         this.page = null;
-        this.args = {};
+        this.args = null;
         this._targetRender = document.body;
     };
 

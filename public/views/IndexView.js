@@ -13,7 +13,7 @@ export default class IndexView extends BaseView {
     constructor() {
         console.log("Index"); 
         super(IndexPage);
-        this.setTargetRender(document.querySelector('.main'));
+        this.setTargetRender(document.querySelector('.container'));
         this.formController = FormMixin;
     };
 
@@ -68,13 +68,8 @@ export default class IndexView extends BaseView {
         };
     }
 
-    onLoginSuccess(data) {
-        console.log('Login success', data);
+    onLoginSuccess() {
         EventBus.emit(PageEvents.RENDER_OBJECTS_PAGE, '/objects');
-
-        const user = {};
-        user.email = data.email;
-        EventBus.emit(StoreEvents.UPDATE_USER, user);
     }
 
     onLoginError(errors) {

@@ -1,6 +1,7 @@
 export default class User {
     constructor() {
         this._email = null;
+        this._permissions = null;
     }
 
     isAuth() {
@@ -9,5 +10,6 @@ export default class User {
 
     update(user) {
         this._email = user && user.email;
+        this._permissions = user && user.permissions;
     }
 }

@@ -23,4 +23,12 @@ module.exports = class User {
             }
         }, {transaction: t})
     }
+
+    static getUserByID(id, t) {
+        return db.User.findOne({
+            where: {
+                id: id
+            }
+        }, {transaction: t})
+    }
 }

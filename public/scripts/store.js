@@ -7,6 +7,7 @@ class Store {
 
     onUpdateUser(user) {
         this.user.update(user);
+        console.log(this.user);
     }
 };
 

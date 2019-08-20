@@ -32,8 +32,9 @@ export default class Router {
                 continue;
             };
 
+            const View = this._routes[key].View;
             if (!this._routes[key].view || parsedUrl.length > 1) {
-                this._routes[key].view = new this._routes[key].View(...(parsedUrl.slice(1,)));
+                this._routes[key].view = new View(...(parsedUrl.slice(1,)));
             };
 
             this._controller(this._routes[key].view);
