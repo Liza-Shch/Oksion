@@ -8,6 +8,10 @@ export default class User {
         return this._email;
     }
 
+    getPermissions() {
+        return this._permissions;
+    }
+
     update(user) {
         this._email = user && user.email;
         this._permissions = user && user.permissions;

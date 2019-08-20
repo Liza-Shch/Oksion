@@ -4,15 +4,14 @@ import EventBus from '../scripts/eventbus';
 import LoginForm from '../components/LoginForm/LoginForm';
 import PageEvents from "../events/PageEvents";
 import APIEvents from "../events/APIEvents";
-import StoreEvents from "../events/StoreEvents";
 import ERROR from "../network/Errors";
 import ERROR_MSG from "../pages/ErrorMsg";
 import FormMixin from "./mixins/FormMixin";
 
 export default class IndexView extends BaseView {
-    constructor() {
+    constructor(args) {
         console.log("Index"); 
-        super(IndexPage);
+        super(args, IndexPage);
         this.setTargetRender(document.querySelector('.container'));
         this.formController = FormMixin;
     };

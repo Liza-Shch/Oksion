@@ -4,7 +4,12 @@ import EventBus from '../scripts/eventbus';
 import StoreEvents from "../events/StoreEvents";
 
 export default class API {
-    static onAuth() {
+    /**
+     * check authentication
+     * return email, permissions
+     * @param {Event} event - callback event
+     */
+    static onAuth(event) {
         Ajax.doGet('/api/auth')
         .then((res) => {
             return res.json()
@@ -20,6 +25,7 @@ export default class API {
             };
 
             EventBus.emit(StoreEvents.UPDATE_USER, user);
+            EventBus.emit(event);
         })
     }
 

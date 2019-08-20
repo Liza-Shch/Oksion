@@ -24,23 +24,31 @@ export default class Router {
      * @param {string} url example: "/object/param1/param2"
      */
     go(url) {
-        console.log(this);
+        let found = false;
         for (let key in this._routes) {
-            console.log(key);
             let parsedUrl = this._routes[key].pattern.exec(url);
             if (!parsedUrl) {
+                if (this._routes[key].view && this._routes[key].view.isShown()) {
+                    this._routes[key].view.hide();
+                };
                 continue;
             };
 
             const View = this._routes[key].View;
             if (!this._routes[key].view || parsedUrl.length > 1) {
-                this._routes[key].view = new View(...(parsedUrl.slice(1,)));
+                const el = document.createElement('div');
+                this._routes[key].view = new View({el: el, args:(parsedUrl.slice(1,))});
             };
+            this._routes[key].view.setShown(true);
 
             this._controller(this._routes[key].view);
             window.history.pushState('', '', url);
-            break;
+            found = true;
         };
+
+        if (!found) {
+            // view not found
+        }
     };
 
     start() {

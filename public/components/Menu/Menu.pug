@@ -1,1 +1,5 @@
 .menu
+    if data.read
+        include ../../mixins/link/link.pug
+        +link('/objects', 'Объекты')
+        +link('/works', 'Работы')

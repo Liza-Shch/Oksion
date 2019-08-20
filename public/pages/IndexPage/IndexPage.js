@@ -3,15 +3,16 @@ import Logo from '../../components/Logo/Logo';
 import './IndexPage.scss';
 
 export default class IndexPage {
-    constructor() {};
+    constructor(args) {
+        this._el = args.el;
+    };
 
     render() {
-        const main = document.createElement('div');
-        main.classList.add('main');
+        this._el.classList.add('main');
         const logo = new Logo();
         const indexContainer = new IndexContainer();
-        main.insertAdjacentHTML('beforeend', logo.render());
-        main.insertAdjacentHTML('beforeend', indexContainer.render());
-        return main.outerHTML;
+        this._el.insertAdjacentHTML('beforeend', logo.render());
+        this._el.insertAdjacentHTML('beforeend', indexContainer.render());
+        return this._el;
     };
 }

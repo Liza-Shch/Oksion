@@ -1,9 +1,13 @@
+import './ObjectsPage.scss';
+
 export default class ObjectsPage {
-    constructor() {
+    constructor(args) {
+        this._el = args.el;
         console.log("ObjectsPage");
     };
 
     render() {
-        console.log("Objects render")
+        this._el.classList.add('main-objects');
+        return this._el;
     }
 }
