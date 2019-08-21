@@ -29,7 +29,7 @@ export default class BaseView {
 
     hide() {
         this.setShown(false);
-        this.el.remove();
+        if (this.el) this.el.remove();
     }
 
     setShown(shown) {

@@ -38,6 +38,7 @@ module.exports = class User {
                 return user;
             })
             .then((user) => {
+                if (!user.email) return;
                 Queries.UserPermissions.getPermissionsByUserID(user.id)
                 .then((permissions) => {
                     const accessToken = jwt.sign({userId: user.id}, process.env.SECRET, {expiresIn: '10h'});
@@ -49,11 +50,12 @@ module.exports = class User {
                     return res.status(200).send({status: 'ok', email: req.body.email.toLowerCase(), permissions: permissions});
                 })
                 .catch((err) => {
-                    res.status(200).send({status: 'error', errors: ['server.error'], message: `${err}`});
+                    return res.status(200).send({status: 'error', errors: ['server.error'], message: `${err}`});
                 })
             })
             .catch((err) => {
-                res.status(200).send({status:'error', errors: ['server.error'], message: `${err}`});
+                if (!err) return;
+                return res.status(200).send({status:'error', errors: ['server.error'], message: `${err}`});
             })
         });
     };

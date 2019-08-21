@@ -17,4 +17,17 @@ export default class Menu {
 
         return menuTmp.call({}, {data});
     }
+
+    renderDOM() {
+        const data = {
+            read: this._permissions.read,
+            write: this._permissions.write,
+            usersModify: this._permissions.usersModify
+        };
+
+        const html = menuTmp.call({}, {data});
+        const container = document.createElement('div');
+        container.insertAdjacentHTML('afterbegin', html);
+        return container.firstElementChild;
+    }
 }

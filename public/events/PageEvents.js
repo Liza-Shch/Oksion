@@ -5,6 +5,8 @@ const PageEvents = {
     LOGIN_ERROR: 'page: login-error',
     RENDER_OBJECTS_PAGE: 'page: render-objects-page',
     RENDER_SERVER_ERROR: 'page: render-server-error',
+    RENDER_MENU: 'page: render-menu',
+    HIDE_MENU: 'page: hide-menu',
 };
 
 export default PageEvents;

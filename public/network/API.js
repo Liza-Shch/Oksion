@@ -7,7 +7,7 @@ export default class API {
     /**
      * check authentication
      * return email, permissions
-     * @param {Event} event - callback event
+     * @param {Event} events - callback events
      */
     static onAuth(event) {
         Ajax.doGet('/api/auth')
@@ -16,7 +16,12 @@ export default class API {
         })
         .then((data) => {
             if (data.status != 'ok') {
-                return EventBus.emit(StoreEvents.UPDATE_USER, null);
+                EventBus.emit(StoreEvents.UPDATE_USER, null);
+                EventBus.emit(event.common.event, event.common.args);
+                event.error.forEach((event) => {
+                    EventBus.emit(event.event, event.args);
+                });
+                return;
             };
 
             const user = {
@@ -25,7 +30,10 @@ export default class API {
             };
 
             EventBus.emit(StoreEvents.UPDATE_USER, user);
-            EventBus.emit(event);
+            EventBus.emit(event.common.event, event.common.args);
+            event.success.forEach((event) => {
+                EventBus.emit(event.event, event.args);
+            });
         })
     }
 
@@ -47,6 +55,7 @@ export default class API {
 
             EventBus.emit(StoreEvents.UPDATE_USER, user);
             EventBus.emit(PageEvents.LOGIN_SUCCESS);
+            EventBus.emit(PageEvents.RENDER_MENU);
         })
         .catch((err) => {
             // 500
