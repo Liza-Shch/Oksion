@@ -29,6 +29,7 @@ export default class Router {
             let parsedUrl = this._routes[key].pattern.exec(url);
             if (!parsedUrl) {
                 if (this._routes[key].view && this._routes[key].view.isShown()) {
+                    console.log('Hide', key);
                     this._routes[key].view.hide();
                 };
                 continue;
@@ -36,12 +37,13 @@ export default class Router {
 
             const View = this._routes[key].View;
             if (!this._routes[key].view || parsedUrl.length > 1) {
+                console.log('New View');
                 const el = document.createElement('div');
                 this._routes[key].view = new View({el: el, args:(parsedUrl.slice(1,))});
             };
-            this._routes[key].view.setShown(true);
 
             this._controller(this._routes[key].view);
+            this._routes[key].view.setShown(true);
             window.history.pushState('', '', url);
             found = true;
         };
@@ -59,6 +61,7 @@ export default class Router {
 
             event.preventDefault();
 
+            console.log('target link');
             this.go(event.target.pathname);
         }.bind(this));
 

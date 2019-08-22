@@ -62,4 +62,19 @@ export default class API {
             // EventBus.emit(render 500)
         })
     }
+
+    static onLogout() {
+        Ajax.doGet('/api/logout')
+        .then((res) => {
+            return res.json();
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPDATE_USER, null);
+            EventBus.emit(PageEvents.RENDER_INDEX_PAGE, '/');
+            EventBus.emit(PageEvents.HIDE_MENU);
+        })
+        .catch((err) => {
+
+        })
+    }
 }

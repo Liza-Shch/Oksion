@@ -70,6 +70,12 @@ module.exports = class User {
         })
     };
 
+    static logout(req, res) {
+        res.clearCookie('x-access-token');
+        res.clearCookie('x-permissions-token');
+        return res.status(200).send({status: 'ok', message: 'User logout'});
+    }
+
     // static deleteUser(req, res) {
     //     Queries.User.getUserByEmail(req.body.email)
     //     .then(user => {

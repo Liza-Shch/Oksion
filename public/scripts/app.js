@@ -23,7 +23,7 @@ export default class App {
         this.router
         .addRoute("/", IndexView)
         .addRoute("/objects", ObjectsView)
-        .addRoute("/objects/:id", ObjectView);
+        .addRoute("/objects/:id", ObjectView)
 
         const el = document.createElement('div');
         this.commonView = new CommonView({el: el});
@@ -36,6 +36,8 @@ export default class App {
         EventBus.on(PageEvents.RENDER_OBJECTS_PAGE, this.router.go.bind(this.router));
         EventBus.on(PageEvents.RENDER_MENU, this.menuView.create.bind(this.menuView));
         EventBus.on(PageEvents.HIDE_MENU, this.menuView.hide.bind(this.menuView));
+        EventBus.on(APIEvents.LOGOUT, API.onLogout);
+        EventBus.on(PageEvents.RENDER_INDEX_PAGE, this.router.go.bind(this.router));
     };
 
     /**
@@ -43,6 +45,7 @@ export default class App {
      * @param {View object} view 
      */
     controller(view) {
+        console.log('Controller view');
         view.beforeRender();
         view.getTargetRender().appendChild(view.render());
         view.afterRender();

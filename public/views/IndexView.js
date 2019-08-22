@@ -14,12 +14,14 @@ export default class IndexView extends BaseView {
         super(args, IndexPage);
         this.setTargetRender(document.querySelector('.container'));
         this.formController = FormMixin;
+
+        EventBus.on(PageEvents.RENDER_LOGIN_FORM, this.onLoginFormRender.bind(this));
+        EventBus.on(PageEvents.AFTER_RENDER_LOGIN_FORM, this.onLoginFormAfterRender.bind(this));
+        EventBus.on(PageEvents.LOGIN_SUCCESS, this.onLoginSuccess.bind(this));
+        EventBus.on(PageEvents.LOGIN_ERROR, this.onLoginError.bind(this));
     };
 
     afterRender() {
-        EventBus.on(PageEvents.RENDER_LOGIN_FORM, this.onLoginFormRender.bind(this));
-        EventBus.on(PageEvents.AFTER_RENDER_LOGIN_FORM, this.onLoginFormAfterRender.bind(this));
-
         const loginButton = document.querySelector('.button_secondary');
         loginButton.addEventListener('click', (e) => {
             e.preventDefault();
@@ -35,9 +37,6 @@ export default class IndexView extends BaseView {
     }
 
     onLoginFormAfterRender() {
-        EventBus.on(PageEvents.LOGIN_SUCCESS, this.onLoginSuccess.bind(this));
-        EventBus.on(PageEvents.LOGIN_ERROR, this.onLoginError.bind(this));
-
         const showPasswordButton = document.querySelector('.form-input__password');
         showPasswordButton.addEventListener('click', (e) => {
             const input = document.querySelector('.form-input__input_password');

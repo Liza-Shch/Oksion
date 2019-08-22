@@ -25,4 +25,13 @@
             color: #111823;
         }
     }
+
+    &_menu {
+        color: #2D4157;
+        text-align: left;
+
+        &:hover {
+            text-decoration: underline;
+        } 
+    }
 }

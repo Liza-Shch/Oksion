@@ -3,3 +3,6 @@
         include ../../mixins/link/link.pug
         +link('/objects', 'Объекты')
         +link('/works', 'Работы')
+        +link('/', 'Выход')
+        include ../../mixins/button/button.pug 
+        +button('menu', 'Выход')(class='menu__button')

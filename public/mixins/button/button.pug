@@ -4,5 +4,7 @@ mixin button(type, text)
             button.button.button_primary&attributes(attributes) #{text}
         when 'secondary'
             button.button.button_secondary&attributes(attributes) #{text}
+        when 'menu'
+            button.button_menu&attributes(attributes) #{text}
         default
             button.button.button_primary&attributes(attributes) #{text}

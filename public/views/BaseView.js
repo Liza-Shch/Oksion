@@ -19,7 +19,6 @@ export default class BaseView {
     beforeRender() {};
 
     render() {
-        console.log(this.el);
         this.page = new this.Page(this.args);
         console.log("Base render");
         return this.page.render();
@@ -29,7 +28,11 @@ export default class BaseView {
 
     hide() {
         this.setShown(false);
-        if (this.el) this.el.remove();
+        if (this.el) {
+            this.el.remove(); 
+            this.el = document.createElement('div');
+            this.args.el = this.el;
+        }
     }
 
     setShown(shown) {
