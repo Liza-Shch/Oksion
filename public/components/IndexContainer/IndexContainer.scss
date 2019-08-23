@@ -22,4 +22,10 @@
     &__button {
         grid-area: login;
     };
+
+    &__login {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
 }

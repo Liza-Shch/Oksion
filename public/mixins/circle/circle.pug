@@ -1,0 +1,8 @@
+mixin circle(type)
+    case type
+        when 'work'
+            .circle.circle-work&attributes(attributes)='P'
+        when 'not-work'
+            .circle.circle-not-work&attributes(attributes)='Н'
+        when 'stat'
+            .circle.circle-stat&attributes(attributes)='С'

@@ -8,6 +8,7 @@ const PageEvents = {
     RENDER_MENU: 'page: render-menu',
     HIDE_MENU: 'page: hide-menu',
     RENDER_INDEX_PAGE: 'page: render-index-page',
+    RENDER_COMMON_PAGE: 'page: render-common-page',
 };
 
 export default PageEvents;

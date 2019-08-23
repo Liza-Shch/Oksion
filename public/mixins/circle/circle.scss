@@ -1,0 +1,21 @@
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #E8E8E8;
+
+    &-work {
+        background-color: #6DB078;
+    }
+
+    &-not-work {
+        background-color: #CD3737;
+    }
+
+    &-stat {
+        background-color: #344960;
+    }
+}

@@ -1,4 +1,13 @@
 .main-objects {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-rows: 95px auto;
+    grid-template-areas: "stat title ."
+                         "filter main .";
     width: 100%;
+    grid-row-gap: 30px;
+    padding: 40px;
+    box-sizing: border-box;
+    align-items: start;
     background-color: #E0E0E0;
 }

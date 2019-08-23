@@ -60,6 +60,7 @@ export default class App {
             ],
             error: [
                 {event: PageEvents.HIDE_MENU, args: null},
+                {event: PageEvents.RENDER_INDEX_PAGE, args: '/'}
             ]
         };
 

@@ -1,3 +1,5 @@
+import Store from './store';
+
 export default class Router {
     constructor(controller) {
         this._routes = {};
@@ -24,8 +26,13 @@ export default class Router {
      * @param {string} url example: "/object/param1/param2"
      */
     go(url) {
+        if (!Store.user.isAuth()) {
+            url = '/'
+        }
+
         let found = false;
         for (let key in this._routes) {
+            console.log(key, url);
             let parsedUrl = this._routes[key].pattern.exec(url);
             if (!parsedUrl) {
                 if (this._routes[key].view && this._routes[key].view.isShown()) {
@@ -65,7 +72,8 @@ export default class Router {
             this.go(event.target.pathname);
         }.bind(this));
 
-        const firstPath = window.location.pathname;
-        this.go(firstPath);
+        console.log('dcdcwd');
+        // const firstPath = window.location.pathname;
+        // this.go(firstPath);
     };
 };

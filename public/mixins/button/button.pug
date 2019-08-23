@@ -6,5 +6,7 @@ mixin button(type, text)
             button.button.button_secondary&attributes(attributes) #{text}
         when 'menu'
             button.button_menu&attributes(attributes) #{text}
+        when 'filter'
+            button.button.button_filter #{text}
         default
             button.button.button_primary&attributes(attributes) #{text}

@@ -63,7 +63,7 @@ export default class IndexView extends BaseView {
             user.password = loginForm.password.value;
 
             EventBus.emit(APIEvents.LOGIN, user);
-        };
+        }
     }
 
     onLoginSuccess() {
