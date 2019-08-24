@@ -1,9 +1,11 @@
 export default class BaseView {
-    constructor(page) {
+    constructor(args, page) {
         this.Page = page;
         this.page = null;
-        this.args = {};
+        this.args = args;
         this._targetRender = document.body;
+        this._shown = false;
+        this.el = args.el;
     };
 
     getTargetRender() {
@@ -23,4 +25,22 @@ export default class BaseView {
     };
 
     afterRender() {};
+
+    hide() {
+        this.setShown(false);
+        if (this.el) {
+            this.el.remove(); 
+            this.el = document.createElement('div');
+            this.args.el = this.el;
+        }
+    }
+
+    setShown(shown) {
+        this._shown = shown;
+    }
+
+    isShown() {
+        return this._shown;
+    }
+
 };

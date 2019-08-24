@@ -4,23 +4,24 @@ import EventBus from '../scripts/eventbus';
 import LoginForm from '../components/LoginForm/LoginForm';
 import PageEvents from "../events/PageEvents";
 import APIEvents from "../events/APIEvents";
-import StoreEvents from "../events/StoreEvents";
 import ERROR from "../network/Errors";
 import ERROR_MSG from "../pages/ErrorMsg";
 import FormMixin from "./mixins/FormMixin";
 
 export default class IndexView extends BaseView {
-    constructor() {
+    constructor(args) {
         console.log("Index"); 
-        super(IndexPage);
-        this.setTargetRender(document.querySelector('.main'));
+        super(args, IndexPage);
+        this.setTargetRender(document.querySelector('.container'));
         this.formController = FormMixin;
+
+        EventBus.on(PageEvents.RENDER_LOGIN_FORM, this.onLoginFormRender.bind(this));
+        EventBus.on(PageEvents.AFTER_RENDER_LOGIN_FORM, this.onLoginFormAfterRender.bind(this));
+        EventBus.on(PageEvents.LOGIN_SUCCESS, this.onLoginSuccess.bind(this));
+        EventBus.on(PageEvents.LOGIN_ERROR, this.onLoginError.bind(this));
     };
 
     afterRender() {
-        EventBus.on(PageEvents.RENDER_LOGIN_FORM, this.onLoginFormRender.bind(this));
-        EventBus.on(PageEvents.AFTER_RENDER_LOGIN_FORM, this.onLoginFormAfterRender.bind(this));
-
         const loginButton = document.querySelector('.button_secondary');
         loginButton.addEventListener('click', (e) => {
             e.preventDefault();
@@ -36,9 +37,6 @@ export default class IndexView extends BaseView {
     }
 
     onLoginFormAfterRender() {
-        EventBus.on(PageEvents.LOGIN_SUCCESS, this.onLoginSuccess.bind(this));
-        EventBus.on(PageEvents.LOGIN_ERROR, this.onLoginError.bind(this));
-
         const showPasswordButton = document.querySelector('.form-input__password');
         showPasswordButton.addEventListener('click', (e) => {
             const input = document.querySelector('.form-input__input_password');
@@ -65,16 +63,11 @@ export default class IndexView extends BaseView {
             user.password = loginForm.password.value;
 
             EventBus.emit(APIEvents.LOGIN, user);
-        };
+        }
     }
 
-    onLoginSuccess(data) {
-        console.log('Login success', data);
+    onLoginSuccess() {
         EventBus.emit(PageEvents.RENDER_OBJECTS_PAGE, '/objects');
-
-        const user = {};
-        user.email = data.email;
-        EventBus.emit(StoreEvents.UPDATE_USER, user);
     }
 
     onLoginError(errors) {

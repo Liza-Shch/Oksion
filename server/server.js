@@ -47,6 +47,8 @@ app.get('/api', (req, res) => {
 });
 app.post('/api/signup', [Middlewares.SignUp.checkBodyExist, Middlewares.SignUp.checkRoleExist], Controllers.User.createUser);
 app.post('/api/login', Controllers.User.login);
+app.get('/api/auth', [Middlewares.Auth.isAuth, Middlewares.Auth.determinePermissions], Controllers.User.auth);
+app.get('/api/logout', [Middlewares.Auth.isAuth, Middlewares.Auth.determinePermissions], Controllers.User.logout);
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(root, 'index.html'));

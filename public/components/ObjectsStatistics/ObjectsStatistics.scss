@@ -1,0 +1,43 @@
+.objects-statistics {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 40px auto;
+    grid-template-areas: "work not-work percent"
+                         "work-js not-work-js percent-js";
+    background-color: #E8E8E8;
+    grid-row-gap: 10px;
+    color: #344960;
+    justify-items: center;
+    align-items: center;
+    width: 200px;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
+
+    &__icon {
+        &-work {
+            grid-area: work;
+        }
+
+        &-not-work {
+            grid-area: not-work;
+        }
+
+        &-percent {
+            grid-area: percent;
+        }
+    }
+
+    &__work {
+        grid-area: work-js;
+    }
+
+    &__not-work {
+        grid-area: not-work-js;
+    }
+
+    &__percent {
+        grid-area: percent-js;
+    }
+}

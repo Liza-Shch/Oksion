@@ -2,9 +2,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     height: 50px;
-    border-radius: 50px;
+    border-radius: 5px;
     box-sizing: border-box;
 
     &_primary {
@@ -23,6 +24,24 @@
         &:hover {
             background-color: white;
             color: #111823;
+        }
+    }
+
+    &_menu {
+        color: #2D4157;
+        text-align: left;
+
+        &:hover {
+            text-decoration: underline;
+        } 
+    }
+
+    &_filter {
+        background-color:  #e6b82b;
+        max-width: unset;
+        
+        &:hover {
+            background-color: #FFC42E;
         }
     }
 }

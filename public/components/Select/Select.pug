@@ -1,0 +1,14 @@
+mixin li(value, text, chosen)
+    if chosen
+        li(value=value).select__option.select__option-chosen-js=text
+    else
+        li(value=value).select__option=text
+
+.select-container
+    span=data.label
+    .select.select-closed
+        .select__icon.select__icon-closed
+        button.select__button=data.chosenOption.text
+        ul.select__list.select__list-closed
+            each option in data.options
+                +li(option.value, option.text,  option.chosen)

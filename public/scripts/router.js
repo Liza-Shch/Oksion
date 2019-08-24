@@ -1,3 +1,5 @@
+import Store from './store';
+
 export default class Router {
     constructor(controller) {
         this._routes = {};
@@ -24,22 +26,38 @@ export default class Router {
      * @param {string} url example: "/object/param1/param2"
      */
     go(url) {
-        console.log(this);
+        if (!Store.user.isAuth()) {
+            url = '/'
+        }
+
+        let found = false;
         for (let key in this._routes) {
-            console.log(key);
+            console.log(key, url);
             let parsedUrl = this._routes[key].pattern.exec(url);
             if (!parsedUrl) {
+                if (this._routes[key].view && this._routes[key].view.isShown()) {
+                    console.log('Hide', key);
+                    this._routes[key].view.hide();
+                };
                 continue;
             };
 
+            const View = this._routes[key].View;
             if (!this._routes[key].view || parsedUrl.length > 1) {
-                this._routes[key].view = new this._routes[key].View(...(parsedUrl.slice(1,)));
+                console.log('New View');
+                const el = document.createElement('div');
+                this._routes[key].view = new View({el: el, args:(parsedUrl.slice(1,))});
             };
 
             this._controller(this._routes[key].view);
+            this._routes[key].view.setShown(true);
             window.history.pushState('', '', url);
-            break;
+            found = true;
         };
+
+        if (!found) {
+            // view not found
+        }
     };
 
     start() {
@@ -50,10 +68,12 @@ export default class Router {
 
             event.preventDefault();
 
+            console.log('target link');
             this.go(event.target.pathname);
         }.bind(this));
 
-        const firstPath = window.location.pathname;
-        this.go(firstPath);
+        console.log('dcdcwd');
+        // const firstPath = window.location.pathname;
+        // this.go(firstPath);
     };
 };

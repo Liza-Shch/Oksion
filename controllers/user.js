@@ -35,14 +35,46 @@ module.exports = class User {
                     return res.status(200).send({status:'error', errors:['password.not_matched'], message: 'Invalid Password'});
                 };
 
-                const token = jwt.sign({userId: user.id}, process.env.SECRET, {expiresIn: '10h'});
-                res.status(200).cookie('x-access-token', token, { expires: new Date(Date.now() + 36000000), httpOnly: true }).send({status:'ok', email: user.email});
+                return user;
+            })
+            .then((user) => {
+                if (!user.email) return;
+                Queries.UserPermissions.getPermissionsByUserID(user.id)
+                .then((permissions) => {
+                    const accessToken = jwt.sign({userId: user.id}, process.env.SECRET, {expiresIn: '10h'});
+                    res.cookie('x-access-token', accessToken, { expires: new Date(Date.now() + 36000000), httpOnly: true });
+                    
+                    const permissionToken = jwt.sign({permissions: permissions}, process.env.SECRET, {expiresIn: '10h'});
+                    res.cookie('x-permissions-token', permissionToken, { expires: new Date(Date.now() + 36000000), httpOnly: true });
+                    
+                    return res.status(200).send({status: 'ok', email: req.body.email.toLowerCase(), permissions: permissions});
+                })
+                .catch((err) => {
+                    return res.status(200).send({status: 'error', errors: ['server.error'], message: `${err}`});
+                })
             })
             .catch((err) => {
-                res.status(200).send({status:'error', errors: ['server.error'], message: `${err}`});
+                if (!err) return;
+                return res.status(200).send({status:'error', errors: ['server.error'], message: `${err}`});
             })
+        });
+    };
+
+    static auth(req, res) {
+        Queries.User.getUserByID(req.userId)
+        .then((user) => {
+            res.status(200).send({status: 'ok', email: user.email, permissions: req.permissions});
+        })
+        .catch((err) => {
+            res.status(200).send({status: 'error', errors: ['server.error'], message: `${err}`});
         })
     };
+
+    static logout(req, res) {
+        res.clearCookie('x-access-token');
+        res.clearCookie('x-permissions-token');
+        return res.status(200).send({status: 'ok', message: 'User logout'});
+    }
 
     // static deleteUser(req, res) {
     //     Queries.User.getUserByEmail(req.body.email)

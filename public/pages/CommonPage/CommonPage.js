@@ -1,26 +1,21 @@
 import './CommonPage.scss';
-import Logo from "../../components/Logo/Logo";
+import Menu from '../../components/Menu/Menu';
 
 export default class CommonPage {
-    constructor(authAs) {
-        this._authAs = authAs;
+    constructor(args) {
+        this._el = args.el;
+        this._permissions = args.permissions;
+        console.log('CommonPAge constr', args);
     };
 
     render() {
-        console.log("CommonPage render");
-        let html = '';
+        this._el.classList.add('container');
 
-        const logo = new Logo();
-        html += logo.render();
+        if (this._permissions) {
+            const menu = new Menu({permissions: this._permissions});
+            this._el.insertAdjacentHTML('afterbegin', menu.render());
+        }
 
-        const commonPage = document.createElement('div');
-        commonPage.classList.add('container');
-        commonPage.insertAdjacentHTML("afterbegin", html);
-
-        const main = document.createElement('div');
-        main.classList.add('main');
-        commonPage.appendChild(main);
-
-        return commonPage.outerHTML;
+        return this._el;
     };
 };
