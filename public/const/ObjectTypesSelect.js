@@ -1,19 +1,14 @@
-const ObjectTypesSelect = [
-        {
-            "text": "Любой",
-            "value": "any",
-            "chosen": "true"
-        },
-        {
-            "text": "ПИОН",
-            "value": "pion",
-            "chosen": "false"
-        },
-        {
-            "text": "ПУОН",
-            "value": "puon",
-            "chosen": "false"
-        }
-]
+import ObjectTypes from "./ObjectTypes";
+
+const ObjectTypesSelect = ObjectTypes;
+ObjectTypesSelect.forEach((objectType) => {
+    objectType.chosen = false;
+});
+
+ObjectTypesSelect.push({
+    text: "Любой",
+    value: "any",
+    chosen: "true"
+});
 
 export default ObjectTypesSelect;
