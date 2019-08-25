@@ -16,7 +16,7 @@ module.exports = class User {
                 })
             })
             .then(() => { return res.status(201).send({status: 'ok', message: `User successfully created!`})})
-            .catch((err) => { return res.status(200).send({status:' errer', errors: ['server.error'], message: `${err}`})});
+            .catch((err) => { return res.status(200).send({status:' error', errors: ['server.error'], message: `${err}`})});
         })
         .catch((err) => { 
             return res.status(200).send({status: 'error', errors: ['server.error'], message: `${err}`});

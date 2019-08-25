@@ -49,6 +49,8 @@ app.post('/api/signup', [Middlewares.SignUp.checkBodyExist, Middlewares.SignUp.c
 app.post('/api/login', Controllers.User.login);
 app.get('/api/auth', [Middlewares.Auth.isAuth, Middlewares.Auth.determinePermissions], Controllers.User.auth);
 app.get('/api/logout', [Middlewares.Auth.isAuth, Middlewares.Auth.determinePermissions], Controllers.User.logout);
+app.post('/api/create/item', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkTypeExist, Middlewares.Item.checkDistrictExist], Controllers.Item.createItem);
+app.post('/api/items', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkTypeOrderExist, Middlewares.Item.checkDistrictOrderExist], Controllers.Item.getItems);
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(root, 'index.html'));
@@ -60,7 +62,3 @@ app.set('port', port);
 
 const server = http.createServer(app);
 server.listen(port);
-
-// app.listen(port, () => {
-//     console.log(`Server listening port ${port}`);
-// });
