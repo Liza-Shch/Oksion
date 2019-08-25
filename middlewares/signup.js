@@ -1,5 +1,4 @@
-const db = require('../models/index');
-const PERMISSION = require('../config/db.config');
+const PERMISSION = require('../config/db/permission');
 
 module.exports = class SignUp {
     static checkBodyExist(req, res, next) {
