@@ -1,4 +1,4 @@
-import Store from './store';
+import Store from './Store';
 
 export default class Router {
     constructor(controller) {
@@ -26,6 +26,7 @@ export default class Router {
      * @param {string} url example: "/object/param1/param2"
      */
     go(url) {
+        console.log("GO", url);
         if (!Store.user.isAuth()) {
             url = '/'
         }

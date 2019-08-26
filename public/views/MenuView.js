@@ -1,7 +1,7 @@
 import BaseView from "./BaseView";
 import Menu from "../components/Menu/Menu";
-import Store from '../scripts/store';
-import EventBus from "../scripts/eventbus";
+import Store from '../scripts/Store';
+import EventBus from "../scripts/EventBus";
 import APIEvents from "../events/APIEvents";
 
 export default class MenuView extends BaseView {

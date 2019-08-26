@@ -1,0 +1,8 @@
+.items-statistics
+    include ../../mixins/circle/circle.pug 
+    +circle('work')(class='items-statistics__icon-work')
+    +circle('not-work')(class='items-statistics__icon-not-work')
+    +circle('stat')(class='items-statistics__icon-percent')
+    span.items-statistics__work=data.work
+    span.items-statistics__not-work=data.notWork
+    span.items-statistics__percent=data.percent+'%'

@@ -1,4 +1,4 @@
-const  ObjectTypes = [
+const  ItemTypes = [
     {
         text: "ПИОН",
         value: "pion"
@@ -9,4 +9,4 @@ const  ObjectTypes = [
     }
 ]
 
-export default ObjectTypes;
+export default ItemTypes;

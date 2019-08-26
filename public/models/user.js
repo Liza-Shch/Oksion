@@ -1,4 +1,4 @@
-import Store from '../scripts/store';
+import Store from '../scripts/Store';
 
 export default class User {
     constructor() {

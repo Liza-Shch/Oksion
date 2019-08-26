@@ -1,6 +1,6 @@
 import BaseView from "./BaseView";
 import IndexPage from "../pages/IndexPage/IndexPage";
-import EventBus from '../scripts/eventbus';
+import EventBus from '../scripts/EventBus';
 import LoginForm from '../components/LoginForm/LoginForm';
 import PageEvents from "../events/PageEvents";
 import APIEvents from "../events/APIEvents";
@@ -67,7 +67,7 @@ export default class IndexView extends BaseView {
     }
 
     onLoginSuccess() {
-        EventBus.emit(PageEvents.RENDER_OBJECTS_PAGE, '/objects');
+        EventBus.emit(PageEvents.CREATE_ITEMS_PAGE, '/items');
     }
 
     onLoginError(errors) {

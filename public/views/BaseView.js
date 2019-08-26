@@ -21,10 +21,17 @@ export default class BaseView {
     render() {
         this.page = new this.Page(this.args);
         console.log("Base render");
-        return this.page.render();
+        this.el = this.page.render();
+        this._targetRender.appendChild(this.el);
     };
 
     afterRender() {};
+
+    create() {
+        this.beforeRender();
+        this.render();
+        this.afterRender();
+    }
 
     hide() {
         this.setShown(false);
