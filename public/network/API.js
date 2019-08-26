@@ -94,7 +94,9 @@ export default class API {
         
             EventBus.emit(StoreEvents.UPDATE_ITEMS, data.items);
 
+            console.log("events", args.event);
             args.event.success.forEach((event) => {
+                console.log("event", event);
                 EventBus.emit(event.event, event.args)
             });
         })

@@ -12,6 +12,7 @@ const PageEvents = {
     PREPARE_ARGS_ITEMS_PAGE: 'page: prepare-args-items-page',
     AFTER_RENDER_ITEMS_PAGE: 'page: after-render-items-page',
     RENDER_ITEMS_PAGE: 'page: render-items-page',
+    UPDATE_ITEMS: 'page: update-items',
 };
 
 export default PageEvents;

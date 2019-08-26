@@ -3,12 +3,15 @@ import './Items.scss';
 import Item from '../Item/Item';
 import ItemTypes from '../../const/ItemTypes';
 import District from '../../const/District';
+import Store from "../../scripts/Store";
+import EventBus from "../../scripts/EventBus";
+import PageEvents from "../../events/PageEvents";
 
 export default class Items {
     constructor(args) {
         this._el = null;
         this._items = args.items;
-        this._order = args.order;
+        this._order = args.order || 'fromPionToPuon';
     }
 
     create() {
@@ -18,30 +21,25 @@ export default class Items {
     }
 
     _prepareArgs() {
-        for (let key in this._items) {
-            this._items[key].type = ItemTypes.find((type) => type.value == this._items[key].type);
-            this._items[key].district = District.find((district) => district.value == this._items[key].district);
-        }
-        console.log("Prepare Args", this._items);
+        this._items = this._items.map((item) => {
+            item.type = Object.assign({}, ItemTypes.find((type) => type.value == item.type)); 
+            return item
+        })
+        .map((item) => {
+            item.district = Object.assign({}, District.find((district) => district.value == item.district));
+            return item
+        });
+        console.log("prepare", this._items);
     }
 
     /**
      * Create order repeat(pion, puon)
      */
     _renderByType(el) {
-        const pions = [];
-        const puons = [];
-        for (let key in this._items) {
-            if (this._items[key].type.value == 'pion') {
-                pions.push(this._items[key])
-            }
-
-            if (this._items[key].type.value == 'puon') {
-                puons.push(this._items[key])
-            }
-        }
+        const pions = this._items.filter((item) => item.type.value == 'pion');
+        const puons = this._items.filter((item) => item.type.value == 'puon');
         
-        console.log(pions, puons);
+        console.log("PIONS", pions, "PUONS", puons);
         const pionsContainer = el.querySelector('.items__col-first');
         const puonsContainer = el.querySelector('.items__col-second');
         pions.forEach((_pion) => {
@@ -60,6 +58,26 @@ export default class Items {
         return el;
     }
 
+    _renderFillAll(el) {
+        const firstContainer = el.querySelector('.items__col-first');
+        const secondContainer = el.querySelector('.items__col-second');
+        const size = this._items.length;
+        let i = 0;
+        while (i < size) {
+            const first = new Item(this._items[i]);
+            const firstEl = first.create();
+            firstContainer.appendChild(firstEl);
+            i++;
+            if (i < size) {
+                const second = new Item(this._items[i]);
+                const secondEl = second.create();
+                secondContainer.appendChild(secondEl);
+            }
+        }
+
+        return el;
+    }
+
     renderDOM() {
         const html = itemsTmp.call({}, {});
         const buffer = document.createElement('div');
@@ -69,8 +87,18 @@ export default class Items {
         console.log(itemsEl);
         if (this._order == 'fromPionToPuon') {
             itemsEl = this._renderByType(itemsEl);
+        } else if (this._order == 'fillAll') {
+            itemsEl = this._renderFillAll(itemsEl);
         }
 
         return itemsEl;
+    }
+
+    update(args) {
+        console.log("UPDATE");
+        this._order = args.order;
+        this._items = args.items;
+        this._el = this.create();
+        return this._el;
     }
 }

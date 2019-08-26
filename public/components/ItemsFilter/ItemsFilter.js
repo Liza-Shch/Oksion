@@ -4,6 +4,10 @@ import Select from '../Select/Select';
 import ItemTypesSelect from '../../const/ItemTypesSelect';
 import DistrictSelect from '../../const/DistrictSelect';
 import Button from '../Button/Button';
+import EventBus from '../../scripts/EventBus';
+import PageEvents from '../../events/PageEvents';
+import APIEvents from '../../events/APIEvents';
+import ItemTypes from '../../const/ItemTypes';
 
 export default class ItemsFilter {
     constructor() {
@@ -56,11 +60,21 @@ export default class ItemsFilter {
             const districtValue = districtChosen.attributes.value.value;
 
             const data = {
-                objectType: objectTypeValue,
+                type: objectTypeValue,
                 district: districtValue
             };
 
-            console.log('DATA', data);
+            const order = data.type == 'any' ? 'fromPionToPuon' : 'fillAll';
+            const args = {
+                cond: data,
+                event: {
+                    success: [
+                        {event: PageEvents.UPDATE_ITEMS, args: {order: order}}
+                    ]
+                }
+            }
+
+            EventBus.emit(APIEvents.GET_ITEMS, args)
         }
     }
 }

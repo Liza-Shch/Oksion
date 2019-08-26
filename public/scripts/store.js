@@ -6,11 +6,11 @@ class Store {
     constructor() {
         this.user = new User();
         this.permissions = new Permission();
-        this.items = {};
+        this.items = [];
     }
 
     getItems() {
-        const clone = Object.assign({}, this.items);
+        const clone = JSON.parse(JSON.stringify(this.items));
         return clone;
     }
 
@@ -20,13 +20,15 @@ class Store {
     }
 
     onUpdateItems(items) {
-        items.forEach((item) => {
-            if (this.items[item.id]) {
-                this.items[item.id].update(item);
-            } else {
-                this.items[item.id] = new Item(item);
-            }
-        });
+        this.items = items;
+
+        // items.forEach((item) => {
+        //     if (this.items[item.id]) {
+        //         this.items[item.id].update(item);
+        //     } else {
+        //         this.items[item.id] = new Item(item);
+        //     }
+        // });
     }
 };
 
