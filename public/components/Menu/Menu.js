@@ -1,7 +1,7 @@
 import menuTmp from './Menu.pug';
 import './Menu.scss';
 import '../../mixins/link/link.scss';
-import Store from '../../scripts/store';
+import Store from '../../scripts/Store';
 
 export default class Menu {
     constructor(args) {

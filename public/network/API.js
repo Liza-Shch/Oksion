@@ -1,6 +1,6 @@
 import Ajax from "./Ajax";
 import PageEvents from '../events/PageEvents';
-import EventBus from '../scripts/eventbus';
+import EventBus from '../scripts/EventBus';
 import StoreEvents from "../events/StoreEvents";
 
 export default class API {
@@ -40,7 +40,6 @@ export default class API {
     static onLogin(user) {
         Ajax.doPost('/api/login', user)
         .then((res) => {
-            console.log("doPost", res);
             return res.json()
         })
         .then((data) => {
@@ -75,6 +74,31 @@ export default class API {
         })
         .catch((err) => {
 
+        })
+    }
+
+    /**
+     * Get items with filter
+     * @param {Object} args - {cond, event} cond - condition of selection {type, district}
+     */
+    static onGetItems(args) {
+        Ajax.doPost('/api/items', args.cond)
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            data.items.map((item) => {
+                item['isWork'] = item['is_work'];
+                return item;
+            });
+        
+            EventBus.emit(StoreEvents.UPDATE_ITEMS, data.items);
+
+            args.event.success.forEach((event) => {
+                EventBus.emit(event.event, event.args)
+            });
+        })
+        .catch((err) => {
         })
     }
 }

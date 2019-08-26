@@ -1,8 +1,8 @@
-import objectsstatisticsTmp from './ObjectsStatistics.pug';
-import './ObjectsStatistics.scss';
+import itemsstatisticsTmp from './ItemsStatistics.pug';
+import './ItemsStatistics.scss';
 import '../../mixins/circle/circle.scss';
 
-export default class ObjectsStatistics {
+export default class ItemsStatistics {
     constructor(args) {
         this._work = args.work;
         this._notWork = args.notWork;
@@ -18,7 +18,7 @@ export default class ObjectsStatistics {
             percent: this._percent
         }
 
-        const html = objectsstatisticsTmp.call({}, {data});
+        const html = itemsstatisticsTmp.call({}, {data});
         const buffer = document.createElement('div');
         buffer.insertAdjacentHTML('afterbegin', html);
         return buffer.firstElementChild;

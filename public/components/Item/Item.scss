@@ -44,6 +44,8 @@
 
     &__address {
         grid-area: address;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &-pion {

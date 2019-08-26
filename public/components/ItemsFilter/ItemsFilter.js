@@ -1,12 +1,11 @@
-import objectsFilterTmp from './ObjectsFilter.pug';
-import './ObjectsFilter.scss';
+import itemsFilterTmp from './ItemsFilter.pug';
+import './ItemsFilter.scss';
 import Select from '../Select/Select';
-import ObjectTypesSelect from '../../const/ObjectTypesSelect';
+import ItemTypesSelect from '../../const/ItemTypesSelect';
 import DistrictSelect from '../../const/DistrictSelect';
 import Button from '../Button/Button';
-import { format } from 'path';
 
-export default class ObjectsFilter {
+export default class ItemsFilter {
     constructor() {
         this._el = null;
     }
@@ -18,20 +17,20 @@ export default class ObjectsFilter {
     }
 
     renderDOM() {
-        const html = objectsFilterTmp.call({}, {});
+        const html = itemsFilterTmp.call({}, {});
         const buffer = document.createElement('div');
         buffer.insertAdjacentHTML('afterbegin', html);
         this._el = buffer.firstElementChild;
         
-        const typeSelectArgs = ObjectTypesSelect;
+        const typeSelectArgs = ItemTypesSelect;
         const typeSelect = new Select({label: 'Тип объекта', options: typeSelectArgs});
         const typeSelectEl = typeSelect.create();
-        typeSelectEl.classList.add('object-type-select-js');
+        typeSelectEl.classList.add('item-type-select-js');
 
         const districtSelectArgs = DistrictSelect;
         const districtSelect = new Select({label: 'Округ', options: districtSelectArgs});
         const districtSelectEl = districtSelect.create();
-        districtSelectEl.classList.add('district-select-js');
+        districtSelectEl.classList.add('item-district-select-js');
 
         const buttonArgs = {
             type: 'filter',
@@ -48,11 +47,11 @@ export default class ObjectsFilter {
     afterRender() {
         this._el.onsubmit = (e) => {
             e.preventDefault();
-            const objectType = this._el.querySelector('.object-type-select-js');
+            const objectType = this._el.querySelector('.item-type-select-js');
             const objectTypeChosen = objectType.querySelector('.select__option-chosen-js');
             const objectTypeValue = objectTypeChosen.attributes.value.value;
 
-            const district = this._el.querySelector('.district-select-js');
+            const district = this._el.querySelector('.item-district-select-js');
             const districtChosen = district.querySelector('.select__option-chosen-js');
             const districtValue = districtChosen.attributes.value.value;
 

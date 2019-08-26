@@ -3,10 +3,10 @@ import './Item.scss';
 
 export default class Item {
     constructor(args) {
-        this._type = args.type;
-        this._isWork = args.isWork;
-        this._district = args.district;
-        this._address = args.address;
+        this.type = args.type;
+        this.isWork = args.isWork;
+        this.district = args.district;
+        this.address = args.address;
         this._el = null;
     }
 
@@ -17,14 +17,13 @@ export default class Item {
 
     renderDOM() {
         const data = {
-            type: this._type,
-            isWork: this._isWork,
-            district: this._district,
-            address: this._address 
+            type: this.type,
+            isWork: this.isWork,
+            district: this.district,
+            address: this.address 
         }
 
-        console.log(data);
-        const html = itemTmp.call({}, {data})
+        const html = itemTmp.call({}, {data});
         const buffer = document.createElement('div');
         buffer.insertAdjacentHTML('afterbegin', html);
         return buffer.firstElementChild;
