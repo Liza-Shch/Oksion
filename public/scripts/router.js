@@ -15,7 +15,7 @@ export default class Router {
         this._routes[url] = {
             View: view,
             view: null,
-            pattern: new RegExp('^' + url.replace(new RegExp(':\\w+', 'g'), '(\\w+)') + '$', 'g')
+            pattern: new RegExp('^' + url.replace(new RegExp(':\\w+', 'g'), '(\\w+)') + '$')
         };
 
         return this;
@@ -38,42 +38,42 @@ export default class Router {
             if (!parsedUrl) {
                 if (this._routes[key].view && this._routes[key].view.isShown()) {
                     console.log('Hide', key);
+                    this._routes[key].view.setShown(false);
                     this._routes[key].view.hide();
                 };
                 continue;
             };
 
             const View = this._routes[key].View;
-            if (!this._routes[key].view || parsedUrl.length > 1) {
+            if (!this._routes[key].view) {
                 console.log('New View');
-                const el = document.createElement('div');
-                this._routes[key].view = new View({el: el, args:(parsedUrl.slice(1,))});
+                this._routes[key].view = new View();
             };
 
-            this._controller(this._routes[key].view);
+            this._controller(this._routes[key].view, { id: parsedUrl[1] });
             this._routes[key].view.setShown(true);
             window.history.pushState('', '', url);
             found = true;
         };
 
         if (!found) {
-            // view not found
+            console.log('url not found')
         }
     };
 
     start() {
-        window.addEventListener('click', function (event) {
-            if (!(event.target instanceof HTMLAnchorElement)) {
+        window.addEventListener('click', function linkCallback (e) {
+            if (!(e.target instanceof HTMLAnchorElement)) {
                 return;
             };
 
-            event.preventDefault();
-
+            e.preventDefault();
+            // e.stopPropagation();
             console.log('target link');
             this.go(event.target.pathname);
+            // return false;
         }.bind(this));
 
-        console.log('dcdcwd');
         // const firstPath = window.location.pathname;
         // this.go(firstPath);
     };

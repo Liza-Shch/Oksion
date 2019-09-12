@@ -32,6 +32,10 @@ export default class Select {
         return buffer.firstElementChild;
     }
 
+    getSelectedData() {
+        return this._el.querySelector('.select__option-chosen-js').attributes['value'].value
+    }
+
     afterRender() {
         const selectButton = this._el.querySelector('.select__button');
         selectButton.addEventListener('click', (e) => {

@@ -29,4 +29,20 @@ module.exports = class Item {
             })
         });
     }
+
+    static getItem(req, res) {
+        db.sequelize.transaction((t) => {
+            return Queries.Item.getItemByID(req.body.id, t)
+            .then((item) => {
+                if (!item) {
+                    return res.status(200).send({ status:"error", errors: ["item.not_found"], message: `Item is not found`})
+                }
+                
+                return res.status(200).send({ status: "ok", item: item })
+            })
+            .catch((err) => {
+                return res.status(200).send({ status: "error", errors: ["server.error"], message: `${err}`})
+            })
+        })
+    }
 }

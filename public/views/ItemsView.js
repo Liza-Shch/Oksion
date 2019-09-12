@@ -6,9 +6,9 @@ import PageEvents from "../events/PageEvents";
 import Store from '../scripts/Store';
 
 export default class ItemsView extends BaseView {
-    constructor(args) {
+    constructor() {
         console.log('ItemsViews');
-        super(args, ItemsPage);
+        super(ItemsPage);
         this.setTargetRender(document.querySelector('.container'));
 
         EventBus.on(PageEvents.PREPARE_ARGS_ITEMS_PAGE, this.prepareArgs.bind(this));
@@ -17,7 +17,9 @@ export default class ItemsView extends BaseView {
         // EventBus.on(PageEvents.UPDATE_ITEMS, this.onUpdateItems.bind(this));
     }
 
-    create() {
+    create(args) {
+        this.args = args;
+        this.el = document.createElement('div');
         this.beforeRender();
     }
 
@@ -29,9 +31,9 @@ export default class ItemsView extends BaseView {
             },
             event: {
                 success: [
-                    {event: PageEvents.PREPARE_ARGS_ITEMS_PAGE, args: null},
-                    {event: PageEvents.RENDER_ITEMS_PAGE, args: null},
-                    {event: PageEvents.AFTER_RENDER_ITEMS_PAGE, args: null}
+                    { event: PageEvents.PREPARE_ARGS_ITEMS_PAGE },
+                    { event: PageEvents.RENDER_ITEMS_PAGE },
+                    { event: PageEvents.AFTER_RENDER_ITEMS_PAGE }
                 ]
             }
         }
@@ -40,7 +42,6 @@ export default class ItemsView extends BaseView {
 
     prepareArgs() {
         this.args.items = Store.getItems();
-        console.log("oiuyfg", Store.getItems());
     }
 
     // onUpdateItems(order) {

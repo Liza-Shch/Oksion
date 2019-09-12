@@ -13,6 +13,12 @@ const PageEvents = {
     AFTER_RENDER_ITEMS_PAGE: 'page: after-render-items-page',
     RENDER_ITEMS_PAGE: 'page: render-items-page',
     UPDATE_ITEMS: 'page: update-items',
+    PREPARE_ARGS_ITEM_PAGE: 'page: prepare-args-item-page',
+    RENDER_ITEM_PAGE: 'page: render-item-page',
+    AFTER_RENDER_ITEM_PAGE: 'page: after-render-item-page',
+    CREATE_ITEM_PAGE: 'page: create-item-page',
+    UPDATE_ITEM_WORK: 'page: update-item-work',
+    CLOSE_CIRCLE_EDIT: 'page: close-circle-edit',
 };
 
 export default PageEvents;

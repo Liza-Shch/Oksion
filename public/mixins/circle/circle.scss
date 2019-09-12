@@ -1,4 +1,5 @@
 .circle {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,6 +7,17 @@
     height: 40px;
     border-radius: 50%;
     color: #E8E8E8;
+
+    &__text {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: inherit;
+        height: inherit;
+        top: 0;
+        left: 0;
+    }
 
     &-work {
         background-color: #6DB078;

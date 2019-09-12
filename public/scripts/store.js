@@ -1,6 +1,6 @@
-import User from "../models/user";
-import Permission from "../models/permission";
-import Item from "../models/item";
+import User from "../models/User";
+import Permission from "../models/Permission";
+import Item from "../models/Item";
 
 class Store {
     constructor() {
@@ -14,21 +14,27 @@ class Store {
         return clone;
     }
 
+    getItemByID(id) {
+        const item = this.items.find((item) => +item.id === +id);
+        return JSON.parse(JSON.stringify(item))
+    }
+
     onUpdateUser(user) {
         this.user.update(user);
-        console.log(this.user);
     }
 
     onUpdateItems(items) {
-        this.items = items;
+        this.items = items.map((item) => new Item(item))
+    }
 
-        // items.forEach((item) => {
-        //     if (this.items[item.id]) {
-        //         this.items[item.id].update(item);
-        //     } else {
-        //         this.items[item.id] = new Item(item);
-        //     }
-        // });
+    onUpdateItem(item) {
+        const itemIndex = this.items.findIndex((_item) => item.id === _item.id);
+        this.items[itemIndex] = new Item(item);
+    }
+
+    onUpdateItemWork({ id, isWork }) {
+        const item = this.items.find((item) => +item.id === +id);
+        item.updateWork(isWork);
     }
 };
 

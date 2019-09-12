@@ -40,4 +40,12 @@ module.exports = class Item  {
         sql += condDistrict;
         return db.sequelize.query(sql, {bind: {type: type, district: district}, type: db.sequelize.QueryTypes.SELECT}, {transaction: t})
     }
+
+    static getItemByID(id, t) {
+        return db.Item.findOne({
+            where: {
+                id: id
+            }
+        }, {transaction: t})
+    }
 }

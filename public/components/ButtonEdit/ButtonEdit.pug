@@ -1,0 +1,7 @@
+case data.type
+    when 'edit'
+        button(type='button').button_edit
+    when 'save'
+        button(type='submit').button.button_save=data.text
+    when 'cancel'
+        button(type='submit').button.button_cancel=data.text

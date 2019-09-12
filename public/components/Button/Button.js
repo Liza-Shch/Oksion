@@ -19,9 +19,7 @@ export default class Button {
             text: this._text
         }
 
-        console.log(data);
         const html = buttonTmp.call({}, {data});
-        console.log(html);
         const buffer = document.createElement('div');
         buffer.insertAdjacentHTML('afterbegin', html);
         return buffer.firstElementChild;

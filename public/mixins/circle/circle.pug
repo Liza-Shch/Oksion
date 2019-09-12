@@ -1,8 +1,11 @@
 mixin circle(type)
     case type
         when 'work'
-            .circle.circle-work&attributes(attributes)='P'
+            .circle.circle-work&attributes(attributes)
+                .circle__text='P'
         when 'not-work'
-            .circle.circle-not-work&attributes(attributes)='Н'
+            .circle.circle-not-work&attributes(attributes)
+                .circle__text='Н'
         when 'stat'
-            .circle.circle-stat&attributes(attributes)='С'
+            .circle.circle-stat&attributes(attributes)
+                .circle__text='C'

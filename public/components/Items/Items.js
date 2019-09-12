@@ -39,13 +39,11 @@ export default class Items {
         const pions = this._items.filter((item) => item.type.value == 'pion');
         const puons = this._items.filter((item) => item.type.value == 'puon');
         
-        console.log("PIONS", pions, "PUONS", puons);
         const pionsContainer = el.querySelector('.items__col-first');
         const puonsContainer = el.querySelector('.items__col-second');
         pions.forEach((_pion) => {
             const pion = new Item(_pion);
             const pionEl = pion.create();
-            console.log("PION", pionEl);
             pionsContainer.appendChild(pionEl);
         });
 
@@ -84,7 +82,6 @@ export default class Items {
         buffer.insertAdjacentHTML('afterbegin', html);
         let itemsEl = buffer.firstElementChild;
 
-        console.log(itemsEl);
         if (this._order == 'fromPionToPuon') {
             itemsEl = this._renderByType(itemsEl);
         } else if (this._order == 'fillAll') {

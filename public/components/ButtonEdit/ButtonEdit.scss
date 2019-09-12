@@ -1,0 +1,32 @@
+.button {
+    padding: 15px;
+    border-radius: 4px;
+    height: fit-content;
+
+    &_edit {
+        width: 30px;
+        border-radius: 50%;
+        background-color: white;
+        position: absolute;
+        z-index: 1;
+        top: -15px;
+        right: -15px;
+        display: none;
+
+        &::after {
+            content: '';
+            display: block;
+            padding-top: 100%;
+        }
+    }
+
+    &_save {
+        background-color: #E97E22;
+        color: white;
+    }
+
+    &_cancel {
+        background-color: #C4C4C4;
+        color: #2E4158;
+    }
+}

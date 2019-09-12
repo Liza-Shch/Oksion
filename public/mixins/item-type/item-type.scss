@@ -1,0 +1,15 @@
+.item-type {
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 5px;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
+
+    &_pion {
+        background-color: #91A8B8;
+    }
+
+    &_puon {
+        background-color: #798E8D;
+    }
+}

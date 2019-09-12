@@ -42,5 +42,13 @@ module.exports = Item = {
         }
 
         next();
+    },
+
+    checkIDExist(req, res, next) {
+        if (!req.body.id) {
+            return res.status(200).send({ status: "error", errors: ["item.id.not_found"], messasge: `Item's ID is not found`})
+        }
+
+        next();
     }
 }

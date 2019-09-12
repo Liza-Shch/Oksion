@@ -9,9 +9,9 @@ import ERROR_MSG from "../pages/ErrorMsg";
 import FormMixin from "./mixins/FormMixin";
 
 export default class IndexView extends BaseView {
-    constructor(args) {
+    constructor() {
         console.log("Index"); 
-        super(args, IndexPage);
+        super(IndexPage);
         this.setTargetRender(document.querySelector('.container'));
         this.formController = FormMixin;
 
