@@ -2,17 +2,13 @@ import circleTmp from './Circle.pug';
 import '../../mixins/circle/circle.scss';
 import EventBus from '../../scripts/EventBus';
 import PageEvents from '../../events/PageEvents';
+import BaseComponent from '../BaseComponent';
 
-export default class Circle {
+export default class Circle extends BaseComponent {
     constructor(args) {
+        super()
         this.isWork = args.isWork;
-        this._el = null;
         EventBus.on(PageEvents.UPDATE_ITEM_WORK, this.update.bind(this))
-    }
-
-    create() {
-        this._el = this.renderDOM();
-        return this._el
     }
     
     render() {
@@ -23,21 +19,10 @@ export default class Circle {
         return circleTmp.call({}, { data })
     }
 
-    renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        return buffer.firstElementChild;
-    }
-
-    coverUp() {
-        this._el.style['display'] = 'none';
-    }
-
     update({ isWork = false }) {
         this.isWork = isWork;
         const newEl = this.renderDOM();
-        this._el.innerHTML = newEl.innerHTML;
-        this._el.classList = newEl.classList;
+        this.el.innerHTML = newEl.innerHTML;
+        this.el.classList = newEl.classList;
     }
 }

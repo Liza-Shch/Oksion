@@ -1,18 +1,13 @@
 import './ButtonEdit.scss';
 import buttonEditTmp from './ButtonEdit.pug';
+import BaseComponent from '../BaseComponent';
 
-export default class ButtonEdit {
+export default class ButtonEdit extends BaseComponent {
     constructor({ action, type, text = null }) {
+        super()
         this._action = action;
         this._type = type;
-        this._el = null;
         this._text = text;
-    }
-
-    create() {
-        this._el = this.renderDOM();
-        this.afterRender()
-        return this._el;
     }
 
     render() {
@@ -24,24 +19,17 @@ export default class ButtonEdit {
         return buttonEditTmp.call({}, { data })
     }
 
-    renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html)
-        return buffer.firstElementChild
-    }
-
     coverUp() {
-        this._el.style['display'] = 'none';
-        this._el.disabled = true;
+        this.el.style['display'] = 'none';
+        this.el.disabled = true;
     }
 
     show() {
-        this._el.style['display'] = 'unset';
-        this._el.disabled = false;
+        this.el.style['display'] = 'unset';
+        this.el.disabled = false;
     }
 
     afterRender() {
-        this._el.addEventListener('click', this._action.bind(this))
+        this.el.addEventListener('click', this._action.bind(this))
     }
 }

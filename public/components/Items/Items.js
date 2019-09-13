@@ -3,21 +3,19 @@ import './Items.scss';
 import Item from '../Item/Item';
 import ItemTypes from '../../const/ItemTypes';
 import District from '../../const/District';
-import Store from "../../scripts/Store";
-import EventBus from "../../scripts/EventBus";
-import PageEvents from "../../events/PageEvents";
+import BaseComponent from '../BaseComponent';
 
-export default class Items {
+export default class Items extends BaseComponent {
     constructor(args) {
-        this._el = null;
+        super()
         this._items = args.items;
         this._order = args.order || 'fromPionToPuon';
     }
 
     create() {
         this._prepareArgs();
-        this._el = this.renderDOM();
-        return this._el;
+        this.el = this.renderDOM();
+        return this.el;
     }
 
     _prepareArgs() {
@@ -95,7 +93,7 @@ export default class Items {
         console.log("UPDATE");
         this._order = args.order;
         this._items = args.items;
-        this._el = this.create();
-        return this._el;
+        this.el = this.create();
+        return this.el;
     }
 }

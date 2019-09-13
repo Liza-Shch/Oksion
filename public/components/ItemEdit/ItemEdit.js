@@ -2,21 +2,16 @@ import './ItemEdit.scss';
 import ButtonEdit from "../ButtonEdit/ButtonEdit";
 import EventBus from '../../scripts/EventBus';
 import PageEvents from '../../events/PageEvents';
+import BaseComponent from '../BaseComponent';
 
-export default class ItemEdit {
+export default class ItemEdit extends BaseComponent {
     constructor({ Component, EditComponent, args = null }) {
+        super()
         this._component = new Component(args);
         this._editComponent = new EditComponent(args);
         this._button = new ButtonEdit({ action: this._onUpdate.bind(this), type: 'edit' });
-        this._el = null;
 
         EventBus.on(PageEvents.CLOSE_CIRCLE_EDIT, this.afterRender.bind(this))
-    }
-
-    create() {
-        this._el = this.renderDOM();
-        this.afterRender();
-        return this._el
     }
 
     renderDOM() {
@@ -30,16 +25,16 @@ export default class ItemEdit {
 
 
     afterRender() {
-        this._el.onmouseenter = this._button.show.bind(this._button);
-        this._el.onmouseleave = this._button.coverUp.bind(this._button);
+        this.el.onmouseenter = this._button.show.bind(this._button);
+        this.el.onmouseleave = this._button.coverUp.bind(this._button);
     }
 
     _onUpdate(e) {
         e.preventDefault();
         this._button.coverUp();
-        this._el.onmouseenter = null;
-        this._el.onmouseleave = null;
+        this.el.onmouseenter = null;
+        this.el.onmouseleave = null;
         const editComponent = this._editComponent.create();
-        this._el.appendChild(editComponent);
+        this.el.appendChild(editComponent);
     }
 }

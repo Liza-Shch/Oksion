@@ -7,24 +7,18 @@ import Button from '../Button/Button';
 import EventBus from '../../scripts/EventBus';
 import PageEvents from '../../events/PageEvents';
 import APIEvents from '../../events/APIEvents';
-import ItemTypes from '../../const/ItemTypes';
+import BaseComponent from '../BaseComponent';
 
-export default class ItemsFilter {
+export default class ItemsFilter extends BaseComponent {
     constructor() {
-        this._el = null;
-    }
-
-    create() {
-        this._el = this.renderDOM();
-        this.afterRender();
-        return this._el;
+        super()
     }
 
     renderDOM() {
         const html = itemsFilterTmp.call({}, {});
         const buffer = document.createElement('div');
         buffer.insertAdjacentHTML('afterbegin', html);
-        this._el = buffer.firstElementChild;
+        this.el = buffer.firstElementChild;
         
         const typeSelectArgs = ItemTypesSelect;
         const typeSelect = new Select({label: 'Тип объекта', options: typeSelectArgs});
@@ -44,18 +38,18 @@ export default class ItemsFilter {
         const button = new Button(buttonArgs);
         const buttonEl = button.create();
 
-        this._el.append(typeSelectEl, districtSelectEl, buttonEl);
-        return this._el;
+        this.el.append(typeSelectEl, districtSelectEl, buttonEl);
+        return this.el;
     }
 
     afterRender() {
-        this._el.onsubmit = (e) => {
+        this.el.onsubmit = (e) => {
             e.preventDefault();
-            const objectType = this._el.querySelector('.item-type-select-js');
+            const objectType = this.el.querySelector('.item-type-select-js');
             const objectTypeChosen = objectType.querySelector('.select__option-chosen-js');
             const objectTypeValue = objectTypeChosen.attributes.value.value;
 
-            const district = this._el.querySelector('.item-district-select-js');
+            const district = this.el.querySelector('.item-district-select-js');
             const districtChosen = district.querySelector('.select__option-chosen-js');
             const districtValue = districtChosen.attributes.value.value;
 

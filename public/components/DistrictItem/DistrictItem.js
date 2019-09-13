@@ -1,15 +1,11 @@
 import districtItemTmp from './DistrictItem.pug';
 import './DistrictItem.scss';
+import BaseComponent from '../BaseComponent';
 
-export default class District {
+export default class District extends BaseComponent {
     constructor(args) {
+        super()
         this.text = args.text;
-        this._el = null;
-    }
-
-    create() {
-        this._el = this.renderDOM();
-        return this._el;
     }
 
     render() {
@@ -18,12 +14,5 @@ export default class District {
         }
 
         return districtItemTmp.call({}, { data })
-    }
-
-    renderDOM() {
-        const html = this.render()
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        return buffer.firstElementChild
     }
 }

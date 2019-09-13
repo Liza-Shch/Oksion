@@ -1,26 +1,19 @@
 import itemTmp from './Item.pug';
 import './Item.scss';
 import '../../mixins/item-type/item-type.scss';
-import EventBus from '../../scripts/EventBus';
-import PageEvents from '../../events/PageEvents';
+import BaseComponent from '../BaseComponent';
 
-export default class Item {
+export default class Item extends BaseComponent {
     constructor(args) {
+        super()
         this.id = args.id;
         this.type = args.type;
         this.isWork = args.isWork;
         this.district = args.district;
         this.address = args.address;
-        this._el = null;
     }
 
-    create() {
-        this._el = this.renderDOM();
-        this.afterRender()
-        return this._el;
-    }
-
-    renderDOM() {
+    render() {
         const data = {
             id: this.id,
             type: this.type,
@@ -29,18 +22,6 @@ export default class Item {
             address: this.address 
         }
 
-        const html = itemTmp.call({}, {data});
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        return buffer.firstElementChild;
-    }
-
-    afterRender() {
-        // this._el.addEventListener('click', (e) => {
-        //     console.log('CLICK')
-        //     e.preventDefault();
-        //     EventBus.emit(PageEvents.CREATE_ITEM_PAGE, `/items/${this.id}`)
-        //     return false
-        // })
+        return itemTmp.call({}, {data});
     }
 }

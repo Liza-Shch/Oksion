@@ -5,12 +5,13 @@ import EventBus from '../../scripts/EventBus';
 import PageEvents from '../../events/PageEvents';
 import APIEvents from '../../events/APIEvents';
 import ButtonEdit from '../../components/ButtonEdit/ButtonEdit';
+import BaseComponent from '../BaseComponent';
 
-export default class CircleEdit {
+export default class CircleEdit extends BaseComponent {
     constructor({ isWork, id }) {
+        super();
         this._itemID = id;
         this._currentValue = isWork ? 'work' : 'not work';
-        this._el = null;
         this._options = null;
         this._select = null;
         this._buttonSave = new ButtonEdit({ action: this.save.bind(this), type: 'save', text: 'Сохранить' });
@@ -35,15 +36,15 @@ export default class CircleEdit {
     create() {
         this.prepareArgs();
         this._select = new Select({ options: this._options, label: 'Работоспособность' });
-        this._el = this.renderDOM();
+        this.el = this.renderDOM();
         this.afterRender();
-        return this._el;
+        return this.el;
     }
 
     hide() {
         EventBus.emit(PageEvents.CLOSE_CIRCLE_EDIT);
         document.removeEventListener('click', this._onClickOutside);
-        this._el.remove();
+        this.el.remove();
     }
 
     save() {

@@ -8,27 +8,27 @@ import EventBus from "../../scripts/EventBus";
 import PageEvents from '../../events/PageEvents';
 
 export default class ItemsPage {
-    constructor(args) {
-        this._el = args.el;
+    constructor({ el, items }) {
+        this.el = el;
         this._stat = {
             work: 123,
             notWork: 23,
             percent: 87
         };
-        this._items = args.items;
+        this._items = items;
         this._itemsEl = null;
-        console.log("ItemsPage", args.items);
+        console.log("ItemsPage", items);
         EventBus.on(PageEvents.UPDATE_ITEMS, this.updateItems.bind(this));
     }
 
     render() {
-        this._el.classList.add('main-items');
+        this.el.classList.add('main-items');
 
         const statistics = new ItemsStatistics(this._stat);
         const statisticsEl = statistics.renderDOM();
         statisticsEl.style['grid-area'] = 'stat';
 
-        this._el.appendChild(statisticsEl);
+        this.el.appendChild(statisticsEl);
 
         const title = new Title({text: 'Объекты'});
         const titleEl = title.renderDOM();
@@ -38,20 +38,16 @@ export default class ItemsPage {
         const filterEl = filter.create();
         filterEl.style['grid-area'] = 'filter';
 
-        const items = new Items({items: this._items});
+        const items = new Items({ items: this._items });
         const itemsEl = items.create();
         itemsEl.style['grid-area'] = 'main';
         this._itemsEl = items;
 
-        this._el.append(statisticsEl, titleEl, filterEl, itemsEl);
+        this.el.append(statisticsEl, titleEl, filterEl, itemsEl);
 
-        console.log("EL", this._el);
-        return this._el;
+        console.log("EL", this.el);
+        return this.el;
     }
-
-    // setItems(items) {
-    //     this._items = items;
-    // }
 
     updateItems(args) {
         this._items = Store.getItems();
@@ -59,14 +55,6 @@ export default class ItemsPage {
         console.log("UPDATE", this._items);
         const newItems = this._itemsEl.update(args);
         console.log("newItems", newItems);
-        this._el.querySelector('.items').innerHTML = newItems.innerHTML;
+        this.el.querySelector('.items').innerHTML = newItems.innerHTML;
     }
-
-    // renderItems(order = 'fromPionToPuon') {
-    // //    const copiedItems = JSON.parse(JSON.stringify(this._items));
-    //    const items = new Items({items: this._items, order: order});
-    //    const itemsEl = items.create();
-    //    itemsEl.style['grid-area'] = 'main';
-    //    return itemsEl;
-    // }
 }

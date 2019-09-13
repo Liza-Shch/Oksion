@@ -1,15 +1,11 @@
 import itemTypeTmp from './ItemType.pug';
 import '../../mixins/item-type/item-type.scss';
+import BaseComponent from '../BaseComponent';
 
-export default class ItemType {
+export default class ItemType extends BaseComponent {
     constructor(args) {
+        super()
         this.type = args.type;
-        this._el = null;
-    }
-
-    create() {
-        this._el = this.renderDOM();
-        return this._el;
     }
 
     render() {
@@ -19,12 +15,5 @@ export default class ItemType {
         }
 
         return itemTypeTmp.call({}, { data })
-    }
-
-    renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        return buffer.firstElementChild
     }
 }

@@ -1,19 +1,18 @@
 import textTmp from './Title.pug';
 import './Title.scss';
+import BaseComponent from '../BaseComponent';
 
-export default class Title {
+export default class Title extends BaseComponent {
     constructor(args) {
+        super()
         this._text = args.text;
     }
 
-    renderDOM() {
+    render() {
         const data = {
             text: this._text,
         }
 
-        const html = textTmp.call({}, {data});
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        return buffer.firstElementChild;
+        return textTmp.call({}, {data});
     }
 }
