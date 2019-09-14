@@ -21,4 +21,8 @@ export default class Item {
     updateWork(isWork) {
         this.isWork = isWork;
     }
+
+    updateAddress(address) {
+        this.address = address;
+    }
 }

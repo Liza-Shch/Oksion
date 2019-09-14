@@ -6,6 +6,8 @@ import DistrictItem from '../../components/DistrictItem/DistrictItem';
 import District from '../../const/District';
 import ItemEdit from '../../components/ItemEdit/ItemEdit';
 import CircleEdit from '../../components/CircleEdit/CircleEdit';
+import AddressItem from '../../components/AddressItem/AddressItem';
+import AddressEdit from '../../components/AddressEdit/AddressEdit';
 
 export default class ItemPage {
     constructor({ el, item }) {
@@ -38,7 +40,11 @@ export default class ItemPage {
         const districtItem = new DistrictItem({ text: district.text})
         const districtItemEl = districtItem.create()
 
-        this.el.append(header, districtItemEl);
+        const addressEdit = new ItemEdit({ Component: AddressItem, EditComponent: AddressEdit,
+            args: { address: this._item.address, id: this._item.id }});
+        const addressEditEl = addressEdit.create();
+
+        this.el.append(header, districtItemEl, addressEditEl);
         return this.el;
     }
 }

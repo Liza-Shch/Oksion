@@ -126,4 +126,8 @@ export default class API {
     static onUpdateItemWork(args) {
         EventBus.emit(StoreEvents.UPADTE_ITEM_WORK, args)
     }
+
+    static onUpdateItemAddress(args) {
+        EventBus.emit(StoreEvents.UPADTE_ITEM_ADDRESS, args)
+    }
 }

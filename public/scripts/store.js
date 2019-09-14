@@ -36,6 +36,11 @@ class Store {
         const item = this.items.find((item) => +item.id === +id);
         item.updateWork(isWork);
     }
+
+    onUpdateItemAddress({ id, address }) {
+        const item = this.items.find((item) => +item.id === +id);
+        item.updateAddress(address);
+    }
 };
 
 export default new Store();

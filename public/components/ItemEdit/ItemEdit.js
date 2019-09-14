@@ -11,7 +11,8 @@ export default class ItemEdit extends BaseComponent {
         this._editComponent = new EditComponent(args);
         this._button = new ButtonEdit({ action: this._onUpdate.bind(this), type: 'edit' });
 
-        EventBus.on(PageEvents.CLOSE_CIRCLE_EDIT, this.afterRender.bind(this))
+        EventBus.on(PageEvents.CLOSE_CIRCLE_EDIT, this.afterRender.bind(this));
+        EventBus.on(PageEvents.CLOSE_ADDRESS_EDIT, this.afterRender.bind(this))
     }
 
     renderDOM() {

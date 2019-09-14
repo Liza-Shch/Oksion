@@ -6,6 +6,7 @@ import PageEvents from '../../events/PageEvents';
 import APIEvents from '../../events/APIEvents';
 import ButtonEdit from '../../components/ButtonEdit/ButtonEdit';
 import BaseComponent from '../BaseComponent';
+import EditControlls from '../EditControlls/EditControlls';
 
 export default class CircleEdit extends BaseComponent {
     constructor({ isWork, id }) {
@@ -14,8 +15,7 @@ export default class CircleEdit extends BaseComponent {
         this._currentValue = isWork ? 'work' : 'not work';
         this._options = null;
         this._select = null;
-        this._buttonSave = new ButtonEdit({ action: this.save.bind(this), type: 'save', text: 'Сохранить' });
-        this._buttonCancel = new ButtonEdit({ action: this.hide.bind(this), type: 'cancel', text: 'Отменить' });
+        this._controlls = new EditControlls({ actionSave: this.save.bind(this), actionCancel: this.hide.bind(this) })
     }
 
     prepareArgs() {
@@ -67,12 +67,10 @@ export default class CircleEdit extends BaseComponent {
         const buffer = document.createElement('div');
         buffer.insertAdjacentHTML('afterbegin', html);
         const el = buffer.firstElementChild;
-        const select = this._select.create();
 
-        const buttonSave = this._buttonSave.create();
-        const buttonCancel = this._buttonCancel.create();
-        el.querySelector('.circle-edit__controlls').append(buttonCancel, buttonSave);
-        el.querySelector('.circle-edit__main').append(select);
+        const selectEl = this._select.create();
+        const controllsEl = this._controlls.create();
+        el.append(selectEl, controllsEl)
         return el;
     }
 
