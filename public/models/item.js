@@ -25,4 +25,8 @@ export default class Item {
     updateAddress(address) {
         this.address = address;
     }
+
+    updateType(type) {
+        this.type = type;
+    }
 }

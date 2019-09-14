@@ -5,12 +5,13 @@ import BaseComponent from '../BaseComponent';
 export default class Select extends BaseComponent {
     /**
      * 
-     * @param {Object} args - options: Array of args {text, value, chosen}, label: string
+     * @param {Object} options - options: Array of args {text, value, chosen}
+     * @param {String} label - label
      */
-    constructor(args) {
+    constructor({ label, options }) {
         super()
-        this._label = args.label;
-        this._options = args.options;
+        this._label = label;
+        this._options = options;
     }
 
     render() {

@@ -21,6 +21,8 @@ const PageEvents = {
     CLOSE_CIRCLE_EDIT: 'page: close-circle-edit',
     CLOSE_ADDRESS_EDIT: 'page: close-address-edit',
     UPDATE_ITEM_ADDRESS: 'page: update-item-address',
+    CLOSE_ITEM_TYPE_EDIT: 'page: close-item-type-edit',
+    UPDATE_ITEM_TYPE: 'page: update-item-type',
 };
 
 export default PageEvents;

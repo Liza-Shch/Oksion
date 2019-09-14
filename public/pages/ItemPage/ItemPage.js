@@ -8,20 +8,27 @@ import ItemEdit from '../../components/ItemEdit/ItemEdit';
 import CircleEdit from '../../components/CircleEdit/CircleEdit';
 import AddressItem from '../../components/AddressItem/AddressItem';
 import AddressEdit from '../../components/AddressEdit/AddressEdit';
+import ItemTypeEdit from '../../components/ItemTypeEdit/ItemTypeEdit';
+import EventBus from '../../scripts/EventBus';
+import PageEvents from '../../events/PageEvents';
 
 export default class ItemPage {
     constructor({ el, item }) {
         this.el = el;
         this._item = item;
+        this._typeClass = null;
+        EventBus.on(PageEvents.UPDATE_ITEM_TYPE, this.updateType.bind(this));
     }
 
     render() {
         this.el.classList.add('main-item');
         if (this._item.type === 'pion') {
-            this.el.classList.add('main-item_pion')
+            this._typeClass = 'main-item_pion';
         } else if (this._item.type === 'puon') {
-            this.el.classList.add('main-item_puon')
+            this._typeClass = 'main-item_puon';
         }
+
+        this.el.classList.add(this._typeClass);
 
         const header = document.createElement('div');
         header.classList.add('main-item__header');
@@ -31,10 +38,11 @@ export default class ItemPage {
         const circleEditEl = circleEdit.create();
 
         const type = Object.assign({}, ItemTypes.find((type) => type.value == this._item.type)); 
-        const itemType = new ItemType({ type: type });
-        const itemTypeEl = itemType.create();
+        const itemTypeEdit = new ItemEdit({ Component: ItemType, EditComponent: ItemTypeEdit,
+            args: { type: type, id: this._item.id }});
+        const itemTypeEditEl = itemTypeEdit.create();
 
-        header.append(itemTypeEl, circleEditEl)
+        header.append(itemTypeEditEl, circleEditEl)
 
         const district = Object.assign({}, District.find((district) => district.value == this._item.district));
         const districtItem = new DistrictItem({ text: district.text})
@@ -46,5 +54,22 @@ export default class ItemPage {
 
         this.el.append(header, districtItemEl, addressEditEl);
         return this.el;
+    }
+
+    updateType({ type: { value } }) {
+        switch(value) {
+            case 'pion': {
+                this.el.classList.remove(this._typeClass);
+                this._typeClass = 'main-item_pion';
+                this.el.classList.add(this._typeClass);
+                break;
+            }
+            case 'puon': {
+                this.el.classList.remove(this._typeClass);
+                this._typeClass = 'main-item_puon';
+                this.el.classList.add(this._typeClass);
+                break;
+            }
+        }
     }
 }

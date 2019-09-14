@@ -47,6 +47,8 @@ export default class App {
         EventBus.on(APIEvents.UPDATE_ITEM_WORK, API.onUpdateItemWork);
         EventBus.on(APIEvents.UPDATE_ITEM_ADDRESS, API.onUpdateItemAddress);
         EventBus.on(StoreEvents.UPADTE_ITEM_ADDRESS, Store.onUpdateItemAddress.bind(Store));
+        EventBus.on(APIEvents.UPDATE_ITEM_TYPE, API.onUpdateItemType.bind(this));
+        EventBus.on(StoreEvents.UPDATE_ITEM_TYPE, Store.onUpdateItemType.bind(Store));
     };
 
     /**
