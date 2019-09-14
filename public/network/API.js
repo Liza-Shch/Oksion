@@ -134,4 +134,8 @@ export default class API {
     static onUpdateItemType(args) {
         EventBus.emit(StoreEvents.UPDATE_ITEM_TYPE, args)
     }
+
+    static onUpdateItemDistrict(args) {
+        EventBus.emit(StoreEvents.UPDATE_ITEM_DISTRICT, args)
+    }
 }

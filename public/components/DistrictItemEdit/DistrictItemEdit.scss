@@ -1,0 +1,12 @@
+.district-item-edit {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 20px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 2px 4px 0 100vw rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    top: 0;
+    color: #2D4157;
+}

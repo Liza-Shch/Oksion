@@ -29,4 +29,8 @@ export default class Item {
     updateType(type) {
         this.type = type;
     }
+
+    updateDistrict(district) {
+        this.district = district;
+    }
 }

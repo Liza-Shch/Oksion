@@ -5,6 +5,7 @@ const StoreEvents = {
     UPADTE_ITEM_WORK: 'store: update-item-work',
     UPADTE_ITEM_ADDRESS: 'store: update-item-address',
     UPDATE_ITEM_TYPE: 'store: update-item-type',
+    UPDATE_ITEM_DISTRICT: 'store: update-item-district',
 }
 
 export default StoreEvents;

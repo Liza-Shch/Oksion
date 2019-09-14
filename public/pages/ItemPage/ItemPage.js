@@ -11,6 +11,7 @@ import AddressEdit from '../../components/AddressEdit/AddressEdit';
 import ItemTypeEdit from '../../components/ItemTypeEdit/ItemTypeEdit';
 import EventBus from '../../scripts/EventBus';
 import PageEvents from '../../events/PageEvents';
+import DistrictItemEdit from '../../components/DistrictItemEdit/DistrictItemEdit';
 
 export default class ItemPage {
     constructor({ el, item }) {
@@ -45,8 +46,9 @@ export default class ItemPage {
         header.append(itemTypeEditEl, circleEditEl)
 
         const district = Object.assign({}, District.find((district) => district.value == this._item.district));
-        const districtItem = new DistrictItem({ text: district.text})
-        const districtItemEl = districtItem.create()
+        const districtItem = new ItemEdit({ Component: DistrictItem, EditComponent: DistrictItemEdit,
+            args: { district: district, id: this._item.id }});
+        const districtItemEl = districtItem.create();
 
         const addressEdit = new ItemEdit({ Component: AddressItem, EditComponent: AddressEdit,
             args: { address: this._item.address, id: this._item.id }});

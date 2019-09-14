@@ -46,6 +46,11 @@ class Store {
         const item = this.items.find((item) => +item.id === +id);
         item.updateType(type);
     }
+
+    onUpdateItemDistrict({ id, district }) {
+        const item = this.items.find((item) => +item.id === +id);
+        item.updateDistrict(district);
+    }
 };
 
 export default new Store();
