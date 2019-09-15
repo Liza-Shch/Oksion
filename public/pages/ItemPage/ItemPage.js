@@ -12,6 +12,8 @@ import ItemTypeEdit from '../../components/ItemTypeEdit/ItemTypeEdit';
 import EventBus from '../../scripts/EventBus';
 import PageEvents from '../../events/PageEvents';
 import DistrictItemEdit from '../../components/DistrictItemEdit/DistrictItemEdit';
+import ItemComposition from '../../components/ItemComposition/ItemComposition';
+import ItemCompositionEdit from '../../components/ItemCompositionEdit/ItemCompositionEdit';
 
 export default class ItemPage {
     constructor({ el, item }) {
@@ -54,7 +56,14 @@ export default class ItemPage {
             args: { address: this._item.address, id: this._item.id }});
         const addressEditEl = addressEdit.create();
 
-        this.el.append(header, districtItemEl, addressEditEl);
+        const compositionEdit = new ItemEdit({ Component: ItemComposition, EditComponent: ItemCompositionEdit,
+            args: { composition: this._item.composition, id: this._item.id }});
+        const compositionEditEl = compositionEdit.create();
+
+        const container = document.createElement('div');
+        container.classList.add('main-item__content');
+        container.append(header, districtItemEl, addressEditEl, compositionEditEl);
+        this.el.append(container);
         return this.el;
     }
 

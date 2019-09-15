@@ -34,4 +34,55 @@
         background-color: #C4C4C4;
         color: #2E4158;
     }
+
+    &_inc {
+        width: 30px;
+        height: 30px;
+        background-image: url('./img/inc.svg');
+        background-size: cover;
+        border-radius: 50%;
+        box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
+
+        &:hover {
+           border: 1px solid white;
+        }
+    }
+
+    &_dec {
+        width: 30px;
+        height: 30px;
+        background-image: url('./img/dec.svg');
+        background-size: cover;
+        border-radius: 50%;
+        box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
+
+        &:hover {
+            border: 1px solid white;
+        }
+    }
+
+    &_close {
+        width: 30px;
+        height: 30px;
+        background-image: url('./img/close.svg');
+        background-size: cover;
+        border-radius: 50%;
+        box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
+
+        &:hover {
+            border: 1px solid white;
+        }
+    }
+
+    &_add {
+        width: 30px;
+        height: 30px;
+        background-image: url('./img/add.svg');
+        background-size: cover;
+        border-radius: 50%;
+
+        &:hover {
+            border: 1px solid #2D4157;
+        }
+    }
 }

@@ -3,10 +3,16 @@
     min-height: 100%;
     padding: 40px 60px;
     box-sizing: border-box;
-    display: grid;
-    grid-template-rows: min-content;
-    grid-gap: 40px;
     position: relative;
+
+    &__content {
+        width: 100%;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-rows: min-content;
+        grid-gap: 40px;
+        position: relative;
+    }
 
     &__header {
         display: grid;

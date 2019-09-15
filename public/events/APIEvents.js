@@ -8,6 +8,7 @@ const APIEvents = {
     UPDATE_ITEM_ADDRESS: 'api: update-item-address',
     UPDATE_ITEM_TYPE: 'api: update-item-type',
     UPDATE_ITEM_DISTRICT: 'api: update-item-district',
+    UPDATE_ITEM_COMPOSITION: 'api: update-item-composition',
 }
 
 export default APIEvents;

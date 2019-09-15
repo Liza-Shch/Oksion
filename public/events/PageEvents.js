@@ -25,6 +25,8 @@ const PageEvents = {
     UPDATE_ITEM_TYPE: 'page: update-item-type',
     CLOSE_ITEM_DISTRICT_EDIT: 'page: close-item-district-edit',
     UPDATE_ITEM_DISTRICT: 'page: update-item-district',
+    CLOSE_ITEM_COMPOSITION_EDIT: 'page: close-item-composition-edit',
+    UPDATE_ITEM_COMPOSITION: 'page: update-item-composition',
 };
 
 export default PageEvents;

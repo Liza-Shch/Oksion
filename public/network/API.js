@@ -138,4 +138,8 @@ export default class API {
     static onUpdateItemDistrict(args) {
         EventBus.emit(StoreEvents.UPDATE_ITEM_DISTRICT, args)
     }
+
+    static onUpdateItemComposition(args) {
+        EventBus.emit(StoreEvents.UPDATE_ITEM_COMPOSITION, args)
+    }
 }

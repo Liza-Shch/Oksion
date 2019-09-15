@@ -51,6 +51,11 @@ class Store {
         const item = this.items.find((item) => +item.id === +id);
         item.updateDistrict(district);
     }
+
+    onUpdateItemComposition({ id, composition }) {
+        const item = this.items.find((item) => +item.id === +id);
+        item.updateComposition(composition);
+    }
 };
 
 export default new Store();

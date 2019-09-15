@@ -48,8 +48,9 @@ export default class CircleEdit extends BaseComponent {
     }
 
     save() {
+        this._currentValue = this._select.getSelectedData();
         const data = {
-            isWork: this._select.getSelectedData() === 'work' ? true : false,
+            isWork: this._currentValue === 'work' ? true: false,
             id: this._itemID,
         }
 

@@ -50,7 +50,9 @@ export default class App {
         EventBus.on(APIEvents.UPDATE_ITEM_TYPE, API.onUpdateItemType.bind(this));
         EventBus.on(StoreEvents.UPDATE_ITEM_TYPE, Store.onUpdateItemType.bind(Store));
         EventBus.on(APIEvents.UPDATE_ITEM_DISTRICT, API.onUpdateItemDistrict);
-        EventBus.on(StoreEvents.UPDATE_ITEM_DISTRICT, Store.onUpdateItemDistrict.bind(Store))
+        EventBus.on(StoreEvents.UPDATE_ITEM_DISTRICT, Store.onUpdateItemDistrict.bind(Store));
+        EventBus.on(APIEvents.UPDATE_ITEM_COMPOSITION, API.onUpdateItemComposition);
+        EventBus.on(StoreEvents.UPDATE_ITEM_COMPOSITION, Store.onUpdateItemComposition.bind(Store));
     };
 
     /**

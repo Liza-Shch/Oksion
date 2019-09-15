@@ -1,0 +1,26 @@
+.item-composition-edit {
+    position: absolute;
+    top: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    width: 80vw;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 2px 4px 0 100vw rgba(0, 0, 0, 0.5);
+
+    &__controlls {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__msg {
+        font-size: smaller;
+
+        &_error {
+            color: red;
+        }
+    }
+}

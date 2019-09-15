@@ -33,4 +33,8 @@ export default class Item {
     updateDistrict(district) {
         this.district = district;
     }
+
+    updateComposition(composition) {
+        this.composition = composition;
+    }
 }
