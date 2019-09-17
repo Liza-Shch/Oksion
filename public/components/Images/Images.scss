@@ -1,0 +1,33 @@
+.images {
+    display: flex;
+    position: relative;
+    width: inherit;
+
+    &__content {
+        position: relative;
+        display: grid;
+        grid-gap: 20px;
+        width: calc(100% - 4em - 40px);
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+    
+    &__image_animation {
+        transition: all 0.5s ease-in-out;
+    }
+
+    &__button {
+        width: 2em;
+        height: 2em;
+        top: 1em;
+
+        &_next {
+            margin-left: 20px;
+            right: 0;
+        }
+
+        &_prev {
+            margin-right: 20px;
+        }
+    }
+}

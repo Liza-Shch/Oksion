@@ -6,11 +6,10 @@
     position: relative;
 
     &__content {
-        width: 100%;
+        width: calc(100% - 300px);
         box-sizing: border-box;
-        display: grid;
-        grid-template-rows: min-content;
-        grid-gap: 40px;
+        display: flex;
+        flex-direction: column;
         position: relative;
     }
 
@@ -20,6 +19,10 @@
         grid-gap: 40px;
         width: min-content;
         align-items: center;
+    }
+
+    &__item {
+        margin-top: 40px;
     }
 
     &_pion {

@@ -14,6 +14,9 @@ import PageEvents from '../../events/PageEvents';
 import DistrictItemEdit from '../../components/DistrictItemEdit/DistrictItemEdit';
 import ItemComposition from '../../components/ItemComposition/ItemComposition';
 import ItemCompositionEdit from '../../components/ItemCompositionEdit/ItemCompositionEdit';
+import UploadImages from '../../components/UploadImages/UploadImages';
+import Images from '../../components/Images/Images';
+import ImagesEdit from '../../components/ImagesEdit/ImagesEdit';
 
 export default class ItemPage {
     constructor({ el, item }) {
@@ -51,18 +54,25 @@ export default class ItemPage {
         const districtItem = new ItemEdit({ Component: DistrictItem, EditComponent: DistrictItemEdit,
             args: { district: district, id: this._item.id }});
         const districtItemEl = districtItem.create();
+        districtItemEl.classList.add('main-item__item');
 
         const addressEdit = new ItemEdit({ Component: AddressItem, EditComponent: AddressEdit,
             args: { address: this._item.address, id: this._item.id }});
         const addressEditEl = addressEdit.create();
+        addressEditEl.classList.add('main-item__item');
 
         const compositionEdit = new ItemEdit({ Component: ItemComposition, EditComponent: ItemCompositionEdit,
             args: { composition: this._item.composition, id: this._item.id }});
         const compositionEditEl = compositionEdit.create();
+        compositionEditEl.classList.add('main-item__item');
+
+        const imagesEdit = new ImagesEdit({ imageURLs: [ '', '', '', '', ''] });
+        const imagesEditEl = imagesEdit.create();
+        imagesEditEl.classList.add('main-item__item');
 
         const container = document.createElement('div');
         container.classList.add('main-item__content');
-        container.append(header, districtItemEl, addressEditEl, compositionEditEl);
+        container.append(header, districtItemEl, addressEditEl, compositionEditEl, imagesEditEl);
         this.el.append(container);
         return this.el;
     }

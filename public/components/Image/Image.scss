@@ -1,0 +1,19 @@
+.image {
+    background-size: cover;
+    background-color: white;
+
+    &_small {
+        width: 20vw;
+        height: 20vh;
+    }
+    
+    &_large {
+        width: 80vw;
+        height: 80vh;
+        position: fixed;
+        left: calc(50% - 40vw);
+        top: calc(50% - 40vh);
+        z-index: 2;
+        box-shadow: 2px 4px 0 100vw rgba(0, 0, 0, 0.5);
+    }
+}

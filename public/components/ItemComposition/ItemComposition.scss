@@ -2,5 +2,5 @@
     display: grid;
     grid-template-rows: auto;
     grid-gap: 20px;
-    width: 80vw;
+    width: calc(100vw - 300px - 120px);
 }
