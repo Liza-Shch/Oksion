@@ -27,6 +27,8 @@ const PageEvents = {
     UPDATE_ITEM_DISTRICT: 'page: update-item-district',
     CLOSE_ITEM_COMPOSITION_EDIT: 'page: close-item-composition-edit',
     UPDATE_ITEM_COMPOSITION: 'page: update-item-composition',
+    CLOSE_NOTE_EDIT: 'page: close-note-edit',
+    UPDATE_ITEM_NOTE: 'page: update-item-note',
 };
 
 export default PageEvents;

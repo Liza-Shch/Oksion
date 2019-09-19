@@ -7,6 +7,7 @@ const StoreEvents = {
     UPDATE_ITEM_TYPE: 'store: update-item-type',
     UPDATE_ITEM_DISTRICT: 'store: update-item-district',
     UPDATE_ITEM_COMPOSITION: 'store: update-item-composition',
+    UPDATE_ITEM_NOTE: 'store: update-item-note',
 }
 
 export default StoreEvents;

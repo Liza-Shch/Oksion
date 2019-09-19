@@ -37,4 +37,8 @@ export default class Item {
     updateComposition(composition) {
         this.composition = composition;
     }
+
+    updateNote(note) {
+        this.note = note;
+    }
 }

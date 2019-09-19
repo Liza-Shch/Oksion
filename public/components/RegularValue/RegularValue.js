@@ -26,7 +26,8 @@ export default class RegularValue extends BaseComponent {
         return this.el;
     }
 
-    inc() {
+    inc(e) {
+        e.stopPropagation();
         if (this._currentValue === 1000) {
             return
         }
@@ -34,7 +35,8 @@ export default class RegularValue extends BaseComponent {
         this.el.querySelector('.regular-value__value-js').textContent = ++this._currentValue;
     }
 
-    dec() {
+    dec(e) {
+        e.stopPropagation();
         if (this._currentValue === 1) {
             return
         }

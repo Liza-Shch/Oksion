@@ -20,7 +20,7 @@ export default class ItemCompositionEdit extends BaseComponent {
 
     _onClickOutside(e) {
         if (!e.target.closest('.item-composition-edit') && !e.target.closest('.item-part-edit__delete')) {
-            this.hide();
+            this.hide(e);
         }
     }
 
@@ -61,13 +61,14 @@ export default class ItemCompositionEdit extends BaseComponent {
         return this.el;
     }
 
-    hide() {
+    hide(e) {
+        e.stopPropagation();
         EventBus.emit(PageEvents.CLOSE_ITEM_COMPOSITION_EDIT);
         document.removeEventListener('click', this._onClickOutside);
         this.el.remove();
     }
 
-    save() {
+    save(e) {
         const data = [];
         if (this._parts.every((part) => !part.el)) {
             this.renderMsgError({ msg: 'Состав объекта не может быть пустым' });
@@ -84,7 +85,7 @@ export default class ItemCompositionEdit extends BaseComponent {
                 data.push(savedPart);
             }
         }
-        this.hide();
+        this.hide(e);
         this._composition = data;
         EventBus.emit(PageEvents.UPDATE_ITEM_COMPOSITION, this._composition);
         EventBus.emit(APIEvents.UPDATE_ITEM_COMPOSITION, { composition: this._composition, id: this._itemID });

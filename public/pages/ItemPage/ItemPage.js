@@ -14,9 +14,9 @@ import PageEvents from '../../events/PageEvents';
 import DistrictItemEdit from '../../components/DistrictItemEdit/DistrictItemEdit';
 import ItemComposition from '../../components/ItemComposition/ItemComposition';
 import ItemCompositionEdit from '../../components/ItemCompositionEdit/ItemCompositionEdit';
-import UploadImages from '../../components/UploadImages/UploadImages';
-import Images from '../../components/Images/Images';
 import ImagesEdit from '../../components/ImagesEdit/ImagesEdit';
+import Note from '../../components/Note/Note';
+import NoteEdit from '../../components/NoteEdit/NoteEdit';
 
 export default class ItemPage {
     constructor({ el, item }) {
@@ -42,13 +42,25 @@ export default class ItemPage {
         const circleEdit = new ItemEdit({ Component: Circle, EditComponent: CircleEdit,
             args: { isWork: this._item.isWork, id: this._item.id }});
         const circleEditEl = circleEdit.create();
+        circleEditEl.classList.add('main-item__margin-left');
 
         const type = Object.assign({}, ItemTypes.find((type) => type.value == this._item.type)); 
         const itemTypeEdit = new ItemEdit({ Component: ItemType, EditComponent: ItemTypeEdit,
             args: { type: type, id: this._item.id }});
         const itemTypeEditEl = itemTypeEdit.create();
 
-        header.append(itemTypeEditEl, circleEditEl)
+        const noteEdit = new ItemEdit({ Component: Note, EditComponent: NoteEdit, args: {id: this._item.id, note: this._item.note }})
+        const noteEditEl = noteEdit.create();
+
+        const leftPart = document.createElement('div');
+        leftPart.classList.add('main-item__part');
+        leftPart.append(itemTypeEditEl, circleEditEl);
+
+        const rightPart = document.createElement('div');
+        rightPart.classList.add('main-item__part');
+        rightPart.append(noteEditEl);
+
+        header.append(leftPart, rightPart);
 
         const district = Object.assign({}, District.find((district) => district.value == this._item.district));
         const districtItem = new ItemEdit({ Component: DistrictItem, EditComponent: DistrictItemEdit,
@@ -72,7 +84,7 @@ export default class ItemPage {
 
         const container = document.createElement('div');
         container.classList.add('main-item__content');
-        container.append(header, districtItemEl, addressEditEl, compositionEditEl, imagesEditEl);
+        container.append(header, districtItemEl, addressEditEl, imagesEditEl, compositionEditEl);
         this.el.append(container);
         return this.el;
     }

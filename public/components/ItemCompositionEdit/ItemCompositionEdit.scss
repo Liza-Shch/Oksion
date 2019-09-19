@@ -1,6 +1,6 @@
 .item-composition-edit {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     padding: 20px;
     box-sizing: border-box;
@@ -10,7 +10,7 @@
     width: 80vw;
     background-color: white;
     border-radius: 4px;
-    box-shadow: 2px 4px 0 100vw rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 4px 0 100vw rgba(0, 0, 0, 0.7);
 
     &__controlls {
         display: flex;

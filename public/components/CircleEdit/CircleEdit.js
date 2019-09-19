@@ -29,7 +29,7 @@ export default class CircleEdit extends BaseComponent {
 
     _onClickOutside(e) {
         if (!e.target.closest('.circle-edit')) {
-            this.hide();
+            this.hide(e);
         }
     }
 
@@ -41,13 +41,14 @@ export default class CircleEdit extends BaseComponent {
         return this.el;
     }
 
-    hide() {
+    hide(e) {
+        e.stopPropagation();
         EventBus.emit(PageEvents.CLOSE_CIRCLE_EDIT);
         document.removeEventListener('click', this._onClickOutside);
         this.el.remove();
     }
 
-    save() {
+    save(e) {
         this._currentValue = this._select.getSelectedData();
         const data = {
             isWork: this._currentValue === 'work' ? true: false,
@@ -56,7 +57,7 @@ export default class CircleEdit extends BaseComponent {
 
         EventBus.emit(PageEvents.UPDATE_ITEM_WORK, data);
         EventBus.emit(APIEvents.UPDATE_ITEM_WORK, data);
-        this.hide();
+        this.hide(e);
     }
 
     render() {

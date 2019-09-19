@@ -142,4 +142,8 @@ export default class API {
     static onUpdateItemComposition(args) {
         EventBus.emit(StoreEvents.UPDATE_ITEM_COMPOSITION, args)
     }
+
+    static onUpdateItemNote(args) {
+        EventBus.emit(StoreEvents.UPDATE_ITEM_NOTE, args);
+    }
 }

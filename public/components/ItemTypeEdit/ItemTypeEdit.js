@@ -20,7 +20,7 @@ export default class ItemTypeEdit extends BaseComponent {
 
     _onClickOutside(e) {
         if (!e.target.closest('.item-type-edit')) {
-            this.hide();
+            this.hide(e);
         }
     }
 
@@ -58,13 +58,14 @@ export default class ItemTypeEdit extends BaseComponent {
         setTimeout(() => document.addEventListener('click', this._onClickOutside), 100);
     }
 
-    hide() {
+    hide(e) {
+        e.stopPropagation();
         EventBus.emit(PageEvents.CLOSE_ITEM_TYPE_EDIT);
         document.removeEventListener('click', this._onClickOutside);
         this.el.remove();
     }
 
-    save() {
+    save(e) {
         const selectedType = this._select.getSelectedData();
         this._currentValue = ItemTypesSelect.find((type) => type.value === selectedType);
         const data = {
@@ -74,6 +75,6 @@ export default class ItemTypeEdit extends BaseComponent {
 
         EventBus.emit(PageEvents.UPDATE_ITEM_TYPE, data);
         EventBus.emit(APIEvents.UPDATE_ITEM_TYPE, { type: this._currentValue.value, id: this._itemID });
-        this.hide();
+        this.hide(e);
     }
 }

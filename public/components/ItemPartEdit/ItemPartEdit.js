@@ -48,7 +48,8 @@ export default class ItemPartEdit extends BaseComponent {
         }
     }
 
-    hide() {
+    hide(e) {
+        e.stopPropagation();
         this.el.remove();
         this.el = null;
     }

@@ -56,6 +56,11 @@ class Store {
         const item = this.items.find((item) => +item.id === +id);
         item.updateComposition(composition);
     }
+
+    onUpdateItemNote({ id, note }) {
+        const item = this.items.find((item) => +item.id === +id);
+        item.updateNote(note);
+    }
 };
 
 export default new Store();

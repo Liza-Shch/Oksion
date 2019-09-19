@@ -14,11 +14,17 @@
     }
 
     &__header {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 40px;
-        width: min-content;
-        align-items: center;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__part {
+        display: flex;
+    }
+
+    &__margin-left {
+        margin-left: 20px;
     }
 
     &__item {

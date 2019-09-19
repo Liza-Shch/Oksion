@@ -16,7 +16,7 @@ export default class AddressEdit extends BaseComponent {
 
     _onClickOutside(e) {
         if (!e.target.closest('.address-edit')) {
-            this.hide();
+            this.hide(e);
         }
     }
 
@@ -45,13 +45,14 @@ export default class AddressEdit extends BaseComponent {
         setTimeout(() => document.addEventListener('click', this._onClickOutside), 100);
     }
 
-    hide() {
+    hide(e) {
+        e.stopPropagation();
         EventBus.emit(PageEvents.CLOSE_ADDRESS_EDIT);
         document.removeEventListener('click', this._onClickOutside);
         this.el.remove();
     }
 
-    save() {
+    save(e) {
         this._currentValue = this.el.querySelector('.address-edit__input').value;
 
         const data = {
@@ -61,6 +62,6 @@ export default class AddressEdit extends BaseComponent {
 
         EventBus.emit(PageEvents.UPDATE_ITEM_ADDRESS, data);
         EventBus.emit(APIEvents.UPDATE_ITEM_ADDRESS, data);
-        this.hide();
+        this.hide(e);
     }
 }
