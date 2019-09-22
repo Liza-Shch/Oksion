@@ -33,6 +33,8 @@
         grid-area: address;
         overflow: hidden;
         text-overflow: ellipsis;
+        font-size: smaller;
+        height: 6em;
     }
 
     &__link {

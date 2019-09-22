@@ -37,6 +37,7 @@ export default class ItemsFilter extends BaseComponent {
 
         const button = new Button(buttonArgs);
         const buttonEl = button.create();
+        buttonEl.classList.add('items-filter__button');
 
         this.el.append(typeSelectEl, districtSelectEl, buttonEl);
         return this.el;
