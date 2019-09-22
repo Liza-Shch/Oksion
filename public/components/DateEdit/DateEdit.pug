@@ -1,0 +1,5 @@
+.date-edit
+    .date-edit__label=data.label
+    .date-edit__content
+        input(type="text", pattern="[0-9]{2}.[0-9]{2}.[0-9]{4}" size="10" maxlength="10" value=data.date placeholder="дд.мм.гггг").date-edit__date
+        input(type="text", pattern="[0-9]{2}:[0-9]{2}" size="5" maxlength="5" value=data.time placeholder="чч:мм").date-edit__time

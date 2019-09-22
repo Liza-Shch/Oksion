@@ -17,6 +17,7 @@ import ItemCompositionEdit from '../../components/ItemCompositionEdit/ItemCompos
 import ImagesEdit from '../../components/ImagesEdit/ImagesEdit';
 import Note from '../../components/Note/Note';
 import NoteEdit from '../../components/NoteEdit/NoteEdit';
+import NewWork from '../../components/NewWork/NewWork';
 
 export default class ItemPage {
     constructor({ el, item }) {
@@ -66,25 +67,37 @@ export default class ItemPage {
         const districtItem = new ItemEdit({ Component: DistrictItem, EditComponent: DistrictItemEdit,
             args: { district: district, id: this._item.id }});
         const districtItemEl = districtItem.create();
-        districtItemEl.classList.add('main-item__item');
 
         const addressEdit = new ItemEdit({ Component: AddressItem, EditComponent: AddressEdit,
             args: { address: this._item.address, id: this._item.id }});
         const addressEditEl = addressEdit.create();
-        addressEditEl.classList.add('main-item__item');
+        addressEditEl.classList.add('main-item__margin-top_small');
+
+        const addressFull = document.createElement('div');
+        addressFull.append(districtItemEl, addressEditEl);
+        addressFull.classList.add('main-item__item');
+
+        const newWork = new NewWork({ id: this._item.id });
+        const newWorkEl = newWork.create();
+        newWorkEl.classList.add('main-item__item');
 
         const compositionEdit = new ItemEdit({ Component: ItemComposition, EditComponent: ItemCompositionEdit,
             args: { composition: this._item.composition, id: this._item.id }});
         const compositionEditEl = compositionEdit.create();
         compositionEditEl.classList.add('main-item__item');
+        compositionEditEl.style.width = '100%';
 
         const imagesEdit = new ImagesEdit({ imageURLs: [ '', '', '', '', ''] });
         const imagesEditEl = imagesEdit.create();
         imagesEditEl.classList.add('main-item__item');
 
+        const containerColumnEl = document.createElement('div');
+        containerColumnEl.classList.add('main-item__container-column');
+        containerColumnEl.append(newWorkEl, compositionEditEl);
+
         const container = document.createElement('div');
         container.classList.add('main-item__content');
-        container.append(header, districtItemEl, addressEditEl, imagesEditEl, compositionEditEl);
+        container.append(header, addressFull, containerColumnEl, imagesEditEl);
         this.el.append(container);
         return this.el;
     }

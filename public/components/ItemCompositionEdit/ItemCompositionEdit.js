@@ -15,7 +15,7 @@ export default class ItemCompositionEdit extends BaseComponent {
         this._composition = composition;
         this._parts = [];
         this._controlls = new EditControlls({ actionCancel: this.hide.bind(this), actionSave: this.save.bind(this) });
-        this._buttonAdd = new ButtonEdit({ action: this.addPart.bind(this), type: 'add' });
+        this._buttonAdd = new ButtonEdit({ action: this.addPart.bind(this), type: 'inc' });
     }
 
     _onClickOutside(e) {
@@ -34,13 +34,20 @@ export default class ItemCompositionEdit extends BaseComponent {
         buffer.insertAdjacentHTML('afterbegin', html);
         const el = buffer.firstElementChild;
 
-        this._parts.forEach((part) => el.append(part.create()));
+        this._parts.forEach((part) => {
+            const partEl = part.create();
+            partEl.classList.add('item-composition-edit__part');
+            el.append(partEl);
+        });
+        
+        this._parts[0].el.classList.remove('item-composition-edit__part');
 
         const controllsContainer = document.createElement('div');
         controllsContainer.classList.add('item-composition-edit__controlls');
 
         const controlls = this._controlls.create();
         const buttonAdd = this._buttonAdd.create();
+        buttonAdd.classList.add('item-composition-edit__button-add');
         controllsContainer.append(buttonAdd, controlls);
 
         const span = document.createElement('span');
@@ -95,6 +102,7 @@ export default class ItemCompositionEdit extends BaseComponent {
         const newPart = new ItemPartEdit({ name: '', count: 1 });
         this._parts.push(newPart);
         const newPartEl = newPart.create();
+        newPartEl.classList.add('item-composition-edit__part');
         const elAfter = this.el.querySelector('.item-composition-edit__msg');
         this.el.insertBefore(newPartEl, elAfter);
     }

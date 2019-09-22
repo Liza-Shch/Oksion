@@ -8,10 +8,11 @@ export default class Select extends BaseComponent {
      * @param {Object} options - options: Array of args {text, value, chosen}
      * @param {String} label - label
      */
-    constructor({ label, options }) {
+    constructor({ label, options, onChange = null }) {
         super()
         this._label = label;
         this._options = options;
+        this._onChange = onChange;
     }
 
     render() {
@@ -26,7 +27,8 @@ export default class Select extends BaseComponent {
     }
 
     getSelectedData() {
-        return this.el.querySelector('.select__option-chosen-js').attributes['value'].value
+        const optionSelected = this._options.find((option) => option.chosen);
+        return this.el && this.el.querySelector('.select__option-chosen-js').attributes['value'].value || optionSelected.value
     }
 
     afterRender() {
@@ -72,7 +74,8 @@ export default class Select extends BaseComponent {
         const options = this.el.querySelectorAll('.select__option');
         options.forEach((option) => {
             option.addEventListener('click', (e) => {
-                chooseOption.bind(this)(e)
+                chooseOption.bind(this)(e);
+                this._onChange && this._onChange.bind(this)(e);
             });
         })
     }

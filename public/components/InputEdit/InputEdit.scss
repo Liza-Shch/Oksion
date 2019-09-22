@@ -1,0 +1,15 @@
+.input-edit {
+    position: relative;
+
+    &__button {
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        background-color: #2D4157;
+        display: none;
+    }
+}
+
+.input-edit:hover .input-edit__button {
+    display: unset;
+}

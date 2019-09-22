@@ -1,0 +1,13 @@
+.workers {
+    display: flex;
+    flex-direction: column;
+
+    &__input {
+        margin-top: 10px;
+    }
+
+    &__button {
+        margin-top: 10px;
+        background-color: #2D4157;
+    }
+}

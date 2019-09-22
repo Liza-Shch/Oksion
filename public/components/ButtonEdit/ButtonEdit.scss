@@ -28,13 +28,19 @@
     }
 
     &_save {
-        background-color: #E97E22;
+        background-color: #FFC42E;
         color: white;
+        box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
+
+        &:hover {
+            background-color: #FFC42E;
+        }
     }
 
     &_cancel {
         background-color: #C4C4C4;
         color: #2E4158;
+        box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
     }
 
     &_inc {

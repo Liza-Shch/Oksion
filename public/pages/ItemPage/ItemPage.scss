@@ -1,7 +1,7 @@
 .main-item {
     width: 100%;
     min-height: 100%;
-    padding: 40px 60px;
+    padding: 40px 100px;
     box-sizing: border-box;
     position: relative;
 
@@ -29,6 +29,20 @@
 
     &__item {
         margin-top: 40px;
+    }
+
+    &__margin-top_small {
+        margin-top: 20px;
+    }
+
+    &__container-column {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        grid-gap: 40px;
+    }
+
+    &__composition {
+        width: 100%;
     }
 
     &_pion {

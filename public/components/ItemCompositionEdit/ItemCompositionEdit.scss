@@ -1,20 +1,38 @@
 .item-composition-edit {
-    position: absolute;
+    position: fixed;
     z-index: 2;
-    top: 0;
+    top: 10vh;
+    left: 10vw;
     padding: 20px;
     box-sizing: border-box;
-    display: grid;
-    grid-template-rows: auto;
-    grid-gap: 20px;
+    display: flex;
+    flex-direction: column;
     width: 80vw;
+    max-height: 80vh;
+    overflow: auto;
     background-color: white;
     border-radius: 4px;
     box-shadow: 2px 4px 0 100vw rgba(0, 0, 0, 0.7);
 
+    &::after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 20px;
+    }
+
+    &__part {
+        margin-top: 20px;
+    }
+
     &__controlls {
         display: flex;
         justify-content: space-between;
+    }
+
+    &__button-add {
+        margin-top: 20px;
+        background-color: #2E4158;
     }
 
     &__msg {
