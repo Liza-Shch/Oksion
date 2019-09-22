@@ -1,31 +1,27 @@
 import itemTmp from './Item.pug';
 import './Item.scss';
+import '../../mixins/item-type/item-type.scss';
+import BaseComponent from '../BaseComponent';
 
-export default class Item {
+export default class Item extends BaseComponent {
     constructor(args) {
+        super()
+        this.id = args.id;
         this.type = args.type;
         this.isWork = args.isWork;
         this.district = args.district;
         this.address = args.address;
-        this._el = null;
     }
 
-    create() {
-        this._el = this.renderDOM();
-        return this._el;
-    }
-
-    renderDOM() {
+    render() {
         const data = {
+            id: this.id,
             type: this.type,
             isWork: this.isWork,
             district: this.district,
             address: this.address 
         }
 
-        const html = itemTmp.call({}, {data});
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        return buffer.firstElementChild;
+        return itemTmp.call({}, {data});
     }
 }

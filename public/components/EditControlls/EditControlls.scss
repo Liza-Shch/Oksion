@@ -1,0 +1,8 @@
+.edit-controlls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    width: fit-content;
+    height: fit-content;
+    margin-top: 20px;
+}

@@ -1,29 +1,20 @@
 import buttonTmp from './Button.pug';
 import '../../mixins/button/button.scss';
+import BaseComponent from '../BaseComponent';
 
-export default class Button {
+export default class Button extends BaseComponent {
     constructor(args) {
+        super()
         this._type = args.type;
         this._text = args.text;
-        this._el = null;
     }
 
-    create() {
-        this._el = this.renderDOM();
-        return this._el;
-    }
-
-    renderDOM() {
+    render() {
         const data = {
             type: this._type,
             text: this._text
         }
 
-        console.log(data);
-        const html = buttonTmp.call({}, {data});
-        console.log(html);
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        return buffer.firstElementChild;
+        return buttonTmp.call({}, { data });
     }
 }

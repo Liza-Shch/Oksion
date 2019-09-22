@@ -1,0 +1,24 @@
+.input-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    &__input {
+        box-sizing: border-box;
+        padding: 10px;
+        background-color: #2D4157;
+        font-family: inherit;
+        font-size: inherit;
+        width: inherit;
+        min-width: fit-content;
+        border-radius: 4px;
+    }
+
+    &__msg {
+        display: none;
+    }
+}
+
+.input-container__input:invalid + .input-container__msg {
+    display: unset;
+}

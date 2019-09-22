@@ -1,0 +1,41 @@
+.date-edit {
+    display: flex;
+    flex-direction: column;
+
+    &__label {
+        margin-bottom: 10px;
+    }
+
+    &__content {
+        display: flex;
+    }
+
+    &__margin-left {
+        margin-left: 5px;
+    }
+
+    &__date {
+        text-align: center;
+        padding: 10px;
+        background-color:  #2D4157;
+        border-radius: 4px;
+    }
+
+    &__time {
+        text-align: center;
+        padding: 10px;
+        background-color:  #2D4157;
+        border-radius: 4px;
+        margin-left: 20px;
+    }
+
+    &__button {
+
+    }
+
+    &__msg {
+        display: none;
+    }
+}
+
+// .date-edit__date:invalid 

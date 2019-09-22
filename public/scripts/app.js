@@ -2,7 +2,7 @@ import Router from "./Router";
 import CommonView from "../views/CommonView";
 import IndexView from "../views/IndexView";
 import ItemsView from "../views/ItemsView";
-import ObjectView from "../views/ObjectView";
+import ItemView from "../views/ItemView";
 import EventBus from "./EventBus";
 import PageEvents from "../events/PageEvents";
 import APIEvents from "../events/APIEvents";
@@ -23,7 +23,7 @@ export default class App {
         this.router
         .addRoute("/", IndexView)
         .addRoute("/items", ItemsView)
-        .addRoute("/objects/:id", ObjectView)
+        .addRoute("/items/:id", ItemView)
 
         const el = document.createElement('div');
         this.commonView = new CommonView({el: el});
@@ -40,21 +40,34 @@ export default class App {
         EventBus.on(PageEvents.RENDER_INDEX_PAGE, this.router.go.bind(this.router));
         EventBus.on(APIEvents.GET_ITEMS, API.onGetItems);
         EventBus.on(StoreEvents.UPDATE_ITEMS, Store.onUpdateItems.bind(Store));
+        EventBus.on(APIEvents.GET_ITEM, API.onGetItem);
+        EventBus.on(PageEvents.CREATE_ITEM_PAGE, this.router.go.bind(this.router));
+        EventBus.on(StoreEvents.UPDATE_ITEM, Store.onUpdateItem.bind(Store));
+        EventBus.on(StoreEvents.UPADTE_ITEM_WORK, Store.onUpdateItemWork.bind(Store));
+        EventBus.on(APIEvents.UPDATE_ITEM_WORK, API.onUpdateItemWork);
+        EventBus.on(APIEvents.UPDATE_ITEM_ADDRESS, API.onUpdateItemAddress);
+        EventBus.on(StoreEvents.UPADTE_ITEM_ADDRESS, Store.onUpdateItemAddress.bind(Store));
+        EventBus.on(APIEvents.UPDATE_ITEM_TYPE, API.onUpdateItemType.bind(this));
+        EventBus.on(StoreEvents.UPDATE_ITEM_TYPE, Store.onUpdateItemType.bind(Store));
+        EventBus.on(APIEvents.UPDATE_ITEM_DISTRICT, API.onUpdateItemDistrict);
+        EventBus.on(StoreEvents.UPDATE_ITEM_DISTRICT, Store.onUpdateItemDistrict.bind(Store));
+        EventBus.on(APIEvents.UPDATE_ITEM_COMPOSITION, API.onUpdateItemComposition);
+        EventBus.on(StoreEvents.UPDATE_ITEM_COMPOSITION, Store.onUpdateItemComposition.bind(Store));
+        EventBus.on(APIEvents.UPDATE_ITEM_NOTE, API.onUpdateItemNote);
+        EventBus.on(StoreEvents.UPDATE_ITEM_NOTE, Store.onUpdateItemNote.bind(Store));
     };
 
     /**
      * run view methods
      * @param {View object} view 
      */
-    controller(view) {
+    controller(view, args) {
         console.log('Controller view');
-        // view.beforeRender();
-        // view.getTargetRender().appendChild(view.render());
-        // view.afterRender();
-        view.create();
+        view.create(args);
     };
 
     start() {
+        console.log('START')
         const event = {
             common: { event: AppEvents.RUN, args: null },
             success: [
@@ -71,9 +84,6 @@ export default class App {
     };
 
     run() {
-        // this.commonView.beforeRender();
-        // this.commonView.getTargetRender().appendChild(this.commonView.render());
-        // this.commonView.afterRender();
         this.commonView.create();
         this.router.start();
     };

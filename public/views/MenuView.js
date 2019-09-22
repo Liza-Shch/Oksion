@@ -5,8 +5,8 @@ import EventBus from "../scripts/EventBus";
 import APIEvents from "../events/APIEvents";
 
 export default class MenuView extends BaseView {
-    constructor(args) {
-        super(args, Menu);
+    constructor() {
+        super(Menu);
     }
 
     render() {
@@ -16,12 +16,9 @@ export default class MenuView extends BaseView {
 
     create() {
         this.setTargetRender(document.querySelector('.container'));
-        console.log(Store.user);
         this.args.permissions = Store.user.getPermissions();
-        console.log(this.args);
         this.el = this.render();
         this.getTargetRender().appendChild(this.el);
-        console.log('Menu el', this.el);
         this.setShown(true);
         this.afterRender();
     }

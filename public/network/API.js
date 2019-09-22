@@ -91,7 +91,7 @@ export default class API {
                 item['isWork'] = item['is_work'];
                 return item;
             });
-        
+            
             EventBus.emit(StoreEvents.UPDATE_ITEMS, data.items);
 
             console.log("events", args.event);
@@ -102,5 +102,48 @@ export default class API {
         })
         .catch((err) => {
         })
+    }
+
+    static onGetItem(args) {
+        Ajax.doPost('/api/item', { id: args.id })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            data.item.isWork = data.item['is_work'];
+
+            EventBus.emit(StoreEvents.UPDATE_ITEM, data.item)
+            
+            args.event.success.forEach((event) => {
+                EventBus.emit(event.event, event.args)
+            })
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    static onUpdateItemWork(args) {
+        EventBus.emit(StoreEvents.UPADTE_ITEM_WORK, args)
+    }
+
+    static onUpdateItemAddress(args) {
+        EventBus.emit(StoreEvents.UPADTE_ITEM_ADDRESS, args)
+    }
+
+    static onUpdateItemType(args) {
+        EventBus.emit(StoreEvents.UPDATE_ITEM_TYPE, args)
+    }
+
+    static onUpdateItemDistrict(args) {
+        EventBus.emit(StoreEvents.UPDATE_ITEM_DISTRICT, args)
+    }
+
+    static onUpdateItemComposition(args) {
+        EventBus.emit(StoreEvents.UPDATE_ITEM_COMPOSITION, args)
+    }
+
+    static onUpdateItemNote(args) {
+        EventBus.emit(StoreEvents.UPDATE_ITEM_NOTE, args);
     }
 }

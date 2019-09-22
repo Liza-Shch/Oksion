@@ -3,21 +3,19 @@ import './Items.scss';
 import Item from '../Item/Item';
 import ItemTypes from '../../const/ItemTypes';
 import District from '../../const/District';
-import Store from "../../scripts/Store";
-import EventBus from "../../scripts/EventBus";
-import PageEvents from "../../events/PageEvents";
+import BaseComponent from '../BaseComponent';
 
-export default class Items {
+export default class Items extends BaseComponent {
     constructor(args) {
-        this._el = null;
+        super()
         this._items = args.items;
         this._order = args.order || 'fromPionToPuon';
     }
 
     create() {
         this._prepareArgs();
-        this._el = this.renderDOM();
-        return this._el;
+        this.el = this.renderDOM();
+        return this.el;
     }
 
     _prepareArgs() {
@@ -39,13 +37,11 @@ export default class Items {
         const pions = this._items.filter((item) => item.type.value == 'pion');
         const puons = this._items.filter((item) => item.type.value == 'puon');
         
-        console.log("PIONS", pions, "PUONS", puons);
         const pionsContainer = el.querySelector('.items__col-first');
         const puonsContainer = el.querySelector('.items__col-second');
         pions.forEach((_pion) => {
             const pion = new Item(_pion);
             const pionEl = pion.create();
-            console.log("PION", pionEl);
             pionsContainer.appendChild(pionEl);
         });
 
@@ -84,7 +80,6 @@ export default class Items {
         buffer.insertAdjacentHTML('afterbegin', html);
         let itemsEl = buffer.firstElementChild;
 
-        console.log(itemsEl);
         if (this._order == 'fromPionToPuon') {
             itemsEl = this._renderByType(itemsEl);
         } else if (this._order == 'fillAll') {
@@ -98,7 +93,7 @@ export default class Items {
         console.log("UPDATE");
         this._order = args.order;
         this._items = args.items;
-        this._el = this.create();
-        return this._el;
+        this.el = this.create();
+        return this.el;
     }
 }

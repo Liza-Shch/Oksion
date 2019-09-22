@@ -15,19 +15,6 @@
 
     &__type {
         grid-area: type;
-        padding: 10px;
-        width: fit-content;
-        height: fit-content;
-        border-radius: 5px;
-        box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
-
-        &-pion {
-            background-color: #91A8B8;
-        }
-
-        &-puon {
-            background-color: #798E8D;
-        }
     }
 
     &__is-work {
@@ -46,6 +33,17 @@
         grid-area: address;
         overflow: hidden;
         text-overflow: ellipsis;
+        font-size: smaller;
+        height: 6em;
+    }
+
+    &__link {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
     }
 
     &-pion {

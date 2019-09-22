@@ -7,13 +7,15 @@
     height: 50px;
     border-radius: 5px;
     box-sizing: border-box;
+    color: white;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
 
     &_primary {
-        background-color: #AF831F;
+        background-color: #f5c123;
         border: none;
 
         &:hover {
-            background-color: #f5c123;
+            background-color: #ffb908;
         }
     }
 
@@ -37,11 +39,11 @@
     }
 
     &_filter {
-        background-color:  #e6b82b;
+        background-color:  #FFC42E;
         max-width: unset;
         
         &:hover {
-            background-color: #FFC42E;
+            background-color: #ffb908;
         }
     }
 }

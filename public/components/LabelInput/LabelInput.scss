@@ -1,0 +1,8 @@
+.label-input {
+    display: flex;
+    flex-direction: column;
+
+    &__label {
+        margin-bottom: 10px;
+    }
+}

@@ -14,6 +14,7 @@
         text-align: left;
         padding: 10px;
         padding-left: 40px;
+        color: #E8E8E8;
     }
 
     &__list {
@@ -22,6 +23,7 @@
         z-index: 1;
         max-height: 200px;
         overflow-y: scroll;
+        color: #E8E8E8;
         box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
 
         &-opened {

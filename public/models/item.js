@@ -17,4 +17,28 @@ export default class Item {
         this.composition = item && item.composition;
         this.note = item && item.note;
     }
+
+    updateWork(isWork) {
+        this.isWork = isWork;
+    }
+
+    updateAddress(address) {
+        this.address = address;
+    }
+
+    updateType(type) {
+        this.type = type;
+    }
+
+    updateDistrict(district) {
+        this.district = district;
+    }
+
+    updateComposition(composition) {
+        this.composition = composition;
+    }
+
+    updateNote(note) {
+        this.note = note;
+    }
 }

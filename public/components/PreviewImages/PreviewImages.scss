@@ -1,0 +1,29 @@
+.preview-images {
+    position: fixed;
+    z-index: 2;
+    left: calc(50% - 30vw - 20px - 20px);
+    top: 20vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 2px 4px 0 100vw rgba(0, 0, 0, 0.5);
+
+    &__images {
+        display: grid;
+        grid-template-columns: repeat(3, 20vw);
+        grid-template-rows: auto;
+        grid-gap: 20px;
+    }
+
+    &__image {
+        width: 20vw;
+        height: 20vh;
+        object-fit: contain;
+    }
+
+    &__controlls {
+        margin-top: 20px;
+    }
+}

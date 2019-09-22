@@ -1,0 +1,21 @@
+.item-part {
+    display: flex;
+    padding: 20px;
+    background-color: #E8E8E8;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    color: #2D4157;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
+
+    &__name {
+        display: flex;
+        max-width: 80%;
+    }
+
+    &__count {
+        margin-left: 20px;
+    }
+}

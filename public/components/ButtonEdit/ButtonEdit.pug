@@ -1,0 +1,19 @@
+case data.type
+    when 'edit'
+        button(type='button').button-edit_edit
+    when 'save'
+        button(type='submit').button-edit.button-edit_save=data.text
+    when 'cancel'
+        button(type='button').button-edit.button-edit_cancel=data.text
+    when 'inc'
+        button(type='button').button-edit_inc
+    when 'dec'
+        button(type='button').button-edit_dec
+    when 'close'
+        button(type='button').button-edit_close
+    when 'add'
+        button(type='button').button-edit_add
+    when 'next'
+        button(type='button').button-edit_next
+    when 'prev'
+        button(type='button').button-edit_prev

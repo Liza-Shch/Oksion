@@ -1,0 +1,11 @@
+.input-msg {
+    font-size: smaller;
+
+    &_success {
+        color: green;
+    }
+
+    &_error {
+        color: #8b2308;
+    }
+}

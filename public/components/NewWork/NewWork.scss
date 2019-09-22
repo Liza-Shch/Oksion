@@ -1,0 +1,21 @@
+.new-work {
+    position: sticky;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 30px;
+    box-sizing: border-box;
+    background-color: #E97E22;
+    border-radius: 4px;
+    height: fit-content;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
+
+    &__type {
+        width: 100%;
+    }
+
+    &__button {
+        margin-top: 20px;
+    }
+}

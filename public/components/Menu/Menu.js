@@ -1,10 +1,11 @@
 import menuTmp from './Menu.pug';
 import './Menu.scss';
 import '../../mixins/link/link.scss';
-import Store from '../../scripts/Store';
+import BaseComponent from '../BaseComponent';
 
-export default class Menu {
+export default class Menu extends BaseComponent {
     constructor(args) {
+        super()
         this._permissions = args.permissions;
     };
 
@@ -16,18 +17,5 @@ export default class Menu {
         };
 
         return menuTmp.call({}, {data});
-    }
-
-    renderDOM() {
-        const data = {
-            read: this._permissions.read,
-            write: this._permissions.write,
-            usersModify: this._permissions.usersModify
-        };
-
-        const html = menuTmp.call({}, {data});
-        const container = document.createElement('div');
-        container.insertAdjacentHTML('afterbegin', html);
-        return container.firstElementChild;
     }
 }

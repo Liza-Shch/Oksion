@@ -13,6 +13,22 @@ const PageEvents = {
     AFTER_RENDER_ITEMS_PAGE: 'page: after-render-items-page',
     RENDER_ITEMS_PAGE: 'page: render-items-page',
     UPDATE_ITEMS: 'page: update-items',
+    PREPARE_ARGS_ITEM_PAGE: 'page: prepare-args-item-page',
+    RENDER_ITEM_PAGE: 'page: render-item-page',
+    AFTER_RENDER_ITEM_PAGE: 'page: after-render-item-page',
+    CREATE_ITEM_PAGE: 'page: create-item-page',
+    UPDATE_ITEM_WORK: 'page: update-item-work',
+    CLOSE_CIRCLE_EDIT: 'page: close-circle-edit',
+    CLOSE_ADDRESS_EDIT: 'page: close-address-edit',
+    UPDATE_ITEM_ADDRESS: 'page: update-item-address',
+    CLOSE_ITEM_TYPE_EDIT: 'page: close-item-type-edit',
+    UPDATE_ITEM_TYPE: 'page: update-item-type',
+    CLOSE_ITEM_DISTRICT_EDIT: 'page: close-item-district-edit',
+    UPDATE_ITEM_DISTRICT: 'page: update-item-district',
+    CLOSE_ITEM_COMPOSITION_EDIT: 'page: close-item-composition-edit',
+    UPDATE_ITEM_COMPOSITION: 'page: update-item-composition',
+    CLOSE_NOTE_EDIT: 'page: close-note-edit',
+    UPDATE_ITEM_NOTE: 'page: update-item-note',
 };
 
 export default PageEvents;

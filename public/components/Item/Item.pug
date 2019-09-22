@@ -1,7 +1,8 @@
 case data.type.value
     when 'puon'
         .item.item-puon
-            .item__type.item__type-puon=data.type.text
+            include ../../mixins/item-type/item-type.pug
+            +item-type(data.type.value, data.type.text)(class='item__type')
             include ../../mixins/circle/circle.pug
             if data.isWork
                 +circle('work')(class='item__is-work')
@@ -9,9 +10,11 @@ case data.type.value
                 +circle('not-work')(class='item__is-work')
             span(value=data.district.value).item__district=data.district.text
             span.item__address=data.address
+            a(href=`/items/${data.id}`).item__link
     when 'pion'
         .item.item-pion
-            .item__type.item__type-pion=data.type.text
+            include ../../mixins/item-type/item-type.pug
+            +item-type(data.type.value, data.type.text)(class='item__type')
             include ../../mixins/circle/circle.pug
             if data.isWork
                 +circle('work')(class='item__is-work')
@@ -19,3 +22,4 @@ case data.type.value
                 +circle('not-work')(class='item__is-work')
             span(value=data.district.value).item__district=data.district.text
             span.item__address=data.address
+            a(href=`/items/${data.id}`).item__link
