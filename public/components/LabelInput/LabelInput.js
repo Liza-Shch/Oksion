@@ -4,11 +4,13 @@ import BaseComponent from "../BaseComponent";
 import Input from '../Input/Input';
 
 export default class LabelTextarea extends BaseComponent {
-    constructor({ label, required = null }) {
+    constructor({ label, required, pattern, type, maxLength, placeholder,  value }) {
         super();
         this._label = label;
-        this._input = new Input({ required: required });
+        this._input = new Input({ required: required, pattern: pattern, type: type,
+            maxLength: maxLength, placeholder: placeholder, value: value });
         this.save = this._input.save.bind(this._input);
+        this.hide = this._input.hide.bind(this._input);
     }
 
     render() {

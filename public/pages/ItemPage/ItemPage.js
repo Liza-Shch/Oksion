@@ -18,6 +18,8 @@ import ImagesEdit from '../../components/ImagesEdit/ImagesEdit';
 import Note from '../../components/Note/Note';
 import NoteEdit from '../../components/NoteEdit/NoteEdit';
 import NewWork from '../../components/NewWork/NewWork';
+import Contacts from '../../components/Contacts/Contacts';
+import ContactsEdit from '../../components/ContactsEdit/ContactsEdit';
 
 export default class ItemPage {
     constructor({ el, item }) {
@@ -91,6 +93,46 @@ export default class ItemPage {
         const imagesEditEl = imagesEdit.create();
         imagesEditEl.classList.add('main-item__item');
 
+        const fakeContacts = [
+            {
+                name: {
+                    name: 'Алексей',
+                    surname: 'Щербаков',
+                    patronymic: 'Николаевич',
+                },
+
+                phone: '+7 (902) 321-85-10',
+            },
+            {
+                name: {
+                    name: 'Максим',
+                    surname: 'Иванов',
+                    patronymic: 'Александрович',
+                },
+
+                phone: '+7 (902) 322-65-10',
+            },
+            {
+                name: {
+                    name: 'Богдан',
+                    surname: 'Смирнов',
+                    patronymic: 'Алексеевич',
+                },
+
+                phone: '+7 (902) 821-75-10',
+            },
+        ];
+
+        const sidebar = document.createElement('div');
+        sidebar.classList.add('main-item__sidebar');
+
+        const contacts = new ItemEdit({ Component: Contacts, EditComponent: ContactsEdit, args: { contacts: fakeContacts }});
+        const contactsEl = contacts.create();
+        sidebar.append(contactsEl);
+        const menu = document.querySelector('.menu');
+        const menuHeight = getComputedStyle(menu).height;
+        sidebar.style['top'] = `calc(${menuHeight} + 80px)`;
+        
         const containerColumnEl = document.createElement('div');
         containerColumnEl.classList.add('main-item__container-column');
         containerColumnEl.append(newWorkEl, compositionEditEl);
@@ -98,7 +140,8 @@ export default class ItemPage {
         const container = document.createElement('div');
         container.classList.add('main-item__content');
         container.append(header, addressFull, containerColumnEl, imagesEditEl);
-        this.el.append(container);
+        
+        this.el.append(container, sidebar);
         return this.el;
     }
 

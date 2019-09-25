@@ -6,7 +6,7 @@
     position: relative;
 
     &__content {
-        width: calc(100% - 300px);
+        width: calc(100% - 280px - 100px);
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
@@ -39,6 +39,14 @@
         display: grid;
         grid-template-columns: 1.5fr 1fr;
         grid-gap: 40px;
+    }
+
+    &__sidebar {
+        position: absolute;
+        right: 100px;
+        display: flex;
+        flex-direction: column;
+        width: 280px;
     }
 
     &__composition {
