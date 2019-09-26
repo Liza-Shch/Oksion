@@ -4,11 +4,11 @@
     font-size: smaller;
     width: 100%;
 
-    &__name {
+    &__name, &__position {
         word-wrap: normal;
     }
 
-    &__phone {
+    &__phone, &__position {
         margin-top: 10px;
     }
 }

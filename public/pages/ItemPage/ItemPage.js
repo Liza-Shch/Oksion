@@ -100,7 +100,7 @@ export default class ItemPage {
                     surname: 'Щербаков',
                     patronymic: 'Николаевич',
                 },
-
+                position: 'Главный инженер',
                 phone: '+7 (902) 321-85-10',
             },
             {
@@ -109,7 +109,7 @@ export default class ItemPage {
                     surname: 'Иванов',
                     patronymic: 'Александрович',
                 },
-
+                position: 'Инженер',
                 phone: '+7 (902) 322-65-10',
             },
             {
@@ -118,7 +118,7 @@ export default class ItemPage {
                     surname: 'Смирнов',
                     patronymic: 'Алексеевич',
                 },
-
+                position: 'Инженер-технолог',
                 phone: '+7 (902) 821-75-10',
             },
         ];

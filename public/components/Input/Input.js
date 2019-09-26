@@ -4,7 +4,8 @@ import BaseComponent from '../BaseComponent';
 import InputMsg from '../InputMsg/InputMsg';
 
 export default class Input extends BaseComponent {
-    constructor({ pattern = null, type = 'text', maxLength = '100', required = false, placeholder = null, value = null }) {
+    constructor({ pattern = null, type = 'text', maxLength = '100', required = false,
+        placeholder = null, value = null, msgError = 'Введите корректные данные!' }) {
         super();
         this._pattern = pattern;
         this._type = type;
@@ -12,7 +13,7 @@ export default class Input extends BaseComponent {
         this._required = required;
         this._placeholder = placeholder;
         this._value = value;
-        this._msgError = new InputMsg({ type: 'error', msg: 'Введите корректные данные!' });
+        this._msgError = new InputMsg({ type: 'error', msg: msgError });
     }
 
     render() {

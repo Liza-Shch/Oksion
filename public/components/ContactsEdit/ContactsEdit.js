@@ -111,6 +111,11 @@ export default class ContactsEdit extends BaseComponent {
 
         this.hide(e);
         console.log(data);
+        const value = {
+            contacts: data,
+        }
+
+        EventBus.emit(PageEvents.UPDATE_ITEM_CONTACTS, value);
         return data;
     }
 

@@ -2,12 +2,15 @@ import contactsTmp from './Contacts.pug';
 import './Contacts.scss';
 import BaseComponent from '../BaseComponent';
 import Contact from '../Contact/Contact';
+import EventBus from '../../scripts/EventBus';
+import PageEvents from '../../events/PageEvents';
 
 export default class Contacts extends BaseComponent {
     constructor({ contacts }) {
         super();
         this._contacts = contacts;
         this._contactsObj = [];
+        EventBus.on(PageEvents.UPDATE_ITEM_CONTACTS, this.update.bind(this));
     }
 
     render() {
@@ -31,5 +34,10 @@ export default class Contacts extends BaseComponent {
         this._contactsObj[0].el.classList.remove('contacts__contact');
 
         return el
+    }
+
+    update({ contacts }) {
+        this._contacts = contacts;
+        
     }
 }
