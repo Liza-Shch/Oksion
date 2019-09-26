@@ -72,4 +72,16 @@ module.exports = class Item  {
             transaction: t
         })
     }
+
+    static updateDistrict(id, district, t) {
+        return db.Item.update({
+            district: district
+        }, {
+            returning: true,
+            where: {
+                id: id
+            },
+            transaction: t
+        })
+    }
 }

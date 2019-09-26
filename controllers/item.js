@@ -69,4 +69,16 @@ module.exports = class Item {
             })
         })
     }
+
+    static updateDistrict(req, res) {
+        db.sequelize.transaction((t) => {
+            return Queries.Item.updateDistrict(req.body.item.id, req.body.item.district, t)
+            .then(([_, [ item ]]) => {
+                return res.status(200).send({ status: "ok", item: item })
+            })
+            .catch((err) => {
+                return res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` })
+            })
+        })
+    }
 }

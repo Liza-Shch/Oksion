@@ -157,7 +157,16 @@ export default class API {
     }
 
     static onUpdateItemDistrict(args) {
-        EventBus.emit(StoreEvents.UPDATE_ITEM_DISTRICT, args)
+        Ajax.doPut('/api/update/item/district', { item: args })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPDATE_ITEM_DISTRICT, data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })   
     }
 
     static onUpdateItemComposition(args) {

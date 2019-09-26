@@ -61,7 +61,9 @@ app.post('/api/item', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkID
 app.put('/api/update/item/type', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkIDExist, Middlewares.Item.checkTypeExist],
     Controllers.Item.updateType);
 app.put('/api/update/item/work', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkIDExist, Middlewares.Item.checkWorkExist],
-    Controllers.Item.updateWork)
+    Controllers.Item.updateWork);
+app.put('/api/update/item/district', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkIDExist, Middlewares.Item.checkDistrictExist],
+    Controllers.Item.updateDistrict);
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(root, 'index.html'));
