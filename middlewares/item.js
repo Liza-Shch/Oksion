@@ -45,7 +45,8 @@ module.exports = Item = {
     },
 
     checkIDExist(req, res, next) {
-        if (!req.body.id) {
+        const item = req.body.item;
+        if (!item || !item.id) {
             return res.status(200).send({ status: "error", errors: ["item.id.not_found"], messasge: `Item's ID is not found`})
         }
 

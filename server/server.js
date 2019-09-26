@@ -45,13 +45,21 @@ const Controllers = require('../controllers/index');
 app.get('/api', (req, res) => {
     res.status(200).send({ message: 'Welcome to API!', })
 });
-app.post('/api/signup', [Middlewares.SignUp.checkBodyExist, Middlewares.SignUp.checkRoleExist], Controllers.User.createUser);
+app.post('/api/signup', [Middlewares.SignUp.checkBodyExist, Middlewares.SignUp.checkRoleExist],
+    Controllers.User.createUser);
 app.post('/api/login', Controllers.User.login);
-app.get('/api/auth', [Middlewares.Auth.isAuth, Middlewares.Auth.determinePermissions], Controllers.User.auth);
-app.get('/api/logout', [Middlewares.Auth.isAuth, Middlewares.Auth.determinePermissions], Controllers.User.logout);
-app.post('/api/create/item', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkTypeExist, Middlewares.Item.checkDistrictExist], Controllers.Item.createItem);
-app.post('/api/items', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkTypeOrderExist, Middlewares.Item.checkDistrictOrderExist], Controllers.Item.getItems);
-app.post('/api/item', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkIDExist,], Controllers.Item.getItem)
+app.get('/api/auth', [Middlewares.Auth.isAuth, Middlewares.Auth.determinePermissions],
+    Controllers.User.auth);
+app.get('/api/logout', [Middlewares.Auth.isAuth, Middlewares.Auth.determinePermissions],
+    Controllers.User.logout);
+app.post('/api/create/item', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkTypeExist, Middlewares.Item.checkDistrictExist],
+    Controllers.Item.createItem);
+app.post('/api/items', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkTypeOrderExist, Middlewares.Item.checkDistrictOrderExist],
+    Controllers.Item.getItems);
+app.post('/api/item', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkIDExist,],
+    Controllers.Item.getItem);
+app.put('/api/update/item/type', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkIDExist, Middlewares.Item.checkTypeExist],
+    Controllers.Item.updateType);
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(root, 'index.html'));

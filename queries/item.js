@@ -48,4 +48,15 @@ module.exports = class Item  {
             }
         }, {transaction: t})
     }
+
+    static updateType(id, type, t) {
+        return db.Item.update({
+            type: type
+        }, {
+            returning: true,
+            where: {
+                id: id
+            }
+        }, { transaction: t })
+    }
 }

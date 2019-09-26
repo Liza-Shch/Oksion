@@ -105,7 +105,7 @@ export default class API {
     }
 
     static onGetItem(args) {
-        Ajax.doPost('/api/item', { id: args.id })
+        Ajax.doPost('/api/item', { item: { id: args.id }})
         .then((res) => {
             return res.json()
         })
@@ -132,7 +132,16 @@ export default class API {
     }
 
     static onUpdateItemType(args) {
-        EventBus.emit(StoreEvents.UPDATE_ITEM_TYPE, args)
+        Ajax.doPut('/api/update/item/type', { item: args })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPDATE_ITEM_TYPE, data.item);
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     static onUpdateItemDistrict(args) {

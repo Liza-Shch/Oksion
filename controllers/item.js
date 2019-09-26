@@ -22,26 +22,38 @@ module.exports = class Item {
         db.sequelize.transaction((t) => {
             return Queries.Item.getItems(type, district, t)
             .then((items) => {
-                return res.status(200).send({status: "ok", items: items})
+                return res.status(200).send({ status: "ok", items: items })
             })
             .catch((err) => {
-                return res.status(200).send({status: "error", errors: ["server.error"], message: `${err}`})
+                return res.status(200).send({ status: "error", errors: ["server.error"], message: `${err}` })
             })
         });
     }
 
     static getItem(req, res) {
         db.sequelize.transaction((t) => {
-            return Queries.Item.getItemByID(req.body.id, t)
+            return Queries.Item.getItemByID(req.body.item.id, t)
             .then((item) => {
                 if (!item) {
-                    return res.status(200).send({ status:"error", errors: ["item.not_found"], message: `Item is not found`})
+                    return res.status(200).send({ status:"error", errors: ["item.not_found"], message: `Item is not found` })
                 }
                 
                 return res.status(200).send({ status: "ok", item: item })
             })
             .catch((err) => {
-                return res.status(200).send({ status: "error", errors: ["server.error"], message: `${err}`})
+                return res.status(200).send({ status: "error", errors: ["server.error"], message: `${err}` })
+            })
+        })
+    }
+
+    static updateType(req, res) {
+        db.sequelize.transaction((t) => {
+            return Queries.Item.updateType(req.body.item.id, req.body.item.type, t)
+            .then(([_, [ item ]]) => {
+                return res.status(200).send({ status: "ok", item: item })
+            })
+            .catch((err) => {
+                return res.status(200).send({ status: "error", errors: ["server.error"], message: `${err}` })
             })
         })
     }
