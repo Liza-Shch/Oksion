@@ -124,7 +124,19 @@ export default class API {
     }
 
     static onUpdateItemWork(args) {
-        EventBus.emit(StoreEvents.UPADTE_ITEM_WORK, args)
+        Ajax.doPut('/api/update/item/work', { item: {
+            id: args.id,
+            'is_work': args.isWork,
+        }})
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPADTE_ITEM_WORK, data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     static onUpdateItemAddress(args) {

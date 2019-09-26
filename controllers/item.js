@@ -57,4 +57,16 @@ module.exports = class Item {
             })
         })
     }
+
+    static updateWork(req, res) {
+        db.sequelize.transaction((t) => {
+            return Queries.Item.updateWork(req.body.item.id, req.body.item['is_work'], t)
+            .then(([_, [ item ]]) => {
+                return res.status(200).send({ status: "ok", item: item })
+            })
+            .catch((err) => {
+                return res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` })
+            })
+        })
+    }
 }

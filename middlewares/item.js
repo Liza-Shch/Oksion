@@ -51,5 +51,14 @@ module.exports = Item = {
         }
 
         next();
+    },
+
+    checkWorkExist(req, res, next) {
+        const item = req.body.item;
+        if (!item || item['is_work'] === undefined) {
+            return res.status(200).send({ status: "error", errors: ["item.work.not_found"], messasge: `Item's work is not found`})
+        }
+
+        next();
     }
 }

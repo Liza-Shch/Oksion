@@ -56,7 +56,20 @@ module.exports = class Item  {
             returning: true,
             where: {
                 id: id
-            }
-        }, { transaction: t })
+            },
+            transaction: t
+        })
+    }
+
+    static updateWork(id, work, t) {
+        return db.Item.update({
+            'is_work': work
+        }, {
+            returning: true,
+            where: {
+                id: id
+            },
+            transaction: t
+        })
     }
 }
