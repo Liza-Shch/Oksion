@@ -20,6 +20,7 @@ import NoteEdit from '../../components/NoteEdit/NoteEdit';
 import NewWork from '../../components/NewWork/NewWork';
 import Contacts from '../../components/Contacts/Contacts';
 import ContactsEdit from '../../components/ContactsEdit/ContactsEdit';
+import DateLabel from '../../components/DateLabel/DateLabel';
 
 export default class ItemPage {
     constructor({ el, item }) {
@@ -52,12 +53,16 @@ export default class ItemPage {
             args: { type: type, id: this._item.id }});
         const itemTypeEditEl = itemTypeEdit.create();
 
+        const date = new DateLabel({ date: Date.now(), label: 'Дата последнего выезда:' });
+        const dateEl = date.create();
+        dateEl.classList.add('main-item__margin-left');
+
         const noteEdit = new ItemEdit({ Component: Note, EditComponent: NoteEdit, args: {id: this._item.id, note: this._item.note }})
         const noteEditEl = noteEdit.create();
 
         const leftPart = document.createElement('div');
         leftPart.classList.add('main-item__part');
-        leftPart.append(itemTypeEditEl, circleEditEl);
+        leftPart.append(itemTypeEditEl, circleEditEl, dateEl);
 
         const rightPart = document.createElement('div');
         rightPart.classList.add('main-item__part');

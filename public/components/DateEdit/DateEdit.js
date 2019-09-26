@@ -1,11 +1,11 @@
 import dateEditTmp from './DateEdit.pug';
 import './DateEdit.scss';
-import BaseComponent from "../BaseComponent";
+import DateLabel from '../DateLabel/DateLabel';
 import InputMsg from '../InputMsg/InputMsg';
 
-export default class DateEdit extends BaseComponent {
+export default class DateEdit extends DateLabel {
     constructor({ label = 'Дата и время проведения' }) {
-        super();
+        super({});
         this._label = label;
         this._date = new Date(Date.now());
         this._msgError = new InputMsg({ type: 'error', msg: 'Введите корректную дату и время!' })
@@ -19,26 +19,6 @@ export default class DateEdit extends BaseComponent {
         }
 
         return dateEditTmp.call({}, { data })
-    }
-
-    getMaskDate(date) {
-        const month = date.getMonth() + 1;
-        const newMonth = month < 10 ? '0' + month : month;
-
-        const days = date.getDate();
-        const newDays = days < 10 ? '0' + days : days;
-        return newDays + '.' + newMonth + '.' + date.getFullYear();
-
-    }
-
-    getMaskTime(time) {
-        const hours = time.getHours();
-        const newHours = hours < 10 ? '0' + hours : hours;
-
-        const minutes = time.getMinutes();
-        const newMinutes = minutes < 10 ? '0' + minutes : minutes;
-
-        return newHours + ':' + newMinutes;
     }
 
     afterRender() {

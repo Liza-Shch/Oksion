@@ -1,0 +1,14 @@
+.date-label {
+    display: flex;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: fit-content;
+    height: fit-content;
+    background-color: brown;
+    box-shadow: rgba(0, 0, 0, 0.25) 2px 4px 5px;
+
+    &__time {
+        margin-left: 10px;
+    }
+}
