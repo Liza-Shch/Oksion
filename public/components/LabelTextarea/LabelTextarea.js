@@ -4,10 +4,10 @@ import BaseComponent from "../BaseComponent";
 import Textarea from "../Textarea/Textarea";
 
 export default class LabelTextarea extends BaseComponent {
-    constructor({ label, required, rows, placeholder }) {
+    constructor({ label, required, rows, placeholder, value }) {
         super();
         this._label = label;
-        this._textarea = new Textarea({ required: required, rows: rows, placeholder: placeholder });
+        this._textarea = new Textarea({ required: required, rows: rows, placeholder: placeholder, value: value });
         this.save = this._textarea.save.bind(this._textarea);
     }
 

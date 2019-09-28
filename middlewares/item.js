@@ -60,5 +60,14 @@ module.exports = Item = {
         }
 
         next();
+    },
+
+    checkAddressExist(req, res, next) {
+        const item = req.body.item;
+        if (!item || item.address === undefined || !item.address) {
+            return res.status(200).send({ status: "error", errors: ["item.address.not_found"], messasge: `Item's address is not found`})
+        }
+
+        next();
     }
 }

@@ -140,7 +140,16 @@ export default class API {
     }
 
     static onUpdateItemAddress(args) {
-        EventBus.emit(StoreEvents.UPADTE_ITEM_ADDRESS, args)
+        Ajax.doPut('/api/update/item/address', { item: args })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPADTE_ITEM_ADDRESS, data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     static onUpdateItemType(args) {

@@ -84,4 +84,16 @@ module.exports = class Item  {
             transaction: t
         })
     }
+
+    static updateAddress(id, address, t) {
+        return db.Item.update({
+            address: address
+        }, {
+            returning: true,
+            where: {
+                id: id
+            },
+            transaction: t
+        })
+    }
 }

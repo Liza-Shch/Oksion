@@ -5,13 +5,16 @@ import EditControlls from '../EditControlls/EditControlls';
 import EventBus from '../../scripts/EventBus';
 import PageEvents from '../../events/PageEvents';
 import APIEvents from '../../events/APIEvents';
+import LabelTextarea from '../LabelTextarea/LabelTextarea';
 
 export default class AddressEdit extends BaseComponent {
     constructor({ address, id }) {
         super()
         this._currentValue = address;
         this._itemID = id;
-        this._controlls = new EditControlls({ actionSave: this.save.bind(this), actionCancel: this.hide.bind(this) })
+        this._address = new LabelTextarea({ label: 'Адрес', value: this._currentValue,
+            required: true, rows: 2, placeholder: 'Адрес'});
+        this._controlls = new EditControlls({ actionSave: this.save.bind(this), actionCancel: this.hide.bind(this) });
     }
 
     _onClickOutside(e) {
@@ -34,9 +37,10 @@ export default class AddressEdit extends BaseComponent {
         buffer.insertAdjacentHTML('afterbegin', html);
         const el = buffer.firstElementChild;
 
+        const addressEl = this._address.create();
+        addressEl.classList.add('address-edit__input');
         const controllsEl = this._controlls.create();
-        el.append(controllsEl)
-
+        el.append(addressEl, controllsEl);
         return el
     }
 
@@ -53,7 +57,12 @@ export default class AddressEdit extends BaseComponent {
     }
 
     save(e) {
-        this._currentValue = this.el.querySelector('.address-edit__input').value;
+        const addressData = this._address.save();
+        if (!addressData) {
+            return
+        }
+
+        this._currentValue = addressData.value;
 
         const data = {
             address: this._currentValue,

@@ -4,11 +4,12 @@ import BaseComponent from "../BaseComponent";
 import InputMsg from '../InputMsg/InputMsg';
 
 export default class Textarea extends BaseComponent {
-    constructor({ required = false, rows = 10, placeholder = null }) {
+    constructor({ required = false, rows = 10, placeholder = null, value }) {
         super();
         this._required = required;
         this._rows = rows;
         this._placeholder = placeholder;
+        this._value = value;
         this._msg = new InputMsg({ type: 'error', msg: 'Заполните обязательное поле!' });
     }
 
@@ -17,6 +18,7 @@ export default class Textarea extends BaseComponent {
             required: this._required,
             rows: this._rows,
             placeholder: this._placeholder,
+            value: this._value,
         }
 
         return textareaTmp.call({}, { data })
@@ -37,6 +39,8 @@ export default class Textarea extends BaseComponent {
             return null
         }
 
-        return { value: textareaEl.value }
+        this._value = textareaEl.value;
+        
+        return { value: this._value }
     }
 }

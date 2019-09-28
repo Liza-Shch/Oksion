@@ -81,4 +81,16 @@ module.exports = class Item {
             })
         })
     }
+
+    static updateAddress(req, res) {
+        db.sequelize.transaction((t) => {
+            return Queries.Item.updateAddress(req.body.item.id, req.body.item.address, t)
+            .then(([_, [ item ]]) => {
+                return res.status(200).send({ status: "ok", item: item })
+            })
+            .catch((err) => {
+                return res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` })
+            })
+        })
+    }
 }
