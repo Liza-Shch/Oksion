@@ -66,6 +66,8 @@ app.put('/api/update/item/district', [Middlewares.Item.checkBodyExist, Middlewar
     Controllers.Item.updateDistrict);
 app.put('/api/update/item/address', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkIDExist, Middlewares.Item.checkAddressExist],
     Controllers.Item.updateAddress);
+app.put('/api/update/item/note', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkIDExist, Middlewares.Item.checkNoteExist],
+    Controllers.Item.updateNote);
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(root, 'index.html'));

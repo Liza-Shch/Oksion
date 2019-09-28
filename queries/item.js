@@ -96,4 +96,16 @@ module.exports = class Item  {
             transaction: t
         })
     }
+
+    static updateNote(id, note, t) {
+        return db.Item.update({
+            note: note
+        }, {
+            returning: true,
+            where: {
+                id: id
+            },
+            transaction: t
+        })
+    }
 }

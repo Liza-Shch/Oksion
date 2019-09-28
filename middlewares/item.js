@@ -69,5 +69,14 @@ module.exports = Item = {
         }
 
         next();
-    }
+    },
+
+    checkNoteExist(req, res, next) {
+        const item = req.body.item;
+        if (!item || item.note === undefined) {
+            return res.status(200).send({ status: "error", errors: ["item.note.not_found"], messasge: `Item's note is not found`})
+        }
+
+        next();
+    },
 }

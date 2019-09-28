@@ -183,6 +183,15 @@ export default class API {
     }
 
     static onUpdateItemNote(args) {
-        EventBus.emit(StoreEvents.UPDATE_ITEM_NOTE, args);
+        Ajax.doPut('/api/update/item/note', { item: args })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPDATE_ITEM_NOTE, data);
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 }

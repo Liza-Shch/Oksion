@@ -93,4 +93,16 @@ module.exports = class Item {
             })
         })
     }
+
+    static updateNote(req, res) {
+        db.sequelize.transaction((t) => {
+            return Queries.Item.updateNote(req.body.item.id, req.body.item.note, t)
+            .then(([_, [ item ]]) => {
+                return res.status(200).send({ status: "ok", item: item })
+            })
+            .catch((err) => {
+                return res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` })
+            })
+        })
+    }
 }
