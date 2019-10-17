@@ -108,4 +108,16 @@ module.exports = class Item  {
             transaction: t
         })
     }
+
+    static updateComposition(id, composition, t) {
+        return db.Item.update({
+            composition: composition
+        }, {
+            returning: true,
+            where: {
+                id: id
+            },
+            transaction: t
+        })
+    }
 }

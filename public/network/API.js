@@ -179,7 +179,17 @@ export default class API {
     }
 
     static onUpdateItemComposition(args) {
-        EventBus.emit(StoreEvents.UPDATE_ITEM_COMPOSITION, args)
+        Ajax.doPut('/api/update/item/composition', { item: args })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPDATE_ITEM_COMPOSITION, data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+        
     }
 
     static onUpdateItemNote(args) {

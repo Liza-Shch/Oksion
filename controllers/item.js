@@ -10,9 +10,7 @@ module.exports = class Item {
             .then(() => {
                 return res.status(200).send({status: "ok", message: `Item is created`});
             })
-            .catch((err) => {
-                return res.status(200).send({status: "error", errors: ["server.error"], message: `${err}`});
-            })
+            .catch((err) => res.status(200).send({status: "error", errors: ["server.error"], message: `${err}` }))
         });
     }
 
@@ -24,9 +22,7 @@ module.exports = class Item {
             .then((items) => {
                 return res.status(200).send({ status: "ok", items: items })
             })
-            .catch((err) => {
-                return res.status(200).send({ status: "error", errors: ["server.error"], message: `${err}` })
-            })
+            .catch((err) => res.status(200).send({ status: "error", errors: ["server.error"], message: `${err}` }))
         });
     }
 
@@ -40,9 +36,7 @@ module.exports = class Item {
                 
                 return res.status(200).send({ status: "ok", item: item })
             })
-            .catch((err) => {
-                return res.status(200).send({ status: "error", errors: ["server.error"], message: `${err}` })
-            })
+            .catch((err) => res.status(200).send({ status: "error", errors: ["server.error"], message: `${err}` }))
         })
     }
 
@@ -52,9 +46,7 @@ module.exports = class Item {
             .then(([_, [ item ]]) => {
                 return res.status(200).send({ status: "ok", item: item })
             })
-            .catch((err) => {
-                return res.status(200).send({ status: "error", errors: ["server.error"], message: `${err}` })
-            })
+            .catch((err) => res.status(200).send({ status: "error", errors: ["server.error"], message: `${err}` }))
         })
     }
 
@@ -64,9 +56,7 @@ module.exports = class Item {
             .then(([_, [ item ]]) => {
                 return res.status(200).send({ status: "ok", item: item })
             })
-            .catch((err) => {
-                return res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` })
-            })
+            .catch((err) => res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` }))
         })
     }
 
@@ -76,9 +66,7 @@ module.exports = class Item {
             .then(([_, [ item ]]) => {
                 return res.status(200).send({ status: "ok", item: item })
             })
-            .catch((err) => {
-                return res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` })
-            })
+            .catch((err) => res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` }))
         })
     }
 
@@ -88,9 +76,7 @@ module.exports = class Item {
             .then(([_, [ item ]]) => {
                 return res.status(200).send({ status: "ok", item: item })
             })
-            .catch((err) => {
-                return res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` })
-            })
+            .catch((err) => res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` }))
         })
     }
 
@@ -100,9 +86,17 @@ module.exports = class Item {
             .then(([_, [ item ]]) => {
                 return res.status(200).send({ status: "ok", item: item })
             })
-            .catch((err) => {
-                return res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` })
+            .catch((err) => res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` }))
+        })
+    }
+
+    static updateComposition(req, res) {
+        db.sequelize.transaction((t) => {
+            return Queries.Item.updateComposition(req.body.item.id, req.body.item.composition, t)
+            .then(([_, [ item ]]) => {
+                return res.status(200).send({ status: "ok", item: item })
             })
+            .catch((err) => res.status(200).send({ status: "error", errors: [ "server.error" ], message: `${err}` }))
         })
     }
 }
