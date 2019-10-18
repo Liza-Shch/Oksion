@@ -74,6 +74,10 @@ export default class Items extends BaseComponent {
         return el;
     }
 
+    render() {
+        return itemsTmp.call({}, {})
+    }
+
     renderDOM() {
         let itemsEl = super.renderDOM();
 

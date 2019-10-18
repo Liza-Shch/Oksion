@@ -14,6 +14,10 @@ export default class ItemsFilter extends BaseComponent {
         super()
     }
 
+    render() {
+        return itemsFilterTmp.call({}, {})
+    }
+
     renderDOM() {
         this.el = super.renderDOM();
         

@@ -28,8 +28,6 @@ export default class ItemsPage {
         const statisticsEl = statistics.renderDOM();
         statisticsEl.style['grid-area'] = 'stat';
 
-        this.el.appendChild(statisticsEl);
-
         const title = new Title({text: 'Объекты'});
         const titleEl = title.renderDOM();
         titleEl.style['grid-area'] = 'title';
@@ -44,8 +42,6 @@ export default class ItemsPage {
         this._itemsEl = items;
 
         this.el.append(statisticsEl, titleEl, filterEl, itemsEl);
-
-        console.log("EL", this.el);
         return this.el;
     }
 
