@@ -20,10 +20,7 @@ export default class NewNotReglamentWork extends BaseComponent {
     }
 
     renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
+        const el = super.renderDOM();
 
         const defectTypeEl = this._defectType.create();
         defectTypeEl.classList.add('new-not-reglament-work__margin-top');

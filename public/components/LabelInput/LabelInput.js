@@ -22,10 +22,7 @@ export default class LabelTextarea extends BaseComponent {
     }
 
     renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
+        const el = super.renderDOM();
 
         const inputEl = this._input.create();
         el.append(inputEl)

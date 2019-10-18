@@ -46,10 +46,7 @@ export default class NewWork extends BaseComponent {
     }
 
     renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
+        const el = super.renderDOM();
 
         const selectTypeEl = this._selectType.create();
         selectTypeEl.classList.add('new-work__type');

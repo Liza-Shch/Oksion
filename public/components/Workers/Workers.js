@@ -21,10 +21,7 @@ export default class Workers extends BaseComponent {
     }
 
     renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
+        const el = super.renderDOM();
 
         const input = new Input({ required: true, placeholder: 'Исполнитель...' });
         this._workers.push(input);

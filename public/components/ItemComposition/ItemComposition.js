@@ -18,12 +18,9 @@ export default class ItemComposition extends BaseComponent {
     }
 
     renderDOM() {
+        const el = super.renderDOM();
+        
         this._parts = this._composition.map((part) => { return new ItemPart(part) });
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
-
         this._parts.forEach((part) => el.append(part.create()));
         return el;
     }

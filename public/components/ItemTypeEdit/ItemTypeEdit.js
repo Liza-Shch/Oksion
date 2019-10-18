@@ -42,10 +42,7 @@ export default class ItemTypeEdit extends BaseComponent {
     }
 
     renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
+        const el = super.renderDOM();
 
         const selectEl = this._select.create();
         const controllsEl = this._controlls.create();

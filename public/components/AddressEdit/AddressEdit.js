@@ -32,10 +32,7 @@ export default class AddressEdit extends BaseComponent {
     }
 
     renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
+        const el = super.renderDOM();
 
         const addressEl = this._address.create();
         addressEl.classList.add('address-edit__input');
