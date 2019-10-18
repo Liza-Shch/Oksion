@@ -204,4 +204,8 @@ export default class API {
             console.log(err)
         })
     }
+
+    static onCreateWork(args) {
+        
+    }
 }
