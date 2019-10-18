@@ -10,6 +10,7 @@ const APIEvents = {
     UPDATE_ITEM_DISTRICT: 'api: update-item-district',
     UPDATE_ITEM_COMPOSITION: 'api: update-item-composition',
     UPDATE_ITEM_NOTE: 'api: update-item-note',
+    CREATE_WORK: 'api: create-work',
 }
 
 export default APIEvents;

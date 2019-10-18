@@ -6,6 +6,8 @@ import WorkTypeSelect from '../../const/WorkTypeSelect';
 import NewReglamentWork from '../NewReglamentWork/NewReglamentWork';
 import ButtonEdit from '../ButtonEdit/ButtonEdit';
 import NewNotReglamentWork from '../NewNotReglamentWork/NewNotReglamentWork';
+import EventBus from '../../scripts/EventBus';
+import APIEvents from '../../events/APIEvents';
 
 export default class NewWork extends BaseComponent {
     constructor({ id }) {
@@ -23,12 +25,12 @@ export default class NewWork extends BaseComponent {
         this._selectType = new Select({ label: 'Тип работ', options: optionsType, onChange: this._onChangeWorkForm.bind(this)});
         const selectedType = this._selectType.getSelectedData();
         switch(selectedType) {
-            case 'reglament': {
+            case 'regular': {
                 this._workForm = this._reglamentWorkForm;
                 break;
             }
 
-            case 'notReglament': {
+            case 'noRegular': {
                 this._workForm = this._notReglamentWorkForm;
                 break;
             }
@@ -66,12 +68,12 @@ export default class NewWork extends BaseComponent {
         const oldWorkFormEl = this._workForm.el;
         const selectedType = this._selectType.getSelectedData();
         switch(selectedType) {
-            case 'reglament': {
+            case 'regular': {
                 this._workForm = this._reglamentWorkForm;
                 break;
             }
 
-            case 'notReglament': {
+            case 'noRegular': {
                 this._workForm = this._notReglamentWorkForm;
                 break;
             }
@@ -85,12 +87,17 @@ export default class NewWork extends BaseComponent {
         e.preventDefault();
         const data = {
             type: this._selectType.getSelectedData(),
+            itemId: this._itemID,
         }
 
         const workFormData = this._workForm.save();
-        Object.assign(data, workFormData);
+        if (!workFormData) {
+            return
+        }
 
-        console.log(data)
+        Object.assign(data, workFormData);
+        console.log(data);
+        EventBus.emit(APIEvents.CREATE_WORK, { work: data });
         return data
     }
 }

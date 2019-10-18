@@ -206,6 +206,16 @@ export default class API {
     }
 
     static onCreateWork(args) {
-        
+        Ajax.doPost('/api/create/work', { work: args.work })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            console.log(data)
+            // EventBus.emit(StoreEvents)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 }
