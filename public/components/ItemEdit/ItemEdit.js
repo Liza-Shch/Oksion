@@ -17,6 +17,7 @@ export default class ItemEdit extends BaseComponent {
         EventBus.on(PageEvents.CLOSE_ITEM_DISTRICT_EDIT, this.afterRender.bind(this));
         EventBus.on(PageEvents.CLOSE_ITEM_COMPOSITION_EDIT, this.afterRender.bind(this));
         EventBus.on(PageEvents.CLOSE_NOTE_EDIT, this.afterRender.bind(this));
+        EventBus.on(PageEvents.CLOSE_CONTACTS_EDIT, this.afterRender.bind(this));
     }
 
     renderDOM() {

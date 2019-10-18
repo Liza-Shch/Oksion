@@ -105,7 +105,7 @@ export default class API {
     }
 
     static onGetItem(args) {
-        Ajax.doPost('/api/item', { id: args.id })
+        Ajax.doPost('/api/item', { item: { id: args.id }})
         .then((res) => {
             return res.json()
         })
@@ -124,26 +124,98 @@ export default class API {
     }
 
     static onUpdateItemWork(args) {
-        EventBus.emit(StoreEvents.UPADTE_ITEM_WORK, args)
+        Ajax.doPut('/api/update/item/work', { item: {
+            id: args.id,
+            'is_work': args.isWork,
+        }})
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPADTE_ITEM_WORK, data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     static onUpdateItemAddress(args) {
-        EventBus.emit(StoreEvents.UPADTE_ITEM_ADDRESS, args)
+        Ajax.doPut('/api/update/item/address', { item: args })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPADTE_ITEM_ADDRESS, data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     static onUpdateItemType(args) {
-        EventBus.emit(StoreEvents.UPDATE_ITEM_TYPE, args)
+        Ajax.doPut('/api/update/item/type', { item: args })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPDATE_ITEM_TYPE, data.item);
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     static onUpdateItemDistrict(args) {
-        EventBus.emit(StoreEvents.UPDATE_ITEM_DISTRICT, args)
+        Ajax.doPut('/api/update/item/district', { item: args })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPDATE_ITEM_DISTRICT, data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })   
     }
 
     static onUpdateItemComposition(args) {
-        EventBus.emit(StoreEvents.UPDATE_ITEM_COMPOSITION, args)
+        Ajax.doPut('/api/update/item/composition', { item: args })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPDATE_ITEM_COMPOSITION, data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+        
     }
 
     static onUpdateItemNote(args) {
-        EventBus.emit(StoreEvents.UPDATE_ITEM_NOTE, args);
+        Ajax.doPut('/api/update/item/note', { item: args })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            EventBus.emit(StoreEvents.UPDATE_ITEM_NOTE, data);
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
+    static onCreateWork(args) {
+        Ajax.doPost('/api/create/work', { work: args.work })
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            console.log(data)
+            // EventBus.emit(StoreEvents)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 }

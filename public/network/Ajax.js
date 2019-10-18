@@ -35,7 +35,26 @@ export default class Ajax {
 
         return this._fetch(url, request)
             .then((res) => {
-                console.log("_fetch then", res)
+                if (!res.ok) {
+                    throw res;
+                }
+
+                return res;
+            })
+    }
+
+    static doPut(apiURL, data) {
+        const url = BACKEND_URL.SERVER + apiURL;
+        const request = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        };
+
+        return this._fetch(url, request)
+            .then((res) => {
                 if (!res.ok) {
                     throw res;
                 }

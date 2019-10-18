@@ -22,10 +22,7 @@ export default class ImagesEdit extends BaseComponent {
     }
 
     renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
+        const el = super.renderDOM();
 
         const imagesEl = this._images.create();
         const controllsEl = document.createElement('div');

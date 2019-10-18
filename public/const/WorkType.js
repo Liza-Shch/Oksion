@@ -1,11 +1,11 @@
 const WorkType = [
     {
         text: 'Нерегламентные',
-        value: 'notReglament',
+        value: 'noRegular',
     },
     {
         text: 'Регламентные',
-        value: 'reglament',
+        value: 'regular',
     },
 ]
 

@@ -26,10 +26,7 @@ export default class NewReglamentWork extends BaseComponent {
     }
 
     renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
+        const el = super.renderDOM();
 
         const typeEl = this._type.create();
         typeEl.classList.add('new-reglament-work__margin-top');

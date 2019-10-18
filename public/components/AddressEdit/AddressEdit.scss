@@ -9,17 +9,10 @@
     top: 0;
     background-color: white;
     border-radius: 4px;
+    color: #2E4158;
     box-shadow: 2px 4px 0 100vw rgba(0, 0, 0, 0.7);
 
     &__input {
-        color: white;
-        padding: 20px;
-        border-radius: 4px;
-        background-color: #2E4158;
-        resize: none;
         width: 100%;
-        font-size: 100%;
-        font-family: inherit;
-        box-sizing: border-box;
     }
 }

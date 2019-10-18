@@ -29,6 +29,8 @@ const PageEvents = {
     UPDATE_ITEM_COMPOSITION: 'page: update-item-composition',
     CLOSE_NOTE_EDIT: 'page: close-note-edit',
     UPDATE_ITEM_NOTE: 'page: update-item-note',
+    CLOSE_CONTACTS_EDIT: 'page: close-contacts-edit',
+    UPDATE_ITEM_CONTACTS: 'page: update-items-contacts',
 };
 
 export default PageEvents;

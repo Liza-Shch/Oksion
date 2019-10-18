@@ -55,6 +55,7 @@ export default class App {
         EventBus.on(StoreEvents.UPDATE_ITEM_COMPOSITION, Store.onUpdateItemComposition.bind(Store));
         EventBus.on(APIEvents.UPDATE_ITEM_NOTE, API.onUpdateItemNote);
         EventBus.on(StoreEvents.UPDATE_ITEM_NOTE, Store.onUpdateItemNote.bind(Store));
+        EventBus.on(APIEvents.CREATE_WORK, API.onCreateWork);
     };
 
     /**

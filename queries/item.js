@@ -48,4 +48,76 @@ module.exports = class Item  {
             }
         }, {transaction: t})
     }
+
+    static updateType(id, type, t) {
+        return db.Item.update({
+            type: type
+        }, {
+            returning: true,
+            where: {
+                id: id
+            },
+            transaction: t
+        })
+    }
+
+    static updateWork(id, work, t) {
+        return db.Item.update({
+            'is_work': work
+        }, {
+            returning: true,
+            where: {
+                id: id
+            },
+            transaction: t
+        })
+    }
+
+    static updateDistrict(id, district, t) {
+        return db.Item.update({
+            district: district
+        }, {
+            returning: true,
+            where: {
+                id: id
+            },
+            transaction: t
+        })
+    }
+
+    static updateAddress(id, address, t) {
+        return db.Item.update({
+            address: address
+        }, {
+            returning: true,
+            where: {
+                id: id
+            },
+            transaction: t
+        })
+    }
+
+    static updateNote(id, note, t) {
+        return db.Item.update({
+            note: note
+        }, {
+            returning: true,
+            where: {
+                id: id
+            },
+            transaction: t
+        })
+    }
+
+    static updateComposition(id, composition, t) {
+        return db.Item.update({
+            composition: composition
+        }, {
+            returning: true,
+            where: {
+                id: id
+            },
+            transaction: t
+        })
+    }
 }

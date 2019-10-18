@@ -15,10 +15,7 @@ export default class EditControlls extends BaseComponent {
     }
 
     renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
+        const el = super.renderDOM();
         
         const buttonSaveEl = this.buttonSave.create();
         const buttonCancelEl = this.buttonCancel.create();

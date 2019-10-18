@@ -16,10 +16,7 @@ export default class PreviewImages extends BaseComponent {
     }
 
     renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
+        const el = super.renderDOM();
 
         const imagesEl = el.querySelector('.preview-images__images');
         this._files.forEach((file) => {

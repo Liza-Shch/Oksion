@@ -75,10 +75,7 @@ export default class Items extends BaseComponent {
     }
 
     renderDOM() {
-        const html = itemsTmp.call({}, {});
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        let itemsEl = buffer.firstElementChild;
+        let itemsEl = super.renderDOM();
 
         if (this._order == 'fromPionToPuon') {
             itemsEl = this._renderByType(itemsEl);

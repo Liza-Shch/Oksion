@@ -45,8 +45,61 @@ module.exports = Item = {
     },
 
     checkIDExist(req, res, next) {
-        if (!req.body.id) {
+        const item = req.body.item;
+        if (!item || !item.id) {
             return res.status(200).send({ status: "error", errors: ["item.id.not_found"], messasge: `Item's ID is not found`})
+        }
+
+        next();
+    },
+
+    checkWorkExist(req, res, next) {
+        const item = req.body.item;
+        if (!item || item['is_work'] === undefined) {
+            return res.status(200).send({ status: "error", errors: ["item.work.not_found"], messasge: `Item's work is not found`})
+        }
+
+        next();
+    },
+
+    checkAddressExist(req, res, next) {
+        const item = req.body.item;
+        if (!item || item.address === undefined || !item.address) {
+            return res.status(200).send({ status: "error", errors: ["item.address.not_found"], messasge: `Item's address is not found`})
+        }
+
+        next();
+    },
+
+    checkNoteExist(req, res, next) {
+        const item = req.body.item;
+        if (!item || item.note === undefined) {
+            return res.status(200).send({ status: "error", errors: ["item.note.not_found"], messasge: `Item's note is not found`})
+        }
+
+        next();
+    },
+
+    checkCompositionExist(req, res, next) {
+        const item = req.body.item;
+        if (!item || item.composition === undefined || !Array.isArray(item.composition) || !item.composition.length) {
+            return res.status(200).send({ status: "error", errors: ["item.composition.not_found"], messasge: `Item's composition is not found`})
+        }
+
+        const isValid = item.composition.every((part) => {
+            if (!part.name) {
+                return false
+            }
+
+            if (!part.count || part.count.toString().match(new RegExp('\\D')) || !parseInt(part.count, 10)) {
+                return false
+            }
+
+            return true
+        });
+
+        if (!isValid) {
+            return res.status(200).send({ status: "error", errors: ["item.composition.not_found"], messasge: `Item's composition is not found`});
         }
 
         next();

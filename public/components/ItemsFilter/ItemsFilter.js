@@ -15,10 +15,7 @@ export default class ItemsFilter extends BaseComponent {
     }
 
     renderDOM() {
-        const html = itemsFilterTmp.call({}, {});
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        this.el = buffer.firstElementChild;
+        this.el = super.renderDOM();
         
         const typeSelectArgs = ItemTypesSelect;
         const typeSelect = new Select({label: 'Тип объекта', options: typeSelectArgs});

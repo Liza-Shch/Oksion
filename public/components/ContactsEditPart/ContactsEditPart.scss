@@ -1,0 +1,24 @@
+.contacts-edit-part {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+    grid-gap: 20px;
+    background-color: #E0E0E0;
+    color: #2D4157;
+    padding: 60px 20px 20px 20px;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.25);
+
+    &__margin-top {
+        margin-top: 20px;
+    }
+
+    &__button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: #2D4157;
+    }
+}

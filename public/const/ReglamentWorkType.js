@@ -1,23 +1,23 @@
 const ReglamentWorkType = [
     {
         text: 'ТО1',
-        value: 'TO1',
+        value: 'ТО1',
     },
     {
         text: 'ТО2',
-        value: 'TO2',
+        value: 'ТО2',
     },
     {
         text: 'КО',
-        value: 'KO2',
+        value: 'КО',
     },
     {
         text: 'ТО с переводом на лето',
-        value: 'TOSummer',
+        value: 'ТО с переводом на лето',
     },
     {
         text: 'ТО с переводом на зиму',
-        value: 'TOWinter',
+        value: 'ТО с переводом на зиму',
     },
 ]
 

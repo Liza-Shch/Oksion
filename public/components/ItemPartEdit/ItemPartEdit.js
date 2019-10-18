@@ -23,10 +23,7 @@ export default class ItemPartEdit extends BaseComponent {
     }
 
     renderDOM() {
-        const html = this.render();
-        const buffer = document.createElement('div');
-        buffer.insertAdjacentHTML('afterbegin', html);
-        const el = buffer.firstElementChild;
+        const el = super.renderDOM();
 
         const regularCount = this._regularCount.create();
         const buttonDelete = this._buttonDelete.create();
