@@ -70,6 +70,10 @@ app.put('/api/update/item/note', [Middlewares.Item.checkBodyExist, Middlewares.I
     Controllers.Item.updateNote);
 app.put('/api/update/item/composition', [Middlewares.Item.checkBodyExist, Middlewares.Item.checkIDExist, Middlewares.Item.checkCompositionExist],
     Controllers.Item.updateComposition);
+app.post('/api/create/no-regular-work', [Middlewares.Work.checkBodyExist, Middlewares.Work.checkWorkExist],
+    Controllers.Work.createWork);
+app.post('/api/create/regular-work', [Middlewares.Work.checkBodyExist, Middlewares.Work.checkWorkExist],
+    Controllers.Work.createWork);
 
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(root, 'index.html'));
