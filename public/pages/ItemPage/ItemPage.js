@@ -101,15 +101,6 @@ export default class ItemPage {
         const fakeContacts = [
             {
                 name: {
-                    name: 'Алексей',
-                    surname: 'Щербаков',
-                    patronymic: 'Николаевич',
-                },
-                position: 'Главный инженер',
-                phone: '+7 (902) 321-85-10',
-            },
-            {
-                name: {
                     name: 'Максим',
                     surname: 'Иванов',
                     patronymic: 'Александрович',

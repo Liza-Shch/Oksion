@@ -13,7 +13,7 @@ export default class ItemsPage {
         this._stat = {
             work: 123,
             notWork: 23,
-            percent: 87
+            percent: 84
         };
         this._items = items;
         this._itemsEl = null;
